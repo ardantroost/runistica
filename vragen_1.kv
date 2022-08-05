@@ -1,0 +1,144 @@
+#: import vragen_1 vragen_1
+
+<AntwButton@Button>
+	background_color: 1,1,1,0
+	background_normal:""
+	canvas.before:
+		Color:
+			rgba: [1,1,1,1]
+		RoundedRectangle:
+			size: self.size
+			pos:self.pos
+			radius: [8]
+	font_size: 12
+	halign:"left"
+	valign:"center"
+	color:0,0,0,1
+
+<AnchorButton@Button>:
+	text: ""
+	size_hint:None,None
+	size: 50,30
+	color:[1,1,1,1]
+	font_size:11
+	background_color:1,1,1,0
+
+<VragenScreen1>:
+
+	canvas:
+		Color:
+			rgba: [1,0,0,1]
+		Rectangle:
+			size:self.width, self.height
+			source:"Pics/road.jpg"
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(1,.2)
+		pos_hint:{"center_y":.75}
+
+		Label:
+			text: "Training\n Association of Runes"
+			halign:"center"
+			font_size:24
+
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:(1,.2)
+		pos_hint:{"center_y":.43}
+
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Ellipse:
+				size: 100,100
+				pos:125,250
+
+		Image:
+			id:_PictureChoice
+			#source:"Pics/Logo runistica.png"
+			source:""
+
+		Label:
+			text:""
+
+		Label:
+			id:_Vraag_label
+			text:"With what is \nthis rune associated ...?"
+			font_size:14
+			halign:"center"
+			valign:"bottom"
+			color:1,1,1,1
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(1,.3)
+
+		GridLayout:
+			cols:2
+			padding:25
+			spacing:25
+			size_hint:(1,.2)
+
+			AntwButton:
+				id: _antw1
+				text: ""
+				on_release:
+					root.ClearButtons()
+					self.background_color = 1,0,0,.3
+					root.PressedButton(self.text)
+			AntwButton:
+				id: _antw2
+				text: ""
+				on_release:
+					root.ClearButtons()
+					self.background_color = 1,0,0,.3
+					root.PressedButton(self.text)
+			AntwButton:
+				id: _antw3
+				text: ""
+				on_release:
+					root.ClearButtons()
+					self.background_color = 1,0,0,.3
+					root.PressedButton(self.text)
+			AntwButton:
+				id: _antw4
+				text: ""
+				on_release:
+					root.ClearButtons()
+					self.background_color = 1,0,0,.3
+					root.PressedButton(self.text)
+
+		Button:
+			text: "<< Submit >>"
+			size_hint:(.33,.05)
+			background_color:1,1,1,0.2
+			pos_hint:{"center_x":.5}
+			on_release:
+				root.ClearButtons()
+				root.SubmittAnswer()
+
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+
+		BoxLayout:
+			orientation: 'horizontal'
+			padding:15
+			size_hint: None, None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				on_release:
+					# voortijdig afbreken dus reset quizzvariabelen
+					root.CleanUp()
+					root.manager.current="menuscreen"
+
+			AnchorButton:
+				text: "Quit"
+				on_release:
+					quit()
+
+
+

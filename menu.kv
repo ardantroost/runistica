@@ -1,0 +1,183 @@
+#: import menu menu
+
+<CBox@CheckBox>:
+	canvas.before:
+		Color:
+			rgba: 1,1,1,.8
+		Ellipse:
+			pos: self.center_x-11, self.center_y-11
+			size:[22,22]
+	group: "training"
+	color: 1,0,0,1
+	size_hint:(.2,.2)
+
+<AnchorButton@Button>:
+
+	text: ""
+	size_hint:None,None
+	size: 50,30
+	color:[1,1,1,1]
+	font_size:11
+	background_normal:''
+	background_color:[1,1,1,0]
+
+<MenuScreen>:
+	canvas:
+		Color:
+			rgba: [0,1,1,.5]
+		Rectangle:
+			size:(self.width,self.height)
+			pos:self.x,self.y
+			source:"Pics/tree.jpg"
+
+	BoxLayout:
+		orientation: "vertical"
+		padding:10
+		size_hint:(1,.4)
+		pos_hint:{"center_x":.5,"center_y":.7}
+
+		Label:
+			text: "Trainingsmenu\n [size=12]Select a training[/size]"
+			markup:True
+			halign:"center"
+			size_hint:(1,.4)
+
+		BoxLayout:
+			size_hint: (1,.2)
+			Label:
+				text:"Runesymbols"
+				size_hint:(.4,.2)
+				halign:"right"
+
+			CBox:
+				id:_Symbols_but
+				on_active:
+					root.Trainingskeuze="Runesymbols"
+					_ButtonStart.text = "Start training\n Symbols of Runes >>"
+			Label:
+				text:''
+				size_hint:(.4,.1)
+		BoxLayout:
+			size_hint: (1,.2)
+			Label:
+				text:"RuneNames"
+				size_hint:(.4,.2)
+				halign:"right"
+
+			CBox:
+				id:_Names_but
+
+				on_active:
+					root.Trainingskeuze = "SymbolNames"
+					_ButtonStart.text = "Start training\n associations of Runes >>"
+
+			Label:
+				text:''
+				size_hint:(.4,.1)
+		BoxLayout:
+			size_hint: (1,.2)
+
+			Label:
+				text:"Meaning of Runes"
+				size_hint:(.4,.2)
+				halign:"right"
+
+			CBox:
+				id:_Meaning_but
+				on_active:
+					root.Trainingskeuze="Meaning of Runes"
+					_ButtonStart.text = "Start training\n Meaning of Runes >>"
+			Label:
+				text:''
+				size_hint:(.4,.1)
+
+	BoxLayout:
+		orientation: "vertical"
+		padding:10
+		size_hint: (1,.5)
+		pos_hint:{"center_x":0.5, "center_y":.25}
+
+		Label:
+			text: "Collegemenu\n [size=12]Select rune college [/size]"
+			markup:True
+			halign:"center"
+			size_hint:(1,.4)
+
+		BoxLayout:
+			size_hint: (1,.2)
+			Label:
+				text:"College symbols"
+				size_hint:(.4,.2)
+				halign:"right"
+
+			CBox:
+				id:_Symbols_college
+				on_active:
+					root.Trainingskeuze="College Symbols"
+					_ButtonStart.text = "Start college\n runes and their Symbols >>"
+			Label:
+				text:''
+				size_hint:(.4,.1)
+
+		BoxLayout:
+			size_hint: (1,.2)
+			Label:
+				text:"College names"
+				size_hint:(.4,.2)
+				halign:"right"
+
+			CBox:
+				id:_Names_college
+				on_active:
+					root.Trainingskeuze="College Names"
+					_ButtonStart.text = "Start college\n runes and their Names >>"
+			Label:
+				text:''
+				size_hint:(.4,.1)
+
+		Label:
+			id:_keuzequizz
+			text:''
+			halign:"center"
+			size_hint:(1,1)
+
+
+	AnchorLayout:
+		anchor_x: "center"
+		anchor_y: "bottom"
+
+		Button:
+			id: _ButtonStart
+			text: " Choose\n your training "
+			font_size:14
+			halign:"center"
+			background_normal:''
+			background_color: 0,1,0,0
+			size_hint:(1,.15)
+			on_release:
+				root.transport()
+
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+
+		BoxLayout:
+
+			orientation: 'horizontal'
+			padding:15
+			size_hint: None,None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				on_release:
+					root.manager.current="menuscreen"
+
+			AnchorButton:
+				text: "Quit"
+				on_release:
+					quit()
+			AnchorButton:
+				text: "Graphics"
+				on_release:
+					root.manager.current="dashboardscreen"

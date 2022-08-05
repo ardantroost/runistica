@@ -1,0 +1,373 @@
+#: import dashboard dashboard
+#: import ew kivy.uix.effectwidget
+
+<PieLabel@Label>:
+	# id:XYZ
+	# aangemaakt kenmerk te roepen met "ids.XYX.progress ...."!
+	progress:0
+	color:0,0,1,1
+	font_size:14
+
+	canvas.before:
+		Color:
+			rgba:1,0,0,1
+		Ellipse:
+			pos:self.pos
+			size:75,75
+	canvas:
+		Color:
+			rgba:0,1,0,1
+		Ellipse:
+			id:_pie1
+			size:65, 65
+			pos:self.x+5,self.y+5
+			angle_start:0
+			angle_end:self.progress
+
+	canvas.after:
+		Color:
+			rgba:1,1,1,1
+		Ellipse:
+			id:_pie1
+			size:50, 50
+			pos:self.x+12,self.y+12
+			source:"Pics/face.png"
+
+<BarLabel@Label>:
+	id:""
+	progress:0
+	canvas.before:
+		Color:
+			rgba:1,0,0,1
+		Rectangle:
+			pos:self.x, self.y
+			size:8, 102
+
+	canvas.after:
+		Color:
+			rgba:0,0,0,1
+		Rectangle:
+			size:(4, self.progress)
+			pos:(self.x+2,self.y+1)
+
+<BarHorLabel@Label>:
+	id:""
+	progress:10
+	canvas.before:
+		Color:
+			rgba:1,0,0,1
+		Rectangle:
+			pos:self.x, self.y
+			size:102,8
+
+	canvas.after:
+		Color:
+			rgba:0,0,0,1
+		Rectangle:
+			size:(self.progress,4)
+			pos:(self.x+1,self.y+2)
+
+<DashboardScreen>:
+	canvas.before:
+		Color:
+			rgba: 0,0,1,1
+		Rectangle:
+			size:self.size
+			pos:self.x,self.y
+			source:"Pics/road.jpg"
+	Label:
+		orientation:"vertical"
+		text: "ScoreBoard"
+		font_size:40
+		pos_hint:{'center_x': .5, 'center_y': .88}
+
+
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:(1,.65)
+		pos_hint:{"center_x:":.1,"center_y":.5}
+
+		padding:20
+		spacing:12
+
+		BoxLayout:
+			orientation:"horizontal"
+
+			BoxLayout:
+				orientation:"horizontal"
+
+				PieLabel:
+					id:_pie1
+					# aangemaakt kenmerk te roepen met "ids._pie1.progress ...."!
+					progress:110
+
+				Label:
+					id: _pie1a
+					text:"Perc: " + str(_pie1.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"horizontal"
+
+				PieLabel:
+					id:_pie2
+					progress:10
+				Label:
+					id:_pie2a
+					text:"Perc: " + str(_pie2.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+		Label:
+		BoxLayout:
+			orientation:"horizontal"
+
+			BoxLayout:
+				orientation:"vertical"
+				PieLabel:
+					id:_pie3
+					progress:60
+				Label:
+					id:_pie3a
+					text:"Perc: " + str(_pie3.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"vertical"
+				PieLabel:
+					id:_pie4
+					progress:70
+				Label:
+					id:_pie4a
+					text:"Perc: " + str(_pie4.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"vertical"
+				PieLabel:
+					id:_piep
+					progress: 26
+				Label:
+					id:_piep_a
+					text:"Perc: " + str(_piep.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+		Label:
+		BoxLayout:
+			orientation:"horizontal"
+
+			BoxLayout:
+				orientation:"vertical"
+
+				BarLabel:
+					id:_Bar2
+					progress:86
+				Label:
+					id:_Bar2a
+					text:"Perc: " + str(_Bar2.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"vertical"
+
+				BarLabel:
+					id:_Bar3
+					progress:44
+				Label:
+					id:_Bar3a
+					text:"Perc: " + str(_Bar3.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"vertical"
+
+				BarLabel:
+					id:_Bar4
+					progress:44
+				Label:
+					id:_Bar4a
+					text:"Perc: " + str(_Bar4.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+			BoxLayout:
+				orientation:"vertical"
+				BarLabel:
+					id:_Bar5
+					progress:14
+				Label:
+					id:_Bar5a
+					text:"Perc: " + str(_Bar5.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+			BoxLayout:
+				orientation:"vertical"
+				BarLabel:
+					id:_Bar6
+					progress:75
+				Label:
+					id:_Bar6a
+					text:"Perc: " + str(_Bar6.progress)
+					font_size:13
+					size_hint:1,.35
+					pos_hint:{"center_x":.25,"center_y":.4}
+
+
+		GridLayout:
+			cols:3
+			spacing:15
+
+			BarHorLabel:
+				id:_BarHor1
+				progress:10
+			Label:
+				text:"Bar 1"
+			Label:
+				text:""
+
+			BarHorLabel:
+				id:_BarHor2
+				progress:60
+			Label:
+				text:"Bar 2"
+			Label:
+				text:""
+
+			BarHorLabel:
+				id:_BarHor3
+				progress:45
+			Label:
+				text:"Bar 3"
+			Label:
+				text:""
+
+	GridLayout:
+		cols:3
+		spacing:10
+		size_hint: (.75,.13)
+		pos_hint:{"center_x":.5,"center_y":.10}
+
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			text:"Push"
+			font_size:12
+			on_release:
+				_pie1.progress +=8
+				_pie1a.text= "Percentage: " + str(_pie1.progress)
+
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"Push"
+			on_release:
+				_pie2.progress +=5
+				_pie2a.text="Percentage: " + str(_pie2.progress)
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			text:"Push"
+			font_size:12
+			on_release:
+				_pie3.progress +=3
+				_pie3a.text="Percentage: "+ str(_pie3.progress)
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			text:"Push"
+			font_size:12
+			on_release:
+				_pie4.progress +=2
+				_pie4a.text="Percentage: " + str(_pie4.progress)
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			text:"Bar 2"
+			font_size:12
+			on_release:
+				_Bar2.progress +=2 if _Bar2.progress < 100 else -100
+				_Bar2a.text="Perc: " + str(_Bar2.progress)
+
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"Bar 3"
+			on_release:
+				_Bar3.progress +=2 if _Bar3.progress < 100 else -100
+				_Bar3a.text="Perc: " + str(_Bar3.progress)
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"Bar 4"
+			on_release:
+				_Bar4.progress +=2 if _Bar4.progress < 100 else -100
+				_Bar4a.text="Perc: " + str(_Bar4.progress)
+
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"BarHor 1"
+			on_release:
+				_BarHor1.progress +=2 if _BarHor1.progress < 100 else -100
+
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"BarHor 2"
+			on_release:
+				_BarHor2.progress +=2 if _BarHor2.progress < 100 else -100
+				#_Bar3a.text="Perc: " + str(_Bar3.progress)
+		Button:
+			size_hint:(.1,.1)
+			pos_hint:{"center_x":.8, "center_y":.1}
+			font_size:12
+			text:"BarHor 3"
+			on_release:
+				_BarHor3.progress +=2 if _BarHor3.progress < 100 else -100
+				#_Bar4a.text="Perc: " + str(_Bar4.progress)
+
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+
+		BoxLayout:
+			orientation: 'horizontal'
+			padding:15
+			size_hint: None, None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				on_release:
+					root.manager.current="menuscreen"
+
+			AnchorButton:
+				text: "Quit"
+				on_release:
+					quit()
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+#: import quizz quizz
+
+<QuizzScreen>:
+	BoxLayout:
+		orientation: "vertical"
+		padding:20
+
+		canvas:
+			Color:
+				rgba:0,1,0,.6
+			Rectangle:
+				size: (self.width, self.height)
+				pos:self.pos
+				source:"Pics/road.jpg"
+			Color:
+				rgba:1,1,1,1
+			#Ellipse:
+			#	size:400,400
+			#	pos:-25,450
+			#Color:
+			#	rgba:0,1,0,1
+			#Ellipse:
+			#	size:380,380
+			#	pos:-15,-140
+
+
+		Label:
+			id: _scherm
+			text: ""
+			halign: "center"
+			#size_hint:(1,.9)
+			pos_hint: {"center_x":.5, "top":1}
+
+		FloatLayout:
+			#orientation: "horizontal"
+			#size_hint:(1,.05)
+			Button:
+				text: "<< home"
+				background_normal:''
+				background_color:[1,0,0,0]
+				size_hint:None,None
+				size: 100,20
+				pos:20,50
+				on_release:
+					root.manager.current= "menuscreen"
+					root.manager.transition.direction = "right"
+			Button:
+				text: "Start training >>"
+				background_normal:''
+				background_color:[1,0,0,0]
+				size_hint:None,None
+				size: 100,20
+				pos: 220,50
+
+				on_press:
+					background_color: [1,0,0,.5]
+
+				on_release:
+					root.manager.current = "vragenscreen"
+					#root.ConstructQuizz()
+					#root.manager.screens[2].ids._scherm.text = f"Your trainings choice\n{root.Trainingskeuze}"
+					root.manager.transition.direction = "left"
+
+			Button:
+				canvas:
+					Line:
+						rounded_rectangle:(self.x-5,self.y ,75 ,20, 10)
+						width:1
+				text: "<< Exit >>"
+				font_size:12
+				background_normal:''
+				background_color:[1,0,0,0]
+				size_hint:None,None
+				size: 75,20
+				pos: 270,555
+				on_release:	quit()
+

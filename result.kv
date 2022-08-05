@@ -1,0 +1,104 @@
+#: import result result
+
+<ResultScreen>:
+
+	canvas:
+		Color:
+			rgba:1,0,1,1
+		Rectangle:
+			size: self.width, self.height
+			source:"Pics/Woodstones.jpg"
+
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:(1,.2)
+		pos_hint:{"center_x":0.5,"center_y":0.75}
+
+		Label:
+			id: _ResultNaam
+			text: ""
+			text_size: (220,None)
+			valign:"center"
+
+	BoxLayout:
+		canvas:
+			Line:
+				rounded_rectangle:self.x+40,self.y,self.width-80, self.height,12
+				width:1
+
+		orientation:"vertical"
+		size_hint:(1,.75)
+		pos_hint:{"center_y":.50}
+		padding:30
+		spacing:10
+
+		Label:
+			id: _MissedRune
+			text: ""
+			font_size:36
+			halign:"center"
+
+		Image:
+			id: _MissedRuneNaam
+			background_color: 1,0,0,0
+			pos_hint:{"center_x":.5,"center_y":.25}
+			source:"Pics/Logo runistica.png"
+
+		Label:
+			text: "_______________________________"
+			halign:"center"
+
+		Label:
+			id: _AssociationMissedRune
+			text: ""
+			text_size: (225,None)
+			halign:"center"
+
+		Label:
+			id: _AdviceMissedRune
+			text: ""
+			text_size: (225,None)
+			halign:"center"
+
+		Label:
+			id: _FavourMissedRune
+			text: ""
+			text_size: 225,None
+			halign:"center"
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(1,.1)
+
+		Button:
+			id: _ButtonAdvice
+			text: "<< Training advice >>"
+			font_size:13
+			size_hint: (.25,.25)
+			pos_hint: {"center_x":.5, "top":1}
+			background_color: [1,0,1,.2]
+
+			on_press:
+				root.Display_Results(1)
+
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+
+		BoxLayout:
+			orientation: 'horizontal'
+			padding:15
+			size_hint: None, None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				on_release:
+					# voortijdig afbreken: reset quizzvariabelen
+					root.CleanUp()
+					root.manager.current = "menuscreen"
+
+			AnchorButton:
+				text: "Quit"
+				on_release:
+					quit()
