@@ -42,12 +42,15 @@ class RunenMasterScreens(ScreenManager):
         self.PopupPressed.open()
 
 
-class RunenMasterApp(App):
+#class RunenMasterApp(App):
+class MainApp(App):
     def build(self):
         return RunenMasterScreens()
 
 if __name__ == '__main__':
-    RunenMasterApp().run()
+
+    #RunenMasterApp().run()
+    MainApp().run()
 
 
 
