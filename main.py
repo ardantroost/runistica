@@ -11,7 +11,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 
 #foutmelding als je kv file (van runenmaster) laadt met alle screens
-#Builder.load_file("runenmaster.kv")
+
 Builder.load_file("welcome.kv")
 Builder.load_file("menu.kv")
 Builder.load_file("quizz.kv")
@@ -21,7 +21,7 @@ Builder.load_file("vragen_2.kv")
 Builder.load_file("result.kv")
 Builder.load_file("CollegeSymbols.kv")
 Builder.load_file("CollegeNames.kv")
-Builder.load_file("dashboard.kv")
+
 
 class RunenMasterScreens(ScreenManager):
 
@@ -41,15 +41,12 @@ class RunenMasterScreens(ScreenManager):
                                   auto_dismiss=True)
         self.PopupPressed.open()
 
-
-#class RunenMasterApp(App):
 class MainApp(App):
     def build(self):
         return RunenMasterScreens()
 
 if __name__ == '__main__':
 
-    #RunenMasterApp().run()
     MainApp().run()
 
 

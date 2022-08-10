@@ -35,16 +35,17 @@ class ResultScreen(Screen):
 			self.Missed_quistions = []
 
 		if len(self.Missed_quistions) > 0:
-
-			print("Selection of wrong answers:" + str(self.Missed_quistions))
+			pass
+			#print("Selection of wrong answers:" + str(self.Missed_quistions))
 		else:
-			print("Selection of wrong answers: None")
+			pass
+			#print("Selection of wrong answers: None")
 
 		self.DisplaySelection = []
+
 		for i in self.Missed_quistions:
 			conn = sqlite3.connect("dataRunistica.db")
 			c = conn.cursor()
-			#c.execute("SELECT RuneNaam,RuneCredo, RuneText, Signtype FROM Runistica WHERE RuneNaam=(?)", (i,))
 			c.execute("SELECT RuneNaam,RuneCredo, RuneText, Signtype FROM Runistica WHERE "+f'{self.indicator}'+"=(?)", (i,))
 			xyz= c.fetchall()
 			self.DisplaySelection.append(xyz)
