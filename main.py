@@ -2,9 +2,9 @@ from kivy.config import Config
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
-Config.set('graphics', 'width',350)
-Config.set('graphics', 'height',600)
-Config.set('graphics', 'resizable',0)
+#Config.set('graphics', 'width',350)
+#Config.set('graphics', 'height',600)
+#Config.set('graphics', 'resizable',0)
 
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
@@ -43,6 +43,8 @@ class RunenMasterScreens(ScreenManager):
 
 class MainApp(App):
     def build(self):
+        # 256 x 256 pixels
+        self.icon = "icon.png"
         return RunenMasterScreens()
 
 if __name__ == '__main__':
