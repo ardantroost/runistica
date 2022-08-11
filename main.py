@@ -19,8 +19,8 @@ Builder.load_file("vragen.kv")
 Builder.load_file("vragen_1.kv")
 Builder.load_file("vragen_2.kv")
 Builder.load_file("result.kv")
-Builder.load_file("CollegeSymbols.kv")
-Builder.load_file("CollegeNames.kv")
+Builder.load_file("collegesymbols.kv")
+Builder.load_file("collegenames.kv")
 
 
 class RunenMasterScreens(ScreenManager):
