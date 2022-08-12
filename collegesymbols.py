@@ -1,15 +1,8 @@
 import sqlite3
-
-from kivy.uix.carousel import Carousel
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
-from kivy.uix.screenmanager import Screen, RiseInTransition,FallOutTransition, WipeTransition
-from kivy.core.window import Window
-import random
-from kivy.properties import StringProperty, ListProperty, NumericProperty
-from kivy.animation import Animation
+from kivy.properties import ListProperty
 
 
 class CollegeSymbolsScreen(Screen):
@@ -32,7 +25,6 @@ class CollegeSymbolsScreen(Screen):
 
 		text1 = text1.capitalize()
 		text1 = text1.replace(" v", " V")
-
 
 		conn = sqlite3.connect("dataRunistica.db")
 		c = conn.cursor()

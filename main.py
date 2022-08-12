@@ -1,11 +1,7 @@
-from kivy.config import Config
+import kivy
 from kivy.uix.label import Label
+kivy.require("2.1.0")
 from kivy.uix.popup import Popup
-
-#Config.set('graphics', 'width',350)
-#Config.set('graphics', 'height',600)
-#Config.set('graphics', 'resizable',0)
-
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
@@ -36,8 +32,8 @@ class RunenMasterScreens(ScreenManager):
                                   size_hint=(None, None),
                                   size=(200, 100),
                                   pos_hint={"center_x": .5, "center_y": .5},
-                                  background_color=[0, 1, 0, 1],
-                                  background="Pics/eye.png",
+                                  background_color=[0, 1, 0, .6],
+                                  #background="Pics/eye.png",
                                   auto_dismiss=True)
         self.PopupPressed.open()
 

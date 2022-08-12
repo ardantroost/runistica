@@ -17,7 +17,7 @@
 	size_hint:None,None
 	size: 50,30
 	color:[1,1,1,1]
-	font_size:11
+	font_size:"10dp"
 	background_normal:''
 	background_color:[1,1,1,0]
 
@@ -28,7 +28,7 @@
 		Rectangle:
 			size:(self.width,self.height)
 			pos:self.x,self.y
-			source:"Pics/tree.jpg"
+			source:"Pics/alternative.jpg"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -38,6 +38,7 @@
 
 		Label:
 			text: "Trainingsmenu\n [size=12]Select a training[/size]"
+			font_size:"14dp"
 			markup:True
 			halign:"center"
 			size_hint:(1,.4)
@@ -46,6 +47,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"Runesymbols"
+				font_size:"14dp"
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -61,6 +63,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"RuneNames"
+				font_size:"14dp"
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -79,6 +82,7 @@
 
 			Label:
 				text:"Meaning of Runes"
+				font_size:"14dp"
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -107,6 +111,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"College symbols"
+				font_size:"14dp"
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -123,6 +128,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"College names"
+				font_size:"14dp"
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -138,6 +144,7 @@
 		Label:
 			id:_keuzequizz
 			text:''
+			font_size:"12dp"
 			halign:"center"
 			size_hint:(1,1)
 
@@ -149,7 +156,7 @@
 		Button:
 			id: _ButtonStart
 			text: " Choose\n your training "
-			font_size:14
+			font_size:"14dp"
 			halign:"center"
 			background_normal:''
 			background_color: 0,1,0,0
@@ -170,11 +177,13 @@
 
 			AnchorButton:
 				text: "Menu"
+				font_size:"10dp"
 				on_release:
 					root.manager.current="menuscreen"
 
 			AnchorButton:
 				text: "Quit"
+				font_size:"10dp"
 				on_release:
 					quit()
 

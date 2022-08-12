@@ -10,7 +10,7 @@
 			size: self.size
 			pos:self.pos
 			radius: [8]
-	font_size: 12
+	font_size: "12dp"
 	halign:"left"
 	valign:"center"
 	color:0,0,0,1
@@ -20,7 +20,7 @@
 	size_hint:None,None
 	size: 50,30
 	color:[1,1,1,1]
-	font_size:11
+	font_size:"10dp"
 	background_color:1,1,1,0
 
 <VragenScreen>:
@@ -30,7 +30,7 @@
 			rgba: [0,1,0,1]
 		Rectangle:
 			size:self.width, self.height
-			source:"Pics/tree.jpg"
+			source:"Pics/alternative.jpg"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -40,7 +40,7 @@
 		Label:
 			text: "Training\n runesymbols"
 			halign:"center"
-			font_size:24
+			font_size:"24dp"
 
 	BoxLayout:
 		orientation:"vertical"
@@ -56,7 +56,6 @@
 
 		Image:
 			id:_PictureChoice
-			#source:"Pics/Logo runistica.png"
 			source:""
 
 		Label:
@@ -65,7 +64,7 @@
 		Label:
 			id:_Vraag_label
 			text:"What's the name of\n this rune...?"
-			font_size:14
+			font_size:"14dp"
 			halign:"center"
 			valign:"bottom"
 			color:1,1,1,1
@@ -111,6 +110,7 @@
 
 		Button:
 			text: "<< Submit >>"
+			font_size:"12dp"
 			size_hint:(.33,.05)
 			background_color:1,1,1,0.2
 			pos_hint:{"center_x":.5}
@@ -130,6 +130,7 @@
 
 			AnchorButton:
 				text: "Menu"
+				font_size:"10dp"
 				on_release:
 					# voortijdig afbreken dus reset quizzvariabelen
 					root.CleanUp()
@@ -137,6 +138,7 @@
 
 			AnchorButton:
 				text: "Quit"
+				font_size:"10dp"
 				on_release:
 					quit()
 

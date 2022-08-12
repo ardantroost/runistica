@@ -22,6 +22,7 @@
 		pos_hint:{"center_x":.5,"center_y":.85}
 		Label:
 			text:"Swipe\n the right combination"
+			font_size:"12dp"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -60,6 +61,7 @@
 		Button:
 			size_hint: (1,.2)
 			text: "Check"
+			font_size:"12dp"
 			on_release:
 				root.Checkcombination(_Carou1.index)
 
@@ -72,16 +74,14 @@
 			size_hint: (1,.3)
 			id:_result1
 			text:""
-				#str(_Carou1.index)
-
-			font_size:12
+			font_size:"12dp"
 			halign:"right"
 
 		Label:
 			size_hint: (1,.3)
 			id:_result2
 			text:""
-			font_size:12
+			font_size:"12dp"
 			halign:"left"
 
 	AnchorLayout:
@@ -97,10 +97,12 @@
 
 			AnchorButton:
 				text: "Menu"
+				font_size:"10dp"
 				on_release:
 					root.manager.current="menuscreen"
 
 			AnchorButton:
 				text: "Quit"
+				font_size:"10dp"
 				on_release:
 					quit()

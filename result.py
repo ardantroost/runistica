@@ -36,10 +36,10 @@ class ResultScreen(Screen):
 
 		if len(self.Missed_quistions) > 0:
 			pass
-			#print("Selection of wrong answers:" + str(self.Missed_quistions))
+
 		else:
 			pass
-			#print("Selection of wrong answers: None")
+
 
 		self.DisplaySelection = []
 

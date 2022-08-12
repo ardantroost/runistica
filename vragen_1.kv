@@ -10,7 +10,7 @@
 			size: self.size
 			pos:self.pos
 			radius: [8]
-	font_size: 12
+	font_size: "12dp"
 	halign:"left"
 	valign:"center"
 	color:0,0,0,1
@@ -20,7 +20,7 @@
 	size_hint:None,None
 	size: 50,30
 	color:[1,1,1,1]
-	font_size:11
+	font_size:"10dp"
 	background_color:1,1,1,0
 
 <VragenScreen1>:
@@ -40,7 +40,7 @@
 		Label:
 			text: "Training\n Association of Runes"
 			halign:"center"
-			font_size:24
+			font_size:"24dp"
 
 	BoxLayout:
 		orientation:"vertical"
@@ -65,7 +65,7 @@
 		Label:
 			id:_Vraag_label
 			text:"With what is \nthis rune associated ...?"
-			font_size:14
+			font_size:"14dp"
 			halign:"center"
 			valign:"bottom"
 			color:1,1,1,1
@@ -111,6 +111,7 @@
 
 		Button:
 			text: "<< Submit >>"
+			font_size:"12dp"
 			size_hint:(.33,.05)
 			background_color:1,1,1,0.2
 			pos_hint:{"center_x":.5}
@@ -130,6 +131,7 @@
 
 			AnchorButton:
 				text: "Menu"
+				font_size:"10dp"
 				on_release:
 					# voortijdig afbreken dus reset quizzvariabelen
 					root.CleanUp()
@@ -137,6 +139,7 @@
 
 			AnchorButton:
 				text: "Quit"
+				font_size:"10dp"
 				on_release:
 					quit()
 

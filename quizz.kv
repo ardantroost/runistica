@@ -14,30 +14,21 @@
 				source:"Pics/road.jpg"
 			Color:
 				rgba:1,1,1,1
-			#Ellipse:
-			#	size:400,400
-			#	pos:-25,450
-			#Color:
-			#	rgba:0,1,0,1
-			#Ellipse:
-			#	size:380,380
-			#	pos:-15,-140
-
 
 		Label:
 			id: _scherm
 			text: ""
+			font_size:"12dp"
 			halign: "center"
-			#size_hint:(1,.9)
 			pos_hint: {"center_x":.5, "top":1}
 
 		FloatLayout:
-			#orientation: "horizontal"
-			#size_hint:(1,.05)
+
 			Button:
 				text: "<< home"
 				background_normal:''
 				background_color:[1,0,0,0]
+				font_size:"12dp"
 				size_hint:None,None
 				size: 100,20
 				pos:20,50
@@ -46,6 +37,7 @@
 					root.manager.transition.direction = "right"
 			Button:
 				text: "Start training >>"
+				font_size:"12dp"
 				background_normal:''
 				background_color:[1,0,0,0]
 				size_hint:None,None
@@ -57,9 +49,7 @@
 
 				on_release:
 					root.manager.current = "vragenscreen"
-					#root.ConstructQuizz()
-					#root.manager.screens[2].ids._scherm.text = f"Your trainings choice\n{root.Trainingskeuze}"
-					root.manager.transition.direction = "left"
+
 
 			Button:
 				canvas:
@@ -67,7 +57,7 @@
 						rounded_rectangle:(self.x-5,self.y ,75 ,20, 10)
 						width:1
 				text: "<< Exit >>"
-				font_size:12
+				font_size:"12dp"
 				background_normal:''
 				background_color:[1,0,0,0]
 				size_hint:None,None

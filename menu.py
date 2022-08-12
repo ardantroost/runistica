@@ -1,7 +1,7 @@
 import random
 import sqlite3
 
-from kivy.uix.screenmanager import Screen, FallOutTransition, WipeTransition
+from kivy.uix.screenmanager import Screen,WipeTransition
 from kivy.properties import StringProperty, ListProperty,NumericProperty
 
 class MenuScreen(Screen):
