@@ -1,0 +1,1252 @@
+#: import stats stats
+
+<Pie1@Label>:
+
+	size_hint:None,None
+	width:150
+	height:150
+	text: str(format((self.level/360)*100,".1f")) + "%"
+	color:0,0,0,.8
+	font_size:dp(14)
+	# dummy voor scoreniveau
+	level: 0
+	pos_hint:{"center_x":.5,"center_y":.5}
+
+	canvas.before:
+		Color:
+			rgba:1,0,0,.3
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,1,1,.95
+		Ellipse:
+			size: self.width-60,self.height-60
+			pos:self.center_x-(self.width-60)/2, self.center_y-(self.height-60)/2
+
+<Pie2@Label>:
+	size_hint:None,None
+	width:75
+	height:75
+	text: str(format((self.level/360)*100,".1f")) + "%"
+	color:(0,0,0,.7)
+	font_size:dp(9)
+	# dummy voor scoreniveau
+	level: 0
+
+	canvas.before:
+		Color:
+			rgba:72/255,255/255,133/255,.75
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,1,1,.95
+		Ellipse:
+			size: self.width-30,self.height-30
+			pos:self.center_x-(self.width-30)/2, self.center_y-(self.height-30)/2
+
+<Pie3@Label>:
+	id:_Pie3
+	size_hint:None,None
+	width:75
+	height:75
+	text: str(format((self.level/360)*100,".1f")) + "%"
+	color:0,0,0,.7
+	font_size:dp(9)
+	# dummy voor scoreniveau
+	level: 0
+
+	canvas.before:
+		Color:
+			rgba:255/255,99/255,70/255,.75
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,1,1,.95
+		Ellipse:
+			size: self.width-30,self.height-30
+			pos:self.center_x-(self.width-30)/2, self.center_y-(self.height-30)/2
+
+<Pie4@Label>:
+	size_hint:None,None
+	width:75
+	height:75
+	text: str(format((self.level/360)*100,".1f")) + "%"
+	color:0,0,0,.7
+	font_size:dp(9)
+	# dummy voor scoreniveau
+	level: 0
+
+	canvas.before:
+		Color:
+			rgba:(72/255,255/255,0,.75)
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,1,1,.95
+		Ellipse:
+			size: self.width-30,self.height-30
+			pos:self.center_x-(self.width-30)/2, self.center_y-(self.height-30)/2
+
+<BarHor@Label>:
+	size_hint:None,None
+	height:10
+	font_size:dp(8)
+	text: format((self.level*10),".1f") +"%"
+	color: 1,1,1,1
+	level: 0
+	pos_hint:{"center_x":.5,"center_y":.5}
+
+	canvas.before:
+		Color:
+			rgba:1,1,1,1
+		Rectangle:
+			size:101,self.height
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.6
+		Rectangle:
+			size: self.level*10,self.height-2
+			pos:self.x+1, self.center_y-4
+
+
+<BarVer@Label>:
+	size_hint:None,None
+	width:10
+	height:101
+	#text: format(self.level,".1f") +"%"
+	font_size:dp(8)
+	color:0,0,0,.5
+	level:0
+	pos_hint:{"center_x":.5,"center_y":.5}
+	valign:"top"
+	canvas.before:
+		Color:
+			rgba:1,1,1,1
+		Rectangle:
+			size: 10,self.height
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.6
+		Rectangle:
+			size: self.width-2,self.level
+			pos:self.center_x-4, self.y+1
+
+<StatsScreen>:
+	canvas:
+		Color:
+			rgba: 1,0,1,.75
+		Rectangle:
+			size:self.width, self.height
+			pos:self.pos
+			#source:"Pics/Magnus.jpg"
+	Image:
+		source:"Pics/sjamaan1.jpg"
+		size_hint:None,None
+		color:1,0,1,.25
+		width:800
+		height:900
+		allow_stretch:True
+		keep_ratio:False
+		pos_hint:{"center_x":.5, "center_y":.25}
+
+	BoxLayout:
+		orientation:"vertical"
+		pos_hint:{"center_x":.5, "center_y":.8}
+		size_hint:1,.2
+		padding:20
+		spacing:0
+		canvas:
+			Color:
+				rgba: 0,0,0,0
+			Rectangle:
+				size:self.width, self.height
+				pos:self.pos
+		Label:
+			text:"RunenMaster\nProgress Statistics"
+			color:1,1,1,1
+			font_size:dp(28)
+			halign:"center"
+
+		BoxLayout:
+			size_hint:0.5,1
+			pos_hint:{"center_x":.5, "center_y":.5}
+			Label:
+				id: _datetimes
+				text:""
+				color:1,1,1,1
+				font_size:dp(10)
+				halign:"center"
+			Label:
+				id: _currenttime
+				text:""
+				color:1,1,1,1
+				font_size:dp(10)
+				halign:"center"
+
+
+	ScrollView:
+		size_hint:.85,1
+		pos_hint:{"center_x":.5, "center_y":0.15}
+		do_scroll_x:False
+		do_scroll_y:True
+		bar_color:0.2,1,0,.45
+		bar_width:15
+		bar_pos_y:"right"
+		scroll_type:["bars","content"]
+		#scroll_y:0
+
+		BoxLayout:
+			orientation:"vertical"
+			size_hint_y:None
+			height:1500
+
+			# box1
+			BoxLayout:
+				id: _box1
+				orientation:"vertical"
+				size_hint_y:None
+				padding:20
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				Label:
+					text:"Overall statistics"
+					color:1,1,1,1
+					font_size:dp(16)
+					size_hint:.5,1
+					halign:"left"
+
+			# box1
+			BoxLayout:
+				orientation:"horizontal"
+				size_hint_y:None
+				height:300
+				canvas:
+					Color:
+						rgba: 1,1,1,1
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				GridLayout:
+					cols:2
+					spacing:20
+					padding:20
+					canvas:
+						Color:
+							rgba: 0,0,0,.1
+						Rectangle:
+							size:self.width, self.height
+							pos:self.pos
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.6,1
+						canvas:
+							Color:
+								rgba: 0,0,1,.5
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+								source:"Pics/Runenmaster.png"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.2
+							Label:
+								text: "CURRENT LEVEL"
+								font_size:dp(18)
+								color:1,1,1,.75
+								valign:"center"
+								halign:"center"
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,.6
+							Pie1:
+								id:_pie1
+								level: _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.2
+							Label:
+								id:_masterlabel
+								text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else "APPRENTICE SKILLS")
+								color:1,1,1,1
+								font_size:dp(16)
+								valign:"center"
+								halign:"center"
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.4,1
+						canvas:
+							Color:
+								rgba: 0,0,1,.1
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+						BoxLayout:
+							canvas:
+								Color:
+									rgba: 0,0,1,.15
+								Rectangle:
+									size:self.width-2, self.height-2
+									pos:self.pos
+							Pie2:
+								id:_pie2
+								level: _pie1_symbol.level
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Label:
+								text: "SKILLS\nRUNE SYMBOLS"
+								font_size:dp(8)
+								valign:"center"
+								halign:"left"
+
+						BoxLayout:
+							canvas:
+								Color:
+									rgba: 0,0,1,.15
+								Rectangle:
+									size:self.width-2, self.height-2
+									pos:self.pos
+							Pie3:
+								id:_pie3
+								level: _pie1_names.level
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Label:
+								text:"SKILLS\nRUNE NAMES"
+								font_size:dp(8)
+								valign:"center"
+								halign:"left"
+						BoxLayout:
+							canvas:
+								Color:
+									rgba: 0,0,1,.15
+								Rectangle:
+									size:self.width-2, self.height-2
+									pos:self.pos
+							Pie4:
+								id:_pie4
+								level: _pie1_meaning.level
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Label:
+								text: "SKILLS\nRUNE MEANINGS"
+								font_size:dp(8)
+								valign:"center"
+								halign:"left"
+
+			# box2a
+			BoxLayout:
+				id: _box1
+				orientation:"vertical"
+				size_hint_y:None
+				padding:20
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				Label:
+					text:"Statistics I The Symbols of Runes"
+					color:1,1,1,1
+					font_size:dp(16)
+					size_hint:1,1
+					halign:"left"
+
+			BoxLayout:
+				orientation:"horizontal"
+				size_hint_y:None
+				height:300
+				canvas:
+					Color:
+						rgba: 1,1,1,1
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				GridLayout:
+					cols:3
+					spacing:20
+					padding:20
+					canvas:
+						Color:
+							rgba:72/255,255/255,133/255,.5
+						Rectangle:
+							size:self.width, self.height
+							pos:self.pos
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.6,1
+						canvas:
+							Color:
+								rgba:72/255,255/255,133/255,.755
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+								source:"Pics/Runenmaster.png"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.2
+							Label:
+								text:"RUNE SYMBOLS"
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,.6
+							Pie1:
+								id:_pie1_symbol
+								level:
+						BoxLayout:
+							orientation:"horizontal"
+							size_hint:1,.2
+							Label:
+								text:"MASTER SKILLS" if _pie1_symbol.level >= 324 else ("MEDIOR SKILLS" if (_pie1_symbol.level >180 and _pie1_symbol.level <324) else "JUNIOR SKILLS")
+								bold:True
+								color:1,1,1,1
+								font_size:dp(16)
+								valign:"center"
+								halign:"center"
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.4,1
+
+						canvas:
+							Color:
+								rgba:72/255,255/255,133/255,.5
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,None
+							height:50
+							Label:
+								text:"Final four tests\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								size_hint:1,.1
+								halign:"center"
+
+						BoxLayout:
+							orientation:"horizontal"
+							padding:20
+							spacing:10
+							pos_hint:{"center_x":.5, "center_y":.5}
+							size_hint:1,.4
+							canvas:
+								Color:
+									rgba:72/255,255/255,133/255,.75
+								Rectangle:
+									size:self.width-5, self.height-5
+									pos:self.pos
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test1_symbol
+									level:0
+								Label:
+									text:"last\n0" if _test1_symbol.level<0 else "last\n" + str(format(_test1_symbol.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test2_symbol
+									level: 0
+								Label:
+									text:"2nd\n"+ str(format(_test2_symbol.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test3_symbol
+									level: 0
+								Label:
+									text:"3nd\n"+ str(format(_test3_symbol.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test4_symbol
+									level: 0
+								Label:
+									text:"4nd\n"+ str(format(_test4_symbol.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+						BoxLayout:
+							size_hint:1,.15
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_tests_symbol
+									size_hint:1,.7
+									text: ""
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Total tests"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_symbol_progress
+									text:""
+									size_hint:1,.7
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Progress"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.3,1
+
+						canvas:
+							Color:
+								rgba:72/255,255/255,133/255,.5
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							size_hint:1,None
+							height: 50
+							canvas:
+
+							Label:
+								text: "Last test\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.14
+							padding:5
+							Label:
+								text: "Date:"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+
+							Label:
+								id:_lastvisit_symbol
+								text: "24-09-2022"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+								size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.3
+							padding:35
+							spacing:10
+
+							BoxLayout:
+								orientation:"vertical"
+								BarHor:
+									id:_bar_symbol
+									level:0
+								Label:
+									id:_bar_symbol_score
+									text: "Score: " + str(format(_bar_symbol.level*10,".1f"))+"%"
+									font_size:dp(8)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"center"
+									size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,None
+							height:60
+							padding:10
+
+							Label:
+								id:_speed_symbol
+								text: "32"
+								color:0,0,0,.5
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+
+							Label:
+								text: "Speed (Sec.)"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+
+			# box 3a *********************************************************
+			BoxLayout:
+				orientation:"vertical"
+				size_hint_y:None
+				padding:20
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				Label:
+					text:"Statistics II The Names of Runes"
+					color:1,1,1,1
+					font_size:dp(16)
+					size_hint:1,1
+					halign:"left"
+
+			# box3b *******************************************************
+			BoxLayout:
+				orientation:"horizontal"
+				size_hint_y:None
+				height:300
+				canvas:
+					Color:
+						rgba: 1,1,1,1
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				GridLayout:
+					cols:3
+					spacing:20
+					padding:20
+					canvas:
+						Color:
+							rgba:255/255,99/255,70/255,.5
+						Rectangle:
+							size:self.width, self.height
+							pos:self.pos
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.6,1
+						canvas:
+							Color:
+								rgba:255/255,99/255,70/255,.75
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+								source:"Pics/Runenmaster.png"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.2
+							Label:
+								text:"RUNE NAMES"
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,.6
+							Pie1:
+								id:_pie1_names
+								level:
+						BoxLayout:
+							orientation:"horizontal"
+							size_hint:1,.2
+							Label:
+								text: "MASTER SKILLS" if _pie1_names.level >= 324 else ("MEDIOR SKILLS" if (_pie1_names.level >180 and _pie1_names.level <324) else "JUNIOR SKILLS")
+								bold:True
+								color:1,1,1,1
+								font_size:dp(16)
+								valign:"center"
+								halign:"center"
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.4,1
+
+						canvas:
+							Color:
+								rgba:255/255,99/255,70/255,.75
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,None
+							height:50
+							Label:
+								text:"Final four tests\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								size_hint:1,.1
+								halign:"center"
+
+						BoxLayout:
+							orientation:"horizontal"
+							padding:20
+							spacing:10
+							pos_hint:{"center_x":.5, "center_y":.5}
+							size_hint:1,.4
+							canvas:
+								Color:
+									rgba:255/255,99/255,70/255,.75
+								Rectangle:
+									size:self.width-5, self.height-5
+									pos:self.pos
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test1_names
+									level:0
+								Label:
+									text:"last\n0" if _test1_names.level<0 else "last\n" + str(format(_test1_names.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test2_names
+									level: 0
+								Label:
+									text:"2nd\n"+ str(format(_test2_names.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test3_names
+									level: 0
+								Label:
+									text:"3nd\n"+ str(format(_test3_names.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test4_names
+									level: 0
+								Label:
+									text:"4nd\n"+ str(format(_test4_names.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+						BoxLayout:
+							size_hint:1,.15
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_tests_names
+									size_hint:1,.7
+									text: ""
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Total tests"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_names_progress
+									text:""
+									size_hint:1,.7
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Progress"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.3,1
+
+						canvas:
+							Color:
+								rgba:255/255,99/255,70/255,.75
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							size_hint:1,None
+							height: 50
+							canvas:
+
+							Label:
+								text: "Last test\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.14
+							padding:5
+							Label:
+								text: "Date:"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+
+							Label:
+								id:_lastvisit_names
+								text: "24-09-2022"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+								size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.3
+							padding:35
+							spacing:10
+
+							BoxLayout:
+								orientation:"vertical"
+								BarHor:
+									id:_bar_names
+									level:0
+								Label:
+									id:_bar_names_score
+									text: "Score: " + str(format(_bar_names.level*10,".1f"))+"%"
+									font_size:dp(8)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"center"
+									size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,None
+							height:60
+							padding:10
+
+							Label:
+								id:_speed_names
+								text: "32"
+								color:0,0,0,.5
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+
+							Label:
+								text: "Speed (Sec.)"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+			# box 4a ****************
+			BoxLayout:
+				orientation:"vertical"
+				size_hint_y:None
+				padding:20
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				Label:
+					text:"Statistics III Meaning of Runes"
+					color:1,1,1,1
+					font_size:dp(16)
+					size_hint:1,1
+					halign:"left"
+
+			# box 4b ****************************
+			BoxLayout:
+				orientation:"horizontal"
+				size_hint_y:None
+				height:300
+				canvas:
+					Color:
+						rgba: 1,1,1,1
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				GridLayout:
+					cols:3
+					spacing:20
+					padding:20
+					canvas:
+						Color:
+							rgba:(72/255,255/255,0,.5)
+						Rectangle:
+							size:self.width, self.height
+							pos:self.pos
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.6,1
+						canvas:
+							Color:
+								rgba:(72/255,255/255,0,.75)
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+								source:"Pics/Runenmaster.png"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.2
+							Label:
+								text:"RUNE MEANINGS"
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,.6
+							Pie1:
+								id:_pie1_meaning
+								level:
+						BoxLayout:
+							orientation:"horizontal"
+							size_hint:1,.2
+
+							Label:
+								text:"MASTER SKILLS" if _pie1_meaning.level >=324 else ("MEDIOR SKILLS" if (_pie1_meaning.level >180 and _pie1_meaning.level <324) else "JUNIOR SKILLS")
+								bold:True
+								color:1,1,1,1
+								font_size:dp(16)
+								valign:"center"
+								halign:"center"
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.4,1
+						canvas:
+							Color:
+								rgba:(72/255,1,0,.5)
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							orientation: "vertical"
+							size_hint:1,None
+							height:50
+							Label:
+								text:"Final four tests\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								size_hint:1,.1
+								halign:"center"
+
+						BoxLayout:
+							orientation:"horizontal"
+							padding:20
+							spacing:10
+							pos_hint:{"center_x":.5, "center_y":.5}
+							size_hint:1,.4
+							canvas:
+								Color:
+									rgba:72/255,1,0,.75
+								Rectangle:
+									size:self.width-5, self.height-5
+									pos:self.pos
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test1_meaning
+									level:0
+								Label:
+									text:"last\n" + str(format(_test1_meaning.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test2_meaning
+									level: 0
+								Label:
+									text:"2nd\n"+ str(format(_test2_meaning.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+								BarVer:
+									id:_test3_meaning
+									level: 0
+								Label:
+									text:"3nd\n"+ str(format(_test3_meaning.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+
+							BoxLayout:
+								orientation:"vertical"
+								spacing:10
+
+								BarVer:
+									id:_test4_meaning
+									level: 0
+								Label:
+									text:"4nd\n"+ str(format(_test4_meaning.level,".1f"))+"%"
+									color:0,0,0,.5
+									font_size:dp(6)
+									halign:"center"
+						BoxLayout:
+							size_hint:1,.15
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_tests_meaning
+									size_hint:1,.7
+									text: ""
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Total tests"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+							BoxLayout:
+								orientation:"vertical"
+								padding:10
+
+								Label:
+									id:_meaning_progress
+									text:""
+									size_hint:1,.7
+									color:0,0,0,.5
+									font_size:dp(14)
+									valign:"center"
+									halign:"center"
+
+								Label:
+									text: "Progress"
+									font_size:dp(9)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"left"
+
+
+					BoxLayout:
+						orientation: "vertical"
+						size_hint:.3,1
+
+						canvas:
+							Color:
+								rgba:(72/255,255/255,0,.5)
+							Rectangle:
+								size:self.width-5, self.height-5
+								pos:self.pos
+
+						BoxLayout:
+							size_hint:1,None
+							height: 50
+							canvas:
+
+							Label:
+								text: "Last test\n_______________________"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.14
+							padding:5
+							Label:
+								text: "Date:"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+
+							Label:
+								id:_lastvisit_meaning
+								text: "24-09-2022"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"left"
+								size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,.3
+							padding:35
+							spacing:10
+
+							BoxLayout:
+								orientation:"vertical"
+								BarHor:
+									id:_bar_meaning
+									level:
+								Label:
+									id:_bar_meaning_score
+									text: "Score: " + str(format(_bar_meaning.level*10,".1f"))+"%"
+									font_size:dp(8)
+									color:0,0,0,.5
+									valign:"center"
+									halign:"center"
+									size_hint:1,.1
+
+						BoxLayout:
+							orientation:"vertical"
+							size_hint:1,None
+							height:60
+							padding:10
+
+							Label:
+								id:_speed_meaning
+								text: "32"
+								color:0,0,0,.5
+								font_size:dp(14)
+								valign:"center"
+								halign:"center"
+
+							Label:
+								text: "Speed (Sec.)"
+								font_size:dp(9)
+								color:0,0,0,.5
+								valign:"center"
+								halign:"center"
+
+
+
+
+
+	AnchorLayout:
+		anchor_x: "right"
+		anchor_y: "top"
+		BoxLayout:
+
+			orientation: 'horizontal'
+			padding:40
+			spacing: 50
+			size_hint: None,None
+			size: self.minimum_size
+
+			AnchorButton:
+				text: "Menu"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			AnchorButton:
+				text: "Quit"
+				font_size:dp(14)
+				on_release:
+					quit()
+

@@ -9,6 +9,7 @@ class MenuScreen(Screen):
 	Trainingskeuze = StringProperty("")
 	Antwoord_runen = ListProperty([])
 	Quizz_runen= ListProperty([])
+	runequizz = ListProperty([])
 	antwoordcat = ListProperty([])
 	quizz= ListProperty([])
 	a_waarde = NumericProperty()
@@ -64,7 +65,7 @@ class MenuScreen(Screen):
 		for i in rune_set:
 			rune_set1.append(i[0])
 
-		# vorm een restant van niet gekozen runen (ontdubbelen shuffel ze ook)
+		# vorm een restant van niet gekozen runen (ontdubbel en shuffel ze ook)
 		rune_rest = [rune for rune in rune_set1 if
 					 rune not in runequizz]
 		random.shuffle(rune_rest)
@@ -81,7 +82,6 @@ class MenuScreen(Screen):
 			conn.commit()
 			conn.close()
 
-		#print(self.quizz)
 		self.antwoordcat = []
 		for i in rune_rest:
 			conn = sqlite3.connect("dataRunistica.db")
@@ -91,7 +91,6 @@ class MenuScreen(Screen):
 			self.antwoordcat.append(datarune_Credo)
 			conn.commit()
 			conn.close()
-		#print(self.antwoordcat)
 
 		self.quizz_meaning = []
 		for i in runequizz:
@@ -102,7 +101,6 @@ class MenuScreen(Screen):
 			self.quizz_meaning.append(datarune_quizzMeaning)
 			conn.commit()
 			conn.close()
-		#print(str(self.quizz_meaning))
 
 		self.antwoordcat_meaning = []
 		for i in rune_rest:
@@ -113,13 +111,12 @@ class MenuScreen(Screen):
 			self.antwoordcat_meaning.append(datarune_Meaning[0])
 			conn.commit()
 			conn.close()
-		#print(self.antwoordcat_meaning)
 
-		#stuur naar volgende pagina alvast de eerste vraag (symbool & antwoorden)
-		self.manager.screens[(int(3 + a_waarde))].ids._PictureChoice.source = "Tekens/" + runequizz[0] + ".png"
+		#stuur naar volgende gekozen pagina alvast de eerste vraag (symbool & antwoorden)
+		#ab= self.manager.screens[(int(3 + a_waarde))].ids._PictureChoice.source = "Tekens/" + runequizz[0].lower() + ".png"
+		#print (str(ab))
 
 		if a_waarde == 0:
-
 			self.manager.screens[(int(3 + a_waarde))].ids._antw1.text = self.Quizz_runen[0]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw2.text = self.Antwoord_runen[1]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw3.text = self.Antwoord_runen[2]
@@ -129,23 +126,21 @@ class MenuScreen(Screen):
 			self.manager.screens[(int(3 + a_waarde))].ids._antw2.text = self.antwoordcat[1][0]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw3.text = self.antwoordcat[2][0]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw4.text = self.antwoordcat[3][0]
-
 		elif a_waarde == 2:
 			self.manager.screens[(int(3 + a_waarde))].ids._antw1.text = self.quizz_meaning[0][0]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw2.text = self.antwoordcat_meaning[1]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw3.text = self.antwoordcat_meaning[2]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw4.text = self.antwoordcat_meaning[3]
 
-
 	def transport(self):
 
 		if self.Trainingskeuze == "Runesymbols":
-		#	print("symbols gekozen")
 
 			# creeer alvast de quizzvragen
 			self.quizzfunctie("Runesymbols")
 			# ga naar volgend scherm
 			self.ids._Symbols_but.active = False
+
 			# reset de tellers
 			self.Trainingskeuze = ""
 			self.ids._ButtonStart.text = "Choose\n Training/ College"
@@ -160,7 +155,6 @@ class MenuScreen(Screen):
 
 			self.manager.current = "vragenscreen"
 			self.manager.transition = WipeTransition(duration=1)
-			#self.manager.transition.direction = "right"
 
 		elif self.Trainingskeuze == "SymbolNames":
 
@@ -175,9 +169,10 @@ class MenuScreen(Screen):
 			self.manager.screens[4].teller = 0
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
-			self.manager.current = "vragenscreen1"
+
+			self.manager.current = "vragenscreeneen"
 			self.manager.transition =  WipeTransition(duration=1)
-		#	print("Names gekozen")
+
 
 		elif self.Trainingskeuze == "Meaning of Runes":
 
@@ -195,10 +190,11 @@ class MenuScreen(Screen):
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+
 			# ga naar antwoorden-scherm
-			self.manager.current = "vragenscreen2"
+			self.manager.current = "vragenscreentwee"
 			self.manager.transition = WipeTransition(duration=1)
-		#	print("Meaning gekozen")
+
 
 		elif self.Trainingskeuze == "College Symbols":
 
@@ -214,9 +210,8 @@ class MenuScreen(Screen):
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
 			# ga naar college symbols-scherm
-			self.manager.current = "CollegeSymbols_screen"
+			self.manager.current = "collegesymbolsscreen"
 			self.manager.transition = WipeTransition(duration=1)
-		#	print("College Symbols gekozen")
 
 		elif self.Trainingskeuze == "College Names":
 
@@ -232,10 +227,8 @@ class MenuScreen(Screen):
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
 			# ga naar college symbols-scherm
-			self.manager.current = "CollegeNames_screen"
+			self.manager.current = "collegenamesscreen"
 			self.manager.transition = WipeTransition(duration=1)
-		#	print("College Names gekozen")
-
 
 		elif self.Trainingskeuze == "":
 			self.manager.Popup_Choose("a module to train")

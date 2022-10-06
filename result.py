@@ -1,6 +1,8 @@
 import sqlite3
+import time
 from kivy.properties import StringProperty, NumericProperty,ListProperty
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen, WipeTransition, RiseInTransition
+
 
 class ResultScreen(Screen):
 
@@ -24,12 +26,12 @@ class ResultScreen(Screen):
 			self.Missed_quistions = self.manager.get_screen("vragenscreen").Missed_quistions
 			self.indicator = "RuneNaam"
 
-		elif len(self.manager.get_screen("vragenscreen1").Missed_quistions)>0:
-			self.Missed_quistions = self.manager.get_screen("vragenscreen1").Missed_quistions
+		elif len(self.manager.get_screen("vragenscreeneen").Missed_quistions)>0:
+			self.Missed_quistions = self.manager.get_screen("vragenscreeneen").Missed_quistions
 			self.indicator = "RuneCredo"
 
-		elif len(self.manager.get_screen("vragenscreen2").Missed_quistions)>0:
-			self.Missed_quistions = self.manager.get_screen("vragenscreen2").Missed_quistions
+		elif len(self.manager.get_screen("vragenscreentwee").Missed_quistions)>0:
+			self.Missed_quistions = self.manager.get_screen("vragenscreentwee").Missed_quistions
 			self.indicator = "RuneText"
 		else:
 			self.Missed_quistions = []
@@ -39,7 +41,6 @@ class ResultScreen(Screen):
 
 		else:
 			pass
-
 
 		self.DisplaySelection = []
 
@@ -69,7 +70,9 @@ class ResultScreen(Screen):
 			self.ids._AssociationMissedRune.text = ""
 			self.ids._AdviceMissedRune.text = ""
 			self.ids._FavourMissedRune.text = ""
-			self.ids._MissedRuneNaam.source = "Pics/Logo runistica.png"
+			self.ids._MissedRuneNaam.source = "Pics/logorunistica.png"
+			self.manager.current = "menuscreen"
+			self.manager.transition = RiseInTransition(duration=1)
 
 
 

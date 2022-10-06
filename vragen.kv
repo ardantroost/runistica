@@ -10,7 +10,7 @@
 			size: self.size
 			pos:self.pos
 			radius: [8]
-	font_size: "12dp"
+	font_size: dp(14)
 	halign:"left"
 	valign:"center"
 	color:0,0,0,1
@@ -20,17 +20,18 @@
 	size_hint:None,None
 	size: 50,30
 	color:[1,1,1,1]
-	font_size:"10dp"
+	#was  dp(10)
+	font_size:dp(28)
 	background_color:1,1,1,0
 
 <VragenScreen>:
 
 	canvas:
 		Color:
-			rgba: [0,1,0,1]
+			rgba: [1,0,0,1]
 		Rectangle:
 			size:self.width, self.height
-			source:"Pics/alternative.jpg"
+			source:"Pics/Olaus.jpg"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -40,34 +41,45 @@
 		Label:
 			text: "Training\n runesymbols"
 			halign:"center"
-			font_size:"24dp"
+			font_size:dp(28)
 
 	BoxLayout:
 		orientation:"vertical"
 		size_hint:(1,.2)
-		pos_hint:{"center_y":.43}
-
-		canvas:
-			Color:
-				rgba:1,1,1,1
-			Ellipse:
-				size: 100,100
-				pos:125,250
+		pos_hint:{"center_y":.63}
 
 		Image:
 			id:_PictureChoice
 			source:""
+			background_color: 1,1,1,0
+			background_normal:""
 
-		Label:
-			text:""
+			canvas.before:
+				Color:
+					rgba:1,1,1,1
+				Ellipse:
+					size: 180,180
+					pos:self.parent.center_x-90,self.parent.center_y-180
+
+			size_hint:None,None
+			width:130
+			height:130
+			allow_stretch:True
+			keep_ratio:False
+			pos_hint:{"center_x":.5}
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(1,.1)
+		pos_hint:{"center_y":.4}
 
 		Label:
 			id:_Vraag_label
 			text:"What's the name of\n this rune...?"
-			font_size:"14dp"
+			font_size:dp(16)
 			halign:"center"
 			valign:"bottom"
-			color:1,1,1,1
+			color: 1,1,1,1
 
 	BoxLayout:
 		orientation: "vertical"
@@ -110,9 +122,9 @@
 
 		Button:
 			text: "<< Submit >>"
-			font_size:"12dp"
+			font_size:dp(14)
 			size_hint:(.33,.05)
-			background_color:1,1,1,0.2
+			background_color:1,1,1,.1
 			pos_hint:{"center_x":.5}
 			on_release:
 				root.ClearButtons()
@@ -124,13 +136,14 @@
 
 		BoxLayout:
 			orientation: 'horizontal'
-			padding:15
+			padding:40
+			spacing: 50
 			size_hint: None, None
 			size: self.minimum_size
 
 			AnchorButton:
 				text: "Menu"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					# voortijdig afbreken dus reset quizzvariabelen
 					root.CleanUp()
@@ -138,7 +151,7 @@
 
 			AnchorButton:
 				text: "Quit"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					quit()
 

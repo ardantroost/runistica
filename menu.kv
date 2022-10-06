@@ -5,8 +5,10 @@
 		Color:
 			rgba: 1,1,1,.8
 		Ellipse:
-			pos: self.center_x-11, self.center_y-11
-			size:[22,22]
+			#pos: self.center_x-11, self.center_y-11
+			#size:[22,22]
+			pos: self.center_x-20, self.center_y-20
+			size:[40,40]
 	group: "training"
 	color: 1,0,0,1
 	size_hint:(.2,.2)
@@ -17,18 +19,19 @@
 	size_hint:None,None
 	size: 50,30
 	color:[1,1,1,1]
-	font_size:"10dp"
-	background_normal:''
+	font_size:dp(12)
+	background_normal: ''
 	background_color:[1,1,1,0]
 
 <MenuScreen>:
 	canvas:
 		Color:
-			rgba: [0,1,1,.5]
+			rgba: [1,0,1,.75]
 		Rectangle:
 			size:(self.width,self.height)
 			pos:self.x,self.y
-			source:"Pics/alternative.jpg"
+			#source:"Pics/sjamaan1.jpg"
+			source:"Pics/Runenlessons.png"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -37,8 +40,8 @@
 		pos_hint:{"center_x":.5,"center_y":.7}
 
 		Label:
-			text: "Trainingsmenu\n [size=12]Select a training[/size]"
-			font_size:"14dp"
+			text: "Trainingsmenu\n [size=20]Select a training[/size]"
+			font_size:dp(28)
 			markup:True
 			halign:"center"
 			size_hint:(1,.4)
@@ -47,7 +50,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"Runesymbols"
-				font_size:"14dp"
+				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -63,7 +66,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"RuneNames"
-				font_size:"14dp"
+				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -82,7 +85,7 @@
 
 			Label:
 				text:"Meaning of Runes"
-				font_size:"14dp"
+				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -102,7 +105,10 @@
 		pos_hint:{"center_x":0.5, "center_y":.25}
 
 		Label:
-			text: "Collegemenu\n [size=12]Select rune college [/size]"
+			size_hint:(1,.1)
+		Label:
+			text: "Collegemenu\n [size=20]Select rune college [/size]"
+			font_size:dp(28)
 			markup:True
 			halign:"center"
 			size_hint:(1,.4)
@@ -111,7 +117,7 @@
 			size_hint: (1,.2)
 			Label:
 				text:"College symbols"
-				font_size:"14dp"
+				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -122,13 +128,13 @@
 					_ButtonStart.text = "Start college\n runes and their Symbols >>"
 			Label:
 				text:''
-				size_hint:(.4,.1)
+				size_hint:(.4,.15)
 
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
 				text:"College names"
-				font_size:"14dp"
+				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
 
@@ -144,7 +150,7 @@
 		Label:
 			id:_keuzequizz
 			text:''
-			font_size:"12dp"
+			font_size:dp(14)
 			halign:"center"
 			size_hint:(1,1)
 
@@ -156,7 +162,7 @@
 		Button:
 			id: _ButtonStart
 			text: " Choose\n your training "
-			font_size:"14dp"
+			font_size:dp(14)
 			halign:"center"
 			background_normal:''
 			background_color: 0,1,0,0
@@ -171,19 +177,20 @@
 		BoxLayout:
 
 			orientation: 'horizontal'
-			padding:15
+			padding:40
+			spacing: 50
 			size_hint: None,None
 			size: self.minimum_size
 
 			AnchorButton:
-				text: "Menu"
-				font_size:"10dp"
-				on_release:
-					root.manager.current="menuscreen"
-
-			AnchorButton:
 				text: "Quit"
-				font_size:"10dp"
+				font_size:dp(12)
 				on_release:
 					quit()
+
+			AnchorButton:
+				text: "Stats"
+				font_size:dp(12)
+				on_release:
+					root.manager.current = "statsscreen"
 

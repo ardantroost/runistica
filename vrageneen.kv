@@ -1,4 +1,4 @@
-#: import vragen_1 vragen_1
+#: import vrageneen vrageneen
 
 <AntwButton@Button>
 	background_color: 1,1,1,0
@@ -23,14 +23,14 @@
 	font_size:dp(14)
 	background_color:1,1,1,0
 
-<VragenScreen1>:
+<VragenScreeneen>:
 
 	canvas:
 		Color:
-			rgba: [0,1,0,1]
+			rgba: [1,0,1,1]
 		Rectangle:
 			size:self.width, self.height
-			source:"Pics/alternative.jpg"
+			source:"Pics/Olaus.jpg"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -45,27 +45,41 @@
 	BoxLayout:
 		orientation:"vertical"
 		size_hint:(1,.2)
-		pos_hint:{"center_y":.43}
+		pos_hint:{"center_y":.63}
 
 		Image:
 			id:_PictureChoice
 			source:""
+			background_color: 1,1,1,0
+			background_normal:""
 
 			canvas.before:
 				Color:
 					rgba:1,1,1,1
 				Ellipse:
-					size: 100,100
-					pos:self.parent.center_x-50,self.parent.center_y
-		Label:
-			text:""
+					size: 180,180
+					pos:self.parent.center_x-90,self.parent.center_y-180
+
+			size_hint:None,None
+			width:150
+			height:150
+			allow_stretch:True
+			keep_ratio:False
+			pos_hint:{"center_x":.5}
+
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(1,.3)
+		pos_hint:{"center_y":.4}
+
 		Label:
 			id:_Vraag_label
 			text:"This rune associated with...?"
 			font_size: dp(18)
 			halign:"center"
 			valign:"bottom"
-			color:1,1,1,1
+			color:0,0,0,1
 
 
 	BoxLayout:
@@ -123,7 +137,8 @@
 
 		BoxLayout:
 			orientation: 'horizontal'
-			padding:15
+			padding:40
+			spacing: 50
 			size_hint: None, None
 			size: self.minimum_size
 

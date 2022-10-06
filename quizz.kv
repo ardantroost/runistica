@@ -18,7 +18,7 @@
 		Label:
 			id: _scherm
 			text: ""
-			font_size:"12dp"
+			font_size:dp(12)
 			halign: "center"
 			pos_hint: {"center_x":.5, "top":1}
 
@@ -28,7 +28,7 @@
 				text: "<< home"
 				background_normal:''
 				background_color:[1,0,0,0]
-				font_size:"12dp"
+				font_size:dp(12)
 				size_hint:None,None
 				size: 100,20
 				pos:20,50
@@ -37,7 +37,7 @@
 					root.manager.transition.direction = "right"
 			Button:
 				text: "Start training >>"
-				font_size:"12dp"
+				font_size:dp(12)
 				background_normal:''
 				background_color:[1,0,0,0]
 				size_hint:None,None
@@ -57,7 +57,7 @@
 						rounded_rectangle:(self.x-5,self.y ,75 ,20, 10)
 						width:1
 				text: "<< Exit >>"
-				font_size:"12dp"
+				font_size:dp(12)
 				background_normal:''
 				background_color:[1,0,0,0]
 				size_hint:None,None

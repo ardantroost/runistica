@@ -11,52 +11,44 @@
 	Label:
 		text:""
 		text_size:(75,None)
-		font_size: "13dp"
+		font_size: dp(14)
 		color: [1,1,1,1]
 		halign: "left"
 		valign: "center"
-
-<Imagetje@Image>:
-	canvas:
-		Color:
-			rgba: 1,0,1,.3
-		Rectangle:
-			size: self.width-5, self.height-5
-			pos:self.pos
-		Ellipse:
-			size: self.width-6, self.height-15
-			pos:self.pos
-
 
 <CollegeSymbolsScreen>:
 	transition:FallOutTransition
 	canvas:
 		Color:
-			rgba: [1,0,1,.7]
+			rgba: [1,0,1,.1]
 		Rectangle:
 			size:(self.width,self.height)
 			pos:self.x,self.y
-			source:"Pics/road.jpg"
+			source:"Pics/Runenmaster.png"
 
 	BoxLayout:
 		orientation:"vertical"
 		size_hint:(1,.05)
-		pos_hint:{"center_x":.5,"center_y":.75}
+		pos_hint:{"center_x":.5,"center_y":.8}
 
 		Label:
-			text: "College RuneSymbols"
-			font_size: "18dp"
+			text: "College\n RuneSymbols"
+			font_size: dp(28)
+			halign:"center"
 			bold:True
 			size_hint: (1,0.2)
 			pos_hint:{"center_x":.5,  "center_y":.7}
 
-	BoxLayout:
+		Label:
+			size_hint: (1,1)
 
+
+	BoxLayout:
 		id: _box
 		orientation:"vertical"
 		size_hint:(.75,.60)
 		pos_hint:{"center_x":.5,"center_y":.45}
-		padding:25
+		padding:10
 
 		canvas:
 			Color:
@@ -67,39 +59,39 @@
 
 		GridLayout:
 			cols:2
-			canvas:
-				Color:
-					rgba: 1,0,0,.3
-				Rectangle:
-					size: self.width-112, self.height-5
-					pos:self.pos
 			Carousel:
 				id:_CarouselSelf
 				direction: "right"
 				loop:True
 
+				canvas:
+					Color:
+						rgba: 1,0,0,.3
+					Rectangle:
+						size: self.width-5, self.height-5
+						pos:self.pos
 			Labeltje:
 				id: _naam
 				text:""
-				font_size:"20dp"
+				font_size:dp(28)
 				halign:"left"
 				bold:True
 
-		Labeltje:
-			id: _symbol
-			text:""
-			size_hint:(1,.4)
-			text_size:(125,None)
-			font_size:"12dp"
-			halign:"left"
+			Labeltje:
+				id: _symbol
+				text:""
+				size_hint:(1,.4)
+				text_size:(250,None)
+				font_size:dp(16)
+				halign:"left"
 
-		Labeltje:
-			id: _meaning
-			text: ""
-			text_size:(125,None)
-			font_size:"12dp"
-			halign:"left"
-			size_hint:(1,1)
+			Labeltje:
+				id: _meaning
+				text: ""
+				text_size:(250,None)
+				font_size:dp(16)
+				halign:"left"
+				size_hint:(1,1)
 
 	BoxLayout:
 		size_hint:(.75,.15)
@@ -122,7 +114,7 @@
 		Button:
 			text:">>"
 			background_color:1,1,1,0
-			font_size:"48dp"
+			font_size:dp(48)
 			on_press:
 				self.color=(1,0,0,1)
 			on_release:
@@ -133,7 +125,7 @@
 	Label:
 		id:_labelx
 		text:""
-		font_size:"24dp"
+		font_size:dp(36)
 		color:1,0,0,1
 		pos_hint:{"center_x":.5,"center_y":.1}
 		size_hint:(1,1)
@@ -152,20 +144,21 @@
 		BoxLayout:
 
 			orientation: 'horizontal'
-			padding:15
+			padding:40
+			spacing: 50
 			size_hint: None,None
 			size: self.minimum_size
 
 			AnchorButton:
 				text: "Menu"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					root.manager.current="menuscreen"
 
 
 			AnchorButton:
 				text: "Quit"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					quit()
 

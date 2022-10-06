@@ -2,27 +2,30 @@
 
 <WelcomeScreen>:
 	FloatLayout:
+
 		canvas:
 			Color:
 				rgba: [0,1,1,.5]
 			Rectangle:
 				size:self.width, self.height
 				pos:self.x,self.y
-
 			Color:
-				rgba: [1,1,1,.3]
+				rgba: [1,1,1,1]
+
 			Ellipse:
-				size:600,650
-				pos:0,-140
-				source: "Pics/sjamaan1.jpg"
-			Rectangle:
+				size:1000,1000
+				pos:self.center_x-500,-500
+
+			Ellipse:
+				id:_LogoRunistica
 				size: 300,200
-				pos:40,350
-				source: "Pics/Logo runistica.png"
+				pos:self.center_x-150, 100
+				source: "Pics/logorunistica.png"
 
 		Label:
-			text: "Master of runes\n [color=#fbffd1][size=13]Learn to read the secret Runes [/color][/size]"
-			font_size: "30dp"
+			text: "Master of runes\n [color=#271405][size=14]Learn to read the secret Runes [/color][/size]"
+			font_size: dp(30)
+			color:0,0,0,1
 			halign: "center"
 			markup: True
 
@@ -33,7 +36,7 @@
 		AnchorButton:
 			id:_start
 			text: "Start"
-			font_size:"18dp"
+			font_size:dp(18)
 			bold:True
 			color:[1,0,0,.6]
 			background_color:[0,0,0,0]

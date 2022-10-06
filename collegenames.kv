@@ -8,6 +8,8 @@
 			size: self.width, self.height
 			pos: self.pos
 			source:"Pics/road.jpg"
+			#source:"Pics/Runenlessons.png"
+
 
 		Color:
 			rgba: 0,0,0,1
@@ -15,15 +17,17 @@
 	BoxLayout:
 		orientation: "vertical"
 		size_hint:(.5, .1)
-		pos_hint:{"center_x":.5,"center_y":.85}
+		pos_hint:{"center_x":.5,"center_y":.75}
 		Label:
 			text:"Swipe\n the right combination"
-			font_size:"12dp"
+			font_size:dp(16)
+			halign:"center"
+			bold:True
 
 	BoxLayout:
 		orientation: "vertical"
-		size_hint:(.35,.45)
-		pos_hint:{"center_x":.5,"center_y":.5}
+		size_hint:(.35,.5)
+		pos_hint:{"center_x":.5,"center_y":.45}
 		spacing:15
 
 		Carousel:
@@ -37,6 +41,7 @@
 				Rectangle:
 					size: self.width, self.height
 					pos:self.pos
+
 		Carousel:
 			id: _Carou2
 			size_hint:(1,.1)
@@ -50,35 +55,34 @@
 					pos:self.pos
 
 	BoxLayout:
-		orientation: "vertical"
-		size_hint:(.5,.05)
+		orientation: "horizontal"
+		size_hint:(.35,.05)
 		pos_hint:{"center_x":.5,"center_y":.15}
+		spacing:15
 
 		Button:
-			size_hint: (1,.2)
 			text: "Check"
-			font_size:"12dp"
+			font_size:dp(14)
 			on_release:
 				root.Checkcombination(_Carou1.index)
+		Label:
+			id:_score
+			text:""
+			font_size:dp(14)
+			pos_hint:{"center_x":.5}
 
 	BoxLayout:
 		orientation: "horizontal"
 		size_hint:(.75, .1)
-		pos_hint:{"center_x":.5,"center_y":.10}
+		pos_hint:{"center_x":.5,"center_y":.05}
 
 		Label:
-			size_hint: (1,.3)
+			#size_hint: (1,.3)
 			id:_result1
 			text:""
-			font_size:"12dp"
-			halign:"right"
+			font_size:dp(14)
+			halign:"center"
 
-		Label:
-			size_hint: (1,.3)
-			id:_result2
-			text:""
-			font_size:"12dp"
-			halign:"left"
 
 	AnchorLayout:
 		anchor_x: "right"
@@ -87,18 +91,19 @@
 		BoxLayout:
 
 			orientation: 'horizontal'
-			padding:15
+			padding:40
+			spacing: 50
 			size_hint: None,None
 			size: self.minimum_size
 
 			AnchorButton:
 				text: "Menu"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					root.manager.current="menuscreen"
 
 			AnchorButton:
 				text: "Quit"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					quit()

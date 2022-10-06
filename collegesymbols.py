@@ -1,3 +1,4 @@
+import random
 import sqlite3
 from kivy.uix.image import Image
 from kivy.uix.label import Label
@@ -7,7 +8,7 @@ from kivy.properties import ListProperty
 
 class CollegeSymbolsScreen(Screen):
 
-	list_runen=ListProperty([])
+	list_runen = ListProperty([])
 
 	def stripper(self, value):
 
@@ -33,15 +34,17 @@ class CollegeSymbolsScreen(Screen):
 		conn.commit()
 		conn.close()
 
-		self.ids._symbol.text = "Symbol: "+ str(datae[0][0])
-		self.ids._meaning.text = "Message: \n" + str(datae[0][1])
+		self.ids._symbol.text = "Symbol: \n\n"+ str(datae[0][0])
+		self.ids._meaning.text = "Message: \n\n" + str(datae[0][1])
 
 	# automatische start van methode bij open van dit scherm (on_start werkt niet!!!!)
 	def on_enter(self):
+
 		conn = sqlite3.connect("dataRunistica.db")
 		c = conn.cursor()
 		c.execute("SELECT RuneNaam,RuneCredo, RuneText, Signtype FROM Runistica")
 		datarune = c.fetchall()
+		random.shuffle(datarune)
 		conn.commit()
 		conn.close()
 
@@ -50,7 +53,7 @@ class CollegeSymbolsScreen(Screen):
 		for i in datarune:
 
 			src = "Tekens/"+ i[0].lower() +".png"
-			image  = Image(source= src)
+			image  = Image(source= src, width=150,height=150,keep_ratio=False,allow_stretch=True, size_hint=(None,None), pos_hint={"center_x":.5,"center_y":.5} )
 			label  = Label(text=i[0], font_size=24,color=(1, 1, 1, 1),halign= "left", valign="center")
 			label.text.replace(".png","")
 			label.text.replace("Tekens/","")
@@ -58,7 +61,7 @@ class CollegeSymbolsScreen(Screen):
 			self.carouselShow.add_widget(image)
 
 		self.ids._naam.text = str(datarune[0][0])
-		self.ids._symbol.text = str(datarune[0][1])
-		self.ids._meaning.text = str(datarune[0][2])
+		self.ids._symbol.text = "Symbol: \n\n" + str(datarune[0][1])
+		self.ids._meaning.text = "Message: \n\n" + str(datarune[0][2])
 
 

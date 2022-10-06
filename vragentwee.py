@@ -1,9 +1,12 @@
 import random
+import sqlite3
+import time
+
 from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 from kivy.animation import Animation
 
-class VragenScreen2(Screen):
+class VragenScreentwee(Screen):
 
 	PictureChoice = StringProperty("")
 	answerquizz = StringProperty("")
@@ -12,11 +15,31 @@ class VragenScreen2(Screen):
 	Missed_quistions = ListProperty([])
 	teller=NumericProperty()
 
+	def on_enter(self, *args):
+		self.Symbol_start= self.manager.get_screen("menuscreen").Quizz_runen
+		self.ids._PictureChoice.source= "Tekens/"+self.Symbol_start[0].lower() +".png"
+
+		#start timer
+		self.starttime= time.time()
+
 	def CleanUp(self, *args):
 
 		self.teller= 0
 		self.Missed_quistions = []
 		self.Score_quizz = 0
+
+	def updatedatabase(self,score_quizz, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Time):
+
+		Lastvisit = time.strftime("%d-%m-%Y")
+		Visittime = time.strftime("%X")
+		Meaningscore = score_quizz
+
+		conn = sqlite3.connect("MasterResults.db")
+		c = conn.cursor()
+		c.execute("INSERT INTO MasterResults VALUES (?,?,?,?,?,?,?,?,?)",
+				  (Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
+		conn.commit()
+		conn.close()
 
 	def Score (self):
 
@@ -62,6 +85,7 @@ class VragenScreen2(Screen):
 				self.answerquizz = ''
 
 			# als alle vragen gesteld zijn score en leersymbolen laten zien in ander scherm RESULT
+
 			else:
 				if len(self.Missed_quistions)> 0:
 					self.print = (f"End of training the interpretation of runes!,\n {self.Score_quizz} out of 10 "
@@ -81,6 +105,12 @@ class VragenScreen2(Screen):
 					self.manager.screens[6].ids._ButtonAdvice.text = "<< Training advice >>"
 					self.manager.current = "resultscreen"
 
+				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens naar DataBase
+				self.endtime = time.time()
+				self.deltatime_meaning = self.endtime - self.starttime
+				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,
+								Nametraining=0,Namescore=0,Meaningtraining=1, Time=format(self.deltatime_meaning, '.1f'))
+
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):
 		anim= Animation(color=[1,1,1,0],duration=.5)
@@ -88,8 +118,8 @@ class VragenScreen2(Screen):
 		anim.start(widget)
 
 	def Anim(self, widget,*args):
-		anim = Animation(size_hint=(1, 0), duration=.5)
-		anim += Animation(duration=.5, size_hint=(1, 1))
+		anim = Animation(width =0, height=0, duration=.5)
+		anim += Animation(duration=.5, width =100, height=100)
 		anim.start(widget)
 
 	def ClearButtons(self):
