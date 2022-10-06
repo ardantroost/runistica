@@ -1,4 +1,4 @@
-#: import vragen_2 vragen_2
+#: import vragen_1 vragen_1
 
 <AntwButton@Button>
 	background_color: 1,1,1,0
@@ -10,19 +10,27 @@
 			size: self.size
 			pos:self.pos
 			radius: [8]
-	font_size: "12dp"
+	font_size: dp(28)
 	halign:"left"
 	valign:"center"
 	color:0,0,0,1
 
-<VragenScreen2>:
+<AnchorButton@Button>:
+	text: ""
+	size_hint:None,None
+	size: 50,30
+	color:[1,1,1,1]
+	font_size:dp(14)
+	background_color:1,1,1,0
+
+<VragenScreen1>:
 
 	canvas:
 		Color:
-			rgba: [1,1,0,1]
+			rgba: [0,1,0,1]
 		Rectangle:
 			size:self.width, self.height
-			source:"Pics/Wolf in bos.jpg"
+			source:"Pics/alternative.jpg"
 
 	BoxLayout:
 		orientation: "vertical"
@@ -30,62 +38,56 @@
 		pos_hint:{"center_y":.75}
 
 		Label:
-			text: "Training\n Meaning of Runes"
+			text: "Training\n Association of Runes"
 			halign:"center"
-			font_size:"24dp"
+			font_size:dp(28)
 
 	BoxLayout:
 		orientation:"vertical"
-		size_hint:(1,.18)
-		pos_hint:{"center_y":.5}
-
-		canvas:
-			Color:
-				rgba:1,1,1,1
-			Ellipse:
-				size: 100,100
-				pos:125,287
+		size_hint:(1,.2)
+		pos_hint:{"center_y":.43}
 
 		Image:
 			id:_PictureChoice
 			source:""
 
+			canvas.before:
+				Color:
+					rgba:1,1,1,1
+				Ellipse:
+					size: 100,100
+					pos:self.parent.center_x-50,self.parent.center_y
 		Label:
 			text:""
-			font_size:"12dp"
-
 		Label:
 			id:_Vraag_label
-			text:"What's the meaning\nthis rune ...?"
-			font_size:"14dp"
+			text:"This rune associated with...?"
+			font_size: dp(18)
 			halign:"center"
 			valign:"bottom"
 			color:1,1,1,1
 
+
 	BoxLayout:
 		orientation: "vertical"
-		size_hint:(1,.42)
+		size_hint:(1,.3)
 
 		GridLayout:
 			cols:2
-			padding:20
-			spacing:20
-			size_hint:(1,.4)
+			padding:25
+			spacing:25
+			size_hint:(1,.2)
 
 			AntwButton:
 				id: _antw1
 				text: ""
-				font_size:"12dp"
-				text_size:120,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
 					root.PressedButton(self.text)
-
 			AntwButton:
 				id: _antw2
 				text: ""
-				text_size:120,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -93,7 +95,6 @@
 			AntwButton:
 				id: _antw3
 				text: ""
-				text_size:120,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -101,7 +102,6 @@
 			AntwButton:
 				id: _antw4
 				text: ""
-				text_size:120,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -109,10 +109,10 @@
 
 		Button:
 			text: "<< Submit >>"
-			font_size:"12dp"
+			font_size: dp(14)
 			size_hint:(.33,.05)
-			background_color:1,1,1,0.1
-			pos_hint:{"center_x":.5,"top":1}
+			background_color:1,1,1,0.2
+			pos_hint:{"center_x":.5}
 			on_release:
 				root.ClearButtons()
 				root.SubmittAnswer()
@@ -129,7 +129,7 @@
 
 			AnchorButton:
 				text: "Menu"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					# voortijdig afbreken dus reset quizzvariabelen
 					root.CleanUp()
@@ -137,8 +137,9 @@
 
 			AnchorButton:
 				text: "Quit"
-				font_size:"10dp"
+				font_size:dp(14)
 				on_release:
 					quit()
+
 
 
