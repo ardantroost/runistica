@@ -1,7 +1,6 @@
 import random
 import sqlite3
 import time
-
 from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty, ListProperty, NumericProperty, Clock
 from kivy.animation import Animation
@@ -18,6 +17,8 @@ class VragenScreen(Screen):
 	def on_enter(self, *args):
 		self.Symbol_start = self.manager.get_screen("menuscreen").Quizz_runen
 		self.ids._PictureChoice.source = "Tekens/" + self.Symbol_start[0].lower() + ".png"
+
+		#TIME CONTROLE
 		self.starttime = time.time()
 
 	def CleanUp(self, *args):
@@ -31,6 +32,8 @@ class VragenScreen(Screen):
 		Lastvisit = time.strftime("%d-%m-%Y")
 		Visittime = time.strftime("%X")
 		Symbolscore = score_quizz
+		#Time controle
+		#Time = 30
 
 		conn = sqlite3.connect("MasterResults.db")
 		c = conn.cursor()
@@ -42,6 +45,7 @@ class VragenScreen(Screen):
 	def Score (self):
 
 		self.Symbol_check = self.manager.get_screen("menuscreen").Quizz_runen[self.teller]
+
 		if self.answerquizz == self.Symbol_check:
 			self.Score_quizz +=1
 		else:
@@ -85,7 +89,7 @@ class VragenScreen(Screen):
 				# leegmaken van antwoord (voor call bij niet antwoorden)
 				self.answerquizz = ''
 
-			# als alle vragen gesteld zijn score & leersymbolen laten zien
+			# als alle vragen gesteld zijn score & verbeter- annex leerpunten laten zien
 			else:
 				if len(self.Missed_quistions)> 0:
 					self.print=(f"End of training the symbols!,\n {self.Score_quizz} out of 10 "
@@ -109,10 +113,6 @@ class VragenScreen(Screen):
 				self.deltatime_symbol = self.endtime - self.starttime
 				self.updatedatabase(self.Score_quizz, Symboltraining=1,Nametraining=0, Namescore=0,
 									Meaningtraining=0,Meaningscore=0,Time=format(self.deltatime_symbol, '.1f'))
-
-				# geplaatst 20-09-2022
-				self.CleanUp()
-
 
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):

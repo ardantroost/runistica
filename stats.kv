@@ -175,7 +175,7 @@
 		height:900
 		allow_stretch:True
 		keep_ratio:False
-		pos_hint:{"center_x":.5, "center_y":.25}
+		pos_hint:{"center_x":.5, "center_y":.5}
 
 	BoxLayout:
 		orientation:"vertical"
@@ -458,7 +458,7 @@
 							size_hint:1,None
 							height:50
 							Label:
-								text:"Final four tests\n_______________________"
+								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								size_hint:1,.1
@@ -485,7 +485,7 @@
 									id:_test1_symbol
 									level:0
 								Label:
-									text:"last\n0" if _test1_symbol.level<0 else "last\n" + str(format(_test1_symbol.level,".1f"))+"%"
+									text:"last\n0" if _test1_symbol.level<0 else "last\n" + str(format(_test1_symbol.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -497,7 +497,7 @@
 									id:_test2_symbol
 									level: 0
 								Label:
-									text:"2nd\n"+ str(format(_test2_symbol.level,".1f"))+"%"
+									text:"2nd\n"+ str(format(_test2_symbol.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -509,7 +509,7 @@
 									id:_test3_symbol
 									level: 0
 								Label:
-									text:"3nd\n"+ str(format(_test3_symbol.level,".1f"))+"%"
+									text:"3nd\n"+ str(format(_test3_symbol.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -522,7 +522,7 @@
 									id:_test4_symbol
 									level: 0
 								Label:
-									text:"4nd\n"+ str(format(_test4_symbol.level,".1f"))+"%"
+									text:"4nd\n"+ str(format(_test4_symbol.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -531,6 +531,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_tests_symbol
@@ -542,7 +543,7 @@
 									halign:"center"
 
 								Label:
-									text: "Total tests"
+									text: "No.tests"
 									font_size:dp(9)
 									color:0,0,0,.5
 									valign:"center"
@@ -550,6 +551,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_symbol_progress
@@ -585,7 +587,7 @@
 							canvas:
 
 							Label:
-								text: "Last test\n_______________________"
+								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -646,7 +648,7 @@
 								halign:"center"
 
 							Label:
-								text: "Speed (Sec.)"
+								text: "Time"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -744,7 +746,7 @@
 							size_hint:1,None
 							height:50
 							Label:
-								text:"Final four tests\n_______________________"
+								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								size_hint:1,.1
@@ -771,7 +773,7 @@
 									id:_test1_names
 									level:0
 								Label:
-									text:"last\n0" if _test1_names.level<0 else "last\n" + str(format(_test1_names.level,".1f"))+"%"
+									text:"last\n0" if _test1_names.level<0 else "last\n" + str(format(_test1_names.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -783,7 +785,7 @@
 									id:_test2_names
 									level: 0
 								Label:
-									text:"2nd\n"+ str(format(_test2_names.level,".1f"))+"%"
+									text:"2nd\n"+ str(format(_test2_names.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -795,7 +797,7 @@
 									id:_test3_names
 									level: 0
 								Label:
-									text:"3nd\n"+ str(format(_test3_names.level,".1f"))+"%"
+									text:"3nd\n"+ str(format(_test3_names.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -808,7 +810,7 @@
 									id:_test4_names
 									level: 0
 								Label:
-									text:"4nd\n"+ str(format(_test4_names.level,".1f"))+"%"
+									text:"4nd\n"+ str(format(_test4_names.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -817,6 +819,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_tests_names
@@ -828,7 +831,7 @@
 									halign:"center"
 
 								Label:
-									text: "Total tests"
+									text: "No.tests"
 									font_size:dp(9)
 									color:0,0,0,.5
 									valign:"center"
@@ -836,6 +839,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_names_progress
@@ -871,7 +875,7 @@
 							canvas:
 
 							Label:
-								text: "Last test\n_______________________"
+								text: "Last test\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -932,7 +936,7 @@
 								halign:"center"
 
 							Label:
-								text: "Speed (Sec.)"
+								text: "Time"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -1029,7 +1033,7 @@
 							size_hint:1,None
 							height:50
 							Label:
-								text:"Final four tests\n_______________________"
+								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								size_hint:1,.1
@@ -1056,7 +1060,7 @@
 									id:_test1_meaning
 									level:0
 								Label:
-									text:"last\n" + str(format(_test1_meaning.level,".1f"))+"%"
+									text:"last\n" + str(format(_test1_meaning.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -1068,7 +1072,7 @@
 									id:_test2_meaning
 									level: 0
 								Label:
-									text:"2nd\n"+ str(format(_test2_meaning.level,".1f"))+"%"
+									text:"2nd\n"+ str(format(_test2_meaning.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -1080,7 +1084,7 @@
 									id:_test3_meaning
 									level: 0
 								Label:
-									text:"3nd\n"+ str(format(_test3_meaning.level,".1f"))+"%"
+									text:"3nd\n"+ str(format(_test3_meaning.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -1093,7 +1097,7 @@
 									id:_test4_meaning
 									level: 0
 								Label:
-									text:"4nd\n"+ str(format(_test4_meaning.level,".1f"))+"%"
+									text:"4nd\n"+ str(format(_test4_meaning.level,".1f"))
 									color:0,0,0,.5
 									font_size:dp(6)
 									halign:"center"
@@ -1102,6 +1106,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_tests_meaning
@@ -1113,7 +1118,7 @@
 									halign:"center"
 
 								Label:
-									text: "Total tests"
+									text: "No.tests"
 									font_size:dp(9)
 									color:0,0,0,.5
 									valign:"center"
@@ -1121,6 +1126,7 @@
 							BoxLayout:
 								orientation:"vertical"
 								padding:10
+								spacing:5
 
 								Label:
 									id:_meaning_progress
@@ -1156,7 +1162,7 @@
 							canvas:
 
 							Label:
-								text: "Last test\n_______________________"
+								text: "Last test\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -1217,7 +1223,7 @@
 								halign:"center"
 
 							Label:
-								text: "Speed (Sec.)"
+								text: "Time"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"

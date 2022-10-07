@@ -108,8 +108,7 @@ class VragenScreentwee(Screen):
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens naar DataBase
 				self.endtime = time.time()
 				self.deltatime_meaning = self.endtime - self.starttime
-				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,
-								Nametraining=0,Namescore=0,Meaningtraining=1, Time=format(self.deltatime_meaning, '.1f'))
+				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,Nametraining=0,Namescore=0,Meaningtraining=1, Time=format(self.deltatime_meaning, '.1f'))
 
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):

@@ -1,7 +1,6 @@
 import sqlite3
-import time
 from kivy.properties import StringProperty, NumericProperty,ListProperty
-from kivy.uix.screenmanager import Screen, WipeTransition, RiseInTransition
+from kivy.uix.screenmanager import Screen,RiseInTransition
 
 
 class ResultScreen(Screen):
@@ -33,14 +32,6 @@ class ResultScreen(Screen):
 		elif len(self.manager.get_screen("vragenscreentwee").Missed_quistions)>0:
 			self.Missed_quistions = self.manager.get_screen("vragenscreentwee").Missed_quistions
 			self.indicator = "RuneText"
-		else:
-			self.Missed_quistions = []
-
-		if len(self.Missed_quistions) > 0:
-			pass
-
-		else:
-			pass
 
 		self.DisplaySelection = []
 
@@ -54,6 +45,7 @@ class ResultScreen(Screen):
 			conn.close()
 
 		einde = len(self.Missed_quistions)
+
 		if self.tel < einde:
 			self.ids._ResultNaam.text = ""
 			self.ids._MissedRune.text = str(self.DisplaySelection[self.tel][0][0])
@@ -71,6 +63,8 @@ class ResultScreen(Screen):
 			self.ids._AdviceMissedRune.text = ""
 			self.ids._FavourMissedRune.text = ""
 			self.ids._MissedRuneNaam.source = "Pics/logorunistica.png"
+
+			self.CleanUp()
 			self.manager.current = "menuscreen"
 			self.manager.transition = RiseInTransition(duration=1)
 

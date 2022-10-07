@@ -168,6 +168,7 @@ class MenuScreen(Screen):
 			self.manager.screens[4].Score_quizz = 0
 			self.manager.screens[4].teller = 0
 			self.manager.screens[3].Missed_quistions = []
+			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
 
 			self.manager.current = "vragenscreeneen"

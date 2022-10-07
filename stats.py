@@ -102,7 +102,6 @@ class StatsScreen(Screen):
 				self.ids._symbol_progress.color = 1, 0, 0, 1
 			ab= str(format(a,".1f"))
 			self.ids._symbol_progress.text=str(ab)+"%"
-
 			self.ids._test1_symbol.level = str((Symbolscores[0][0]) * 10.0)
 			self.ids._test2_symbol.level = str((Symbolscores[1][0]) * 10.0)
 			self.ids._test3_symbol.level = 0
@@ -145,7 +144,7 @@ class StatsScreen(Screen):
 			x2 = (Namesscores[1][0]+Namesscores[2][0] + Namesscores[3][0])/3
 			self.growth=(x1-x2)/x2*100
 			if self.growth > 0:
-				self.ids._names_progrself.ids._pie1_names.leveless.color=1,0,1,1
+				self.ids._names_progress.color =1,0,1,1
 			else:
 				self.ids._names_progress.color = 1, 0, 0, 1
 			a= str(format(self.growth,".1f"))
