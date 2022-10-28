@@ -2,7 +2,6 @@ import sqlite3
 from kivy.properties import StringProperty, NumericProperty,ListProperty
 from kivy.uix.screenmanager import Screen,RiseInTransition
 
-
 class ResultScreen(Screen):
 
 	Score_quizz = NumericProperty()
@@ -21,6 +20,13 @@ class ResultScreen(Screen):
 
 	def Display_Results(self,next):
 
+		if len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0 or len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0 or len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0:
+			self.CleanUp()
+			self.manager.current = "menuscreen"
+			self.manager.transition = RiseInTransition(duration=1)
+		else:
+			pass
+
 		if len(self.manager.get_screen("vragenscreen").Missed_quistions) > 0:
 			self.Missed_quistions = self.manager.get_screen("vragenscreen").Missed_quistions
 			self.indicator = "RuneNaam"
@@ -32,6 +38,7 @@ class ResultScreen(Screen):
 		elif len(self.manager.get_screen("vragenscreentwee").Missed_quistions)>0:
 			self.Missed_quistions = self.manager.get_screen("vragenscreentwee").Missed_quistions
 			self.indicator = "RuneText"
+
 
 		self.DisplaySelection = []
 

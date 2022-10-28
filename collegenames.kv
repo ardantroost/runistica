@@ -1,5 +1,36 @@
 #: import collegenames collegenames
 
+<Pie1@Label>:
+
+	size_hint:None,None
+	width:100
+	height:100
+	text: str(format((self.level),".1f")) + "%"
+	color:0,0,0,.8
+	font_size:dp(8)
+
+	# dummy voor scoreniveau
+	level: 0
+	pos_hint:{"center_x":.5,"center_y":0}
+
+	canvas.before:
+		Color:
+			rgba:1,1,1,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.75
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,0,0,1
+		Ellipse:
+			size: self.width-60,self.height-60
+			pos:self.center_x-(self.width-60)/2, self.center_y-(self.height-60)/2
+
 <CollegeNamesScreen>:
 	canvas:
 		Color:
@@ -7,103 +38,317 @@
 		Rectangle:
 			size: self.width, self.height
 			pos: self.pos
-			source:"Pics/road.jpg"
-			#source:"Pics/Runenlessons.png"
-
-
+			source:"Pics/Runenlessons.png"
 		Color:
 			rgba: 0,0,0,1
 
 	BoxLayout:
-		orientation: "vertical"
 		size_hint:(.5, .1)
-		pos_hint:{"center_x":.5,"center_y":.75}
+		pos_hint:{"center_x":.5,"center_y":.82}
 		Label:
 			text:"Swipe\n the right combination"
-			font_size:dp(16)
+			font_size:dp(20)
 			halign:"center"
 			bold:True
 
 	BoxLayout:
-		orientation: "vertical"
-		size_hint:(.35,.5)
-		pos_hint:{"center_x":.5,"center_y":.45}
-		spacing:15
+		orientation: "horizontal"
+		size_hint:(1,.22)
+		pos_hint:{"center_x":.5,"center_y":.62}
+		spacing:20
+		padding:20
 
-		Carousel:
-			id: _Carou1
-			size_hint:(1,.1)
-			loop:True
+		GridLayout:
+			cols:1
 
-			canvas:
-				Color:
-					rgba: 1,1,1,1
-				Rectangle:
-					size: self.width, self.height
-					pos:self.pos
+			BoxLayout:
+				orientation:"horizontal"
+				Label:
+					size_hint:.15,1
+				Carousel:
+					id: _Car1
+					loop:True
+					canvas:
+						Color:
+							rgba: 0,0,0,0
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
+		GridLayout:
+			cols:1
+			BoxLayout:
+				orientation:"horizontal"
+				Label:
+					size_hint:.15,1
 
-		Carousel:
-			id: _Carou2
-			size_hint:(1,.1)
-			loop:True
-
-			canvas:
-				Color:
-					rgba: 1,1,1,.6
-				Rectangle:
-					size: self.width, self.height
-					pos:self.pos
+				Carousel:
+					id: _Carou1
+					loop:True
+					canvas:
+						Color:
+							rgba: 1,1,1,1
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
+		GridLayout:
+			cols:1
+			BoxLayout:
+				orientation:"horizontal"
+				Label:
+					size_hint:.15,1
+				Carousel:
+					id: _Car3
+					loop:True
+					canvas.before:
+						Color:
+							rgba: [1,1,1,0]
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
 
 	BoxLayout:
 		orientation: "horizontal"
-		size_hint:(.35,.05)
-		pos_hint:{"center_x":.5,"center_y":.15}
+		size_hint:(1,.4)
+		pos_hint:{"center_x":.5,"center_y":.29}
+		spacing:20
+		padding:20
+
+		GridLayout:
+			cols:1
+
+			BoxLayout:
+				Label:
+					id:_Carou1a_text
+					text:"Symbol"
+					font_size:dp(14)
+					halign:"center"
+					valign:"center"
+					size_hint:(.15,1)
+
+					canvas.before:
+						PushMatrix
+						Rotate:
+							angle: 90
+							origin: self.center
+					canvas.after:
+						PopMatrix
+
+				Carousel:
+					id: _Carou1a
+					loop:True
+					canvas:
+						Color:
+							rgba: 1,1,1,.6
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(1,.85)
+				Label:
+					id:_Carou1a_result
+					text:"- result -"
+					halign:"center"
+					valign:"center"
+					font_size:dp(14)
+					text_size:(130,None)
+					color:1,1,1,1
+		GridLayout:
+			cols:1
+
+			BoxLayout:
+				orientation:"horizontal"
+				Label:
+					id:_Carou2_text
+					text:"Association"
+					size_hint:(.15,1)
+					halign:"center"
+					valign:"center"
+					font_size:dp(14)
+
+					canvas.before:
+						PushMatrix
+						Rotate:
+							angle: 90
+							origin: self.center
+
+					canvas.after:
+						PopMatrix
+				Carousel:
+					id: _Carou2
+					loop:True
+					canvas:
+						Color:
+							rgba: 1,1,1,.6
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(1,.85)
+				Label:
+					id:_Carou2_result
+					text:"- result -"
+					font_size:dp(14)
+					text_size:(130,None)
+					color:1,1,1,1
+
+		GridLayout:
+			cols:1
+			BoxLayout:
+				orientation:"horizontal"
+				Label:
+					id:_Carou1b_text
+					text:"Meaning"
+					halign:"center"
+					valign:"center"
+					font_size:dp(14)
+					size_hint:(.15,1)
+					canvas.before:
+						PushMatrix
+						Rotate:
+							angle: 90
+							origin: self.center
+
+					canvas.after:
+						PopMatrix
+				Carousel:
+					id: _Carou1b
+					loop:True
+					canvas:
+						Color:
+							rgba: 1,1,1,.6
+						Rectangle:
+							size: self.width, self.height
+							pos:self.pos
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(1,.85)
+				Label:
+					id:_Carou1b_result
+					text:"- result -"
+					font_size:dp(14)
+					text_size:(130,None)
+					color:1,1,1,1
+
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(.25,.05)
+		pos_hint:{"center_x":.5,"center_y":.05}
 		spacing:15
 
 		Button:
-			text: "Check"
-			font_size:dp(14)
-			on_release:
-				root.Checkcombination(_Carou1.index)
-		Label:
-			id:_score
-			text:""
-			font_size:dp(14)
-			pos_hint:{"center_x":.5}
-
-	BoxLayout:
-		orientation: "horizontal"
-		size_hint:(.75, .1)
-		pos_hint:{"center_x":.5,"center_y":.05}
-
-		Label:
-			#size_hint: (1,.3)
-			id:_result1
-			text:""
+			id:_Buttoncheck
+			text:"Check"
 			font_size:dp(14)
 			halign:"center"
+			color: 1,1,1,1
+			background_color: 1,1,1,0
+			on_press:
+				root.Checkcombination(_Carou1.index) if self.text == "Check" else root.newcombination()
 
+			canvas.before:
+				Color:
+					rgba: 1,1,1,.5
+				Ellipse:
+					size: 120, 120
+					pos:self.center_x-60,self.center_y-60
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:(.2,.14)
+		pos_hint:{"center_x":.20, "center_y":.6}
 
-	AnchorLayout:
-		anchor_x: "right"
-		anchor_y: "top"
+		Pie1:
+			id: _pie_perf
+			level:0
+
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:(.2,.14)
+		pos_hint:{"center_x":.85, "center_y":.6}
 
 		BoxLayout:
+			orientation:"horizontal"
+			size_hint:(1,.8)
 
-			orientation: 'horizontal'
-			padding:40
-			spacing: 50
-			size_hint: None,None
-			size: self.minimum_size
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(.65,1)
+				Label:
+					text:"Performance\n\n"
+					font_size:dp(14)
+					#halign:"left"
+				Label:
+					text:"Symbol:"
+					font_size:dp(14)
+				Label:
+					id:_symbol_score
+					text:""
+					halign:"left"
+					font_size:dp(12)
+				Label:
+					text:"Association:"
+					font_size:dp(14)
+					#halign:"left"
+				Label:
+					id:_naam_score
+					text:""
+					font_size:dp(12)
+					halign:"left"
+				Label:
+					text:"Meaning:"
+					font_size:dp(14)
+					halign:"left"
+				Label:
+					id:_meaning_score
+					text:""
+					font_size:dp(12)
+					halign:"left"
 
-			AnchorButton:
-				text: "Menu"
+	ActionBar:
+		size:self.width, 50
+		pos_hint:{"top":1}
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:20
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=16]Academy of RunenMaster[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:50
+				app_icon_width:50
+
+			ActionButton:
+				icon:"Pics/home.png"
+				background_color:1,0,1,.85
+				text:"Stats"
 				font_size:dp(14)
 				on_release:
 					root.manager.current="menuscreen"
 
-			AnchorButton:
-				text: "Quit"
+			ActionButton:
+				icon:"Pics/graph.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="statsscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
 				font_size:dp(14)
 				on_release:
 					quit()

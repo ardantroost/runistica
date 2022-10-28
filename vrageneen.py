@@ -30,14 +30,17 @@ class VragenScreeneen(Screen):
 
 	def updatedatabase(self,score_quizz, Symboltraining, Symbolscore, Nametraining, Meaningtraining,Meaningscore,Time):
 
+
 		Lastvisit = time.strftime("%d-%m-%Y")
 		Visittime = time.strftime("%X")
 		Namescore = score_quizz
 
-		conn = sqlite3.connect("MasterResults.db")
+
+		conn = sqlite3.connect("masterresults.db")
 		c = conn.cursor()
-		c.execute("INSERT INTO MasterResults VALUES (?,?,?,?,?,?,?,?,?)" ,
+		c.execute("INSERT INTO masterresults VALUES (?,?,?,?,?,?,?,?,?)" ,
 				  (Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
+
 		conn.commit()
 		conn.close()
 
@@ -108,8 +111,11 @@ class VragenScreeneen(Screen):
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens
 				self.endtime = time.time()
 				self.deltatime_name = self.endtime - self.starttime
-				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,
-									Nametraining=1,Meaningtraining=0,Meaningscore=0,Time= format(self.deltatime_name,'.1f'))
+				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,Nametraining=1,Meaningtraining=0,Meaningscore=0,Time=format(self.deltatime_name,'.1f'))
+
+
+
+
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):
 		anim= Animation(color=[1,1,1,0],duration=.5)

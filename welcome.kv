@@ -18,13 +18,13 @@
 
 			Ellipse:
 				id:_LogoRunistica
-				size: 300,200
-				pos:self.center_x-150, 100
+				size: 400,300
+				pos:self.center_x-150, 150
 				source: "Pics/logorunistica.png"
 
 		Label:
-			text: "Master of runes\n [color=#271405][size=14]Learn to read the secret Runes [/color][/size]"
-			font_size: dp(30)
+			text: "Master of runes\n [color=#271405][size=28]Learn to read the secret Runes [/color][/size]"
+			font_size: dp(36)
 			color:0,0,0,1
 			halign: "center"
 			markup: True
@@ -38,11 +38,11 @@
 			text: "Start"
 			font_size:dp(18)
 			bold:True
-			color:[1,0,0,.6]
+			color:[0,1,1,.5]
 			background_color:[0,0,0,0]
 			size_hint:(1,.1)
 			on_press:
-				color = [1,0,0,1] if _start.state == "active" else [0,0,0,1]
+				color = [1,0,0,1] if _start.state == "active" else [0,1,1,.75]
 				root.manager.current = "menuscreen"
 				root.manager.transition.direction = "down"
 

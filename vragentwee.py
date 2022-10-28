@@ -34,10 +34,9 @@ class VragenScreentwee(Screen):
 		Visittime = time.strftime("%X")
 		Meaningscore = score_quizz
 
-		conn = sqlite3.connect("MasterResults.db")
+		conn = sqlite3.connect("masterresults.db")
 		c = conn.cursor()
-		c.execute("INSERT INTO MasterResults VALUES (?,?,?,?,?,?,?,?,?)",
-				  (Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
+		c.execute("INSERT INTO masterresults VALUES (?,?,?,?,?,?,?,?,?)",(Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time))
 		conn.commit()
 		conn.close()
 
@@ -108,7 +107,7 @@ class VragenScreentwee(Screen):
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens naar DataBase
 				self.endtime = time.time()
 				self.deltatime_meaning = self.endtime - self.starttime
-				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,Nametraining=0,Namescore=0,Meaningtraining=1, Time=format(self.deltatime_meaning, '.1f'))
+				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,Nametraining=0,Namescore=0,Meaningtraining=1,Time=format(self.deltatime_meaning, '.1f'))
 
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):

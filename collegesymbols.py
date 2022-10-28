@@ -34,8 +34,14 @@ class CollegeSymbolsScreen(Screen):
 		conn.commit()
 		conn.close()
 
-		self.ids._symbol.text = "Symbol: \n\n"+ str(datae[0][0])
-		self.ids._meaning.text = "Message: \n\n" + str(datae[0][1])
+		self.ids._symbol.text = str(datae[0][0])
+		self.ids._meaning.text = str(datae[0][1])
+		if text1[-1]== "v" or text1[-1]== "V":
+			self.ids._reverse.text = "<reversed rune>"
+		else:
+			self.ids._reverse.text = ""
+
+
 
 	# automatische start van methode bij open van dit scherm (on_start werkt niet!!!!)
 	def on_enter(self):
@@ -61,7 +67,14 @@ class CollegeSymbolsScreen(Screen):
 			self.carouselShow.add_widget(image)
 
 		self.ids._naam.text = str(datarune[0][0])
-		self.ids._symbol.text = "Symbol: \n\n" + str(datarune[0][1])
-		self.ids._meaning.text = "Message: \n\n" + str(datarune[0][2])
+		self.ids._symbol.text = str(datarune[0][1])
+		self.ids._meaning.text = str(datarune[0][2])
+
+		if datarune[0][0][-1]== "v" or datarune[0][0][-1]== "V":
+			self.ids._reverse.text = "<reversed rune>"
+		else:
+			self.ids._reverse.text = ""
+
+
 
 

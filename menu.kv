@@ -30,18 +30,17 @@
 		Rectangle:
 			size:(self.width,self.height)
 			pos:self.x,self.y
-			#source:"Pics/sjamaan1.jpg"
 			source:"Pics/Runenlessons.png"
 
 	BoxLayout:
 		orientation: "vertical"
 		padding:10
 		size_hint:(1,.4)
-		pos_hint:{"center_x":.5,"center_y":.7}
+		pos_hint:{"center_x":.5,"center_y":.65}
 
 		Label:
-			text: "Trainingsmenu\n [size=20]Select a training[/size]"
-			font_size:dp(28)
+			text: "Testcenter\n [size=24]Take tests and become a Master in Runes[/size]"
+			font_size:dp(32)
 			markup:True
 			halign:"center"
 			size_hint:(1,.4)
@@ -58,14 +57,14 @@
 				id:_Symbols_but
 				on_active:
 					root.Trainingskeuze="Runesymbols"
-					_ButtonStart.text = "Start training\n Symbols of Runes >>"
+					_ButtonStart.text = "Start test"
 			Label:
 				text:''
 				size_hint:(.4,.1)
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
-				text:"RuneNames"
+				text:"Runenames"
 				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
@@ -75,7 +74,7 @@
 
 				on_active:
 					root.Trainingskeuze = "SymbolNames"
-					_ButtonStart.text = "Start training\n associations of Runes >>"
+					_ButtonStart.text = "Start test"
 
 			Label:
 				text:''
@@ -93,7 +92,7 @@
 				id:_Meaning_but
 				on_active:
 					root.Trainingskeuze="Meaning of Runes"
-					_ButtonStart.text = "Start training\n Meaning of Runes >>"
+					_ButtonStart.text = "Start test"
 			Label:
 				text:''
 				size_hint:(.4,.1)
@@ -102,13 +101,13 @@
 		orientation: "vertical"
 		padding:10
 		size_hint: (1,.5)
-		pos_hint:{"center_x":0.5, "center_y":.25}
+		pos_hint:{"center_x":0.5, "center_y":.20}
 
 		Label:
 			size_hint:(1,.1)
 		Label:
-			text: "Collegemenu\n [size=20]Select rune college [/size]"
-			font_size:dp(28)
+			text: "Academy for Runes\n [size=24]Select a college to learn Runes[/size]"
+			font_size:dp(32)
 			markup:True
 			halign:"center"
 			size_hint:(1,.4)
@@ -116,7 +115,7 @@
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
-				text:"College symbols"
+				text:"Library for Runes "
 				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
@@ -125,7 +124,7 @@
 				id:_Symbols_college
 				on_active:
 					root.Trainingskeuze="College Symbols"
-					_ButtonStart.text = "Start college\n runes and their Symbols >>"
+					_ButtonStart.text = "Start\n college"
 			Label:
 				text:''
 				size_hint:(.4,.15)
@@ -133,7 +132,7 @@
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
-				text:"College names"
+				text:"Practice Runes"
 				font_size:dp(14)
 				size_hint:(.4,.2)
 				halign:"right"
@@ -142,7 +141,7 @@
 				id:_Names_college
 				on_active:
 					root.Trainingskeuze="College Names"
-					_ButtonStart.text = "Start college\n runes and their Names >>"
+					_ButtonStart.text = "Start\n college"
 			Label:
 				text:''
 				size_hint:(.4,.1)
@@ -154,43 +153,76 @@
 			halign:"center"
 			size_hint:(1,1)
 
+	#AnchorLayout:
+	#	anchor_x: "center"
+	#	anchor_y: "bottom"
 
-	AnchorLayout:
-		anchor_x: "center"
-		anchor_y: "bottom"
+	Button:
+		id:_ButtonStart
+		text:"Choose"
+		font_size:dp(14)
+		halign:"center"
+		color: 1,1,1,1
+		background_color: 1,1,1,0
+		size_hint: (.4,.25)
+		pos_hint:{"center_x":.5, "center_y":.08}
+		on_press:
+			self.color=[0,0,0,1]
+			root.transport()
 
-		Button:
-			id: _ButtonStart
-			text: " Choose\n your training "
-			font_size:dp(14)
-			halign:"center"
-			background_normal:''
-			background_color: 0,1,0,0
-			size_hint:(1,.15)
-			on_release:
-				root.transport()
+		canvas.before:
+			Color:
+				rgba: 1,1,1,.5
+			Ellipse:
+				size: 130, 130
+				pos:self.center_x-65,self.center_y-65
 
-	AnchorLayout:
-		anchor_x: "right"
-		anchor_y: "top"
+	ActionBar:
+		size:self.width, 50
+		pos_hint:{"top":1}
 
-		BoxLayout:
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
 
-			orientation: 'horizontal'
-			padding:40
-			spacing: 50
-			size_hint: None,None
-			size: self.minimum_size
+		ActionView:
+			id: _toolbar
+			spacing:40
 
-			AnchorButton:
-				text: "Quit"
-				font_size:dp(12)
+			ActionPrevious:
+				color:1,0,1,1
+				title:"[size=16]Master of Runes[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:50
+				app_icon_width:50
+
+			ActionButton:
+				icon:"Pics/info.png"
+				background_color:1,0,1,.85
+				text:"About"
+				font_size:dp(14)
+				on_release:
+					root.textinfo()
+
+			ActionButton:
+				icon:"Pics/graph.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="statsscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
 				on_release:
 					quit()
 
-			AnchorButton:
-				text: "Stats"
-				font_size:dp(12)
-				on_release:
-					root.manager.current = "statsscreen"
 

@@ -1,8 +1,11 @@
 import random
 import sqlite3
-
+from kivy.uix.actionbar import ActionBar
+from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen,WipeTransition
 from kivy.properties import StringProperty, ListProperty,NumericProperty
+from kivy.uix.textinput import TextInput
+
 
 class MenuScreen(Screen):
 
@@ -16,6 +19,11 @@ class MenuScreen(Screen):
 	teller = NumericProperty()
 	Missed_quistions=ListProperty([])
 	Score_quizz = NumericProperty(0)
+
+	def textinfo(self):
+
+		self.manager.Popup_info()
+
 
 	def quizzfunctie(self, quizztype, *args):
 
@@ -143,7 +151,7 @@ class MenuScreen(Screen):
 
 			# reset de tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose\n Training/ College"
+			self.ids._ButtonStart.text = "Choose"
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
 			self.a_waarde = 0
@@ -162,7 +170,7 @@ class MenuScreen(Screen):
 			self.ids._Names_but.active=False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose\n Training/ College"
+			self.ids._ButtonStart.text = "Choose"
 			self.a_waarde = 0
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
 			self.manager.screens[4].Score_quizz = 0
@@ -182,7 +190,7 @@ class MenuScreen(Screen):
 
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose\n Training/ College"
+			self.ids._ButtonStart.text = "Choose"
 			self.a_waarde = 0
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
@@ -202,7 +210,7 @@ class MenuScreen(Screen):
 			self.ids._Symbols_college.active = False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose\n Training/ College"
+			self.ids._ButtonStart.text = "Choose"
 
 			# bij eerder gespeelde kwis alle resultaten wissen
 			self.manager.screens[5].teller = 0
@@ -219,7 +227,7 @@ class MenuScreen(Screen):
 			self.ids._Names_college.active = False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose\n Training/ College"
+			self.ids._ButtonStart.text = "Choose"
 
 			# bij eerder gespeelde kwis alle resultaten wissen
 			self.manager.screens[5].teller = 0
@@ -232,4 +240,4 @@ class MenuScreen(Screen):
 			self.manager.transition = WipeTransition(duration=1)
 
 		elif self.Trainingskeuze == "":
-			self.manager.Popup_Choose("a module to train")
+			self.manager.Popup_Choose("a test module")

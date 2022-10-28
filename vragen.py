@@ -32,13 +32,10 @@ class VragenScreen(Screen):
 		Lastvisit = time.strftime("%d-%m-%Y")
 		Visittime = time.strftime("%X")
 		Symbolscore = score_quizz
-		#Time controle
-		#Time = 30
 
-		conn = sqlite3.connect("MasterResults.db")
+		conn = sqlite3.connect("masterresults.db")
 		c = conn.cursor()
-		c.execute("INSERT INTO MasterResults VALUES (?,?,?,?,?,?,?,?,?)" ,
-				  (Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
+		c.execute("INSERT INTO masterresults VALUES (?,?,?,?,?,?,?,?,?)",(Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
 		conn.commit()
 		conn.close()
 

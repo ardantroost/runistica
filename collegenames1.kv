@@ -1,0 +1,131 @@
+#: import collegenames collegenames
+
+<CollegeNamesScreen>:
+	canvas:
+		Color:
+			rgba: 1,0,0,1
+		Rectangle:
+			size: self.width, self.height
+			pos: self.pos
+			#source:"Pics/road.jpg"
+			source:"Pics/Runenlessons.png"
+
+
+		Color:
+			rgba: 0,0,0,1
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(.5, .1)
+		pos_hint:{"center_x":.5,"center_y":.75}
+		Label:
+			text:"Swipe\n the right combination"
+			font_size:dp(16)
+			halign:"center"
+			bold:True
+
+	BoxLayout:
+		orientation: "vertical"
+		size_hint:(.35,.5)
+		pos_hint:{"center_x":.5,"center_y":.45}
+		spacing:15
+
+		Carousel:
+			id: _Carou1
+			size_hint:(1,.1)
+			loop:True
+
+			canvas:
+				Color:
+					rgba: 1,1,1,1
+				Rectangle:
+					size: self.width, self.height
+					pos:self.pos
+
+		Carousel:
+			id: _Carou2
+			size_hint:(1,.1)
+			loop:True
+
+			canvas:
+				Color:
+					rgba: 1,1,1,.6
+				Rectangle:
+					size: self.width, self.height
+					pos:self.pos
+
+	BoxLayout:
+		orientation: "horizontal"
+		size_hint:(.35,.05)
+		pos_hint:{"center_x":.5,"center_y":.15}
+		spacing:15
+
+		Button:
+			text: "Check"
+			font_size:dp(14)
+			on_release:
+				root.Checkcombination(_Carou1.index)
+		Label:
+			id:_score
+			text:""
+			font_size:dp(14)
+			pos_hint:{"center_x":.5}
+
+	BoxLayout:
+		orientation: "horizontal"
+		size_hint:(.75, .1)
+		pos_hint:{"center_x":.5,"center_y":.05}
+
+		Label:
+			id:_result1
+			text:""
+			font_size:dp(14)
+			halign:"center"
+
+	ActionBar:
+		size:self.width, 50
+		pos_hint:{"top":1}
+
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:20
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=16]Academy of RunenMaster[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:50
+				app_icon_width:50
+
+			ActionButton:
+				icon:"Pics/home.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			ActionButton:
+				icon:"Pics/graph.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="statsscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
+				on_release:
+					quit()

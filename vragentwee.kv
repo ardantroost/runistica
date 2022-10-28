@@ -31,7 +31,7 @@
 		pos_hint:{"center_y":.75}
 
 		Label:
-			text: "Training\n Meaning of Runes"
+			text: "Test\nMeaning of Runes"
 			halign:"center"
 			font_size:dp(24)
 
@@ -77,6 +77,7 @@
 		orientation: "vertical"
 		size_hint:(1,.42)
 
+
 		GridLayout:
 			cols:2
 			padding:20
@@ -87,7 +88,7 @@
 				id: _antw1
 				text: ""
 				#font_size: dp(14)
-				text_size:220,None
+				text_size:240,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -96,7 +97,7 @@
 			AntwButton:
 				id: _antw2
 				text: ""
-				text_size:220,None
+				text_size:240,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -104,7 +105,7 @@
 			AntwButton:
 				id: _antw3
 				text: ""
-				text_size:220,None
+				text_size:240,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
@@ -112,45 +113,81 @@
 			AntwButton:
 				id: _antw4
 				text: ""
-				text_size:220,None
+				text_size:240,None
 				on_release:
 					root.ClearButtons()
 					self.background_color = 1,0,0,.3
 					root.PressedButton(self.text)
 
+	#	Button:
+	#		text: "<< Submit >>"
+	#		font_size: dp(14)
+	#		size_hint:(.33,.05)
+	#		background_color:1,1,1,0.1
+	#		pos_hint:{"center_x":.5,"top":1}
+	#		on_release:
+	#			root.ClearButtons()
+	#			root.SubmittAnswer()
+
 		Button:
-			text: "<< Submit >>"
-			font_size: dp(14)
-			size_hint:(.33,.05)
-			background_color:1,1,1,0.1
-			pos_hint:{"center_x":.5,"top":1}
-			on_release:
+			id:_ButtonStart
+			text:"Submit"
+			font_size:dp(14)
+			halign:"center"
+			color: 1,1,1,1
+			background_color: 1,1,1,0
+			size_hint: (.25,.15)
+			pos_hint:{"center_x":.5, "center_y":.075}
+			on_press:
+				self.color=[0,0,0,1]
 				root.ClearButtons()
 				root.SubmittAnswer()
+			canvas.before:
+				Color:
+					rgba: 1,1,1,.5
+				Ellipse:
+					size: 130, 130
+					pos:self.center_x-65,self.center_y-65
 
-	AnchorLayout:
-		anchor_x: "right"
-		anchor_y: "top"
+	ActionBar:
+		size:self.width, 50
+		pos_hint:{"top":1}
 
-		BoxLayout:
-			orientation: 'horizontal'
-			padding:40
-			spacing: 50
-			size_hint: None, None
-			size: self.minimum_size
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
 
-			AnchorButton:
-				text: "Menu"
+		ActionView:
+			id: _toolbar
+			spacing:40
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=14]Master of Runes[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:50
+				app_icon_width:50
+
+			ActionButton:
+				icon:"Pics/home.png"
+				background_color:1,0,1,.85
+				text:"Stats"
 				font_size:dp(14)
 				on_release:
-					# voortijdig afbreken dus reset quizzvariabelen
-					root.CleanUp()
 					root.manager.current="menuscreen"
 
-			AnchorButton:
-				text: "Quit"
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
 				font_size:dp(14)
 				on_release:
 					quit()
+
 
 

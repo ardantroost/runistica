@@ -166,13 +166,12 @@
 		Rectangle:
 			size:self.width, self.height
 			pos:self.pos
-			#source:"Pics/Magnus.jpg"
 	Image:
 		source:"Pics/sjamaan1.jpg"
 		size_hint:None,None
 		color:1,0,1,.25
-		width:800
-		height:900
+		width:900
+		height:1400
 		allow_stretch:True
 		keep_ratio:False
 		pos_hint:{"center_x":.5, "center_y":.5}
@@ -211,7 +210,6 @@
 				font_size:dp(10)
 				halign:"center"
 
-
 	ScrollView:
 		size_hint:.85,1
 		pos_hint:{"center_x":.5, "center_y":0.15}
@@ -221,7 +219,6 @@
 		bar_width:15
 		bar_pos_y:"right"
 		scroll_type:["bars","content"]
-		#scroll_y:0
 
 		BoxLayout:
 			orientation:"vertical"
@@ -231,7 +228,7 @@
 			# box1
 			BoxLayout:
 				id: _box1
-				orientation:"vertical"
+				orientation:"horizontal"
 				size_hint_y:None
 				padding:20
 				canvas:
@@ -294,16 +291,18 @@
 							size_hint:1,.6
 							Pie1:
 								id:_pie1
-								level: _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
+								#level: _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
+								level: 0 if (_tests_symbol.text== "2" or _tests_symbol.text== "1" or _tests_names.text== "2" or _tests_names.text== "1" or _tests_meaning.text== "2" or _tests_meaning.text== "1") else _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
 
 						BoxLayout:
 							orientation:"vertical"
 							size_hint:1,.2
 							Label:
 								id:_masterlabel
-								text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else "APPRENTICE SKILLS")
+								#text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else "APPRENTICE SKILLS")
+								text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else ("NO ENOUGH TESTS" if (_pie1.level==0) else "APPRENTICE SKILLS"))
 								color:1,1,1,1
-								font_size:dp(16)
+								font_size:dp(15)
 								valign:"center"
 								halign:"center"
 
@@ -438,7 +437,7 @@
 								text:"MASTER SKILLS" if _pie1_symbol.level >= 324 else ("MEDIOR SKILLS" if (_pie1_symbol.level >180 and _pie1_symbol.level <324) else "JUNIOR SKILLS")
 								bold:True
 								color:1,1,1,1
-								font_size:dp(16)
+								font_size:dp(15)
 								valign:"center"
 								halign:"center"
 
@@ -587,7 +586,7 @@
 							canvas:
 
 							Label:
-								text:"Final four tests\n_______"
+								text:"Last test"
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -606,7 +605,7 @@
 
 							Label:
 								id:_lastvisit_symbol
-								text: "24-09-2022"
+								text: ""
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -641,7 +640,7 @@
 
 							Label:
 								id:_speed_symbol
-								text: "32"
+								text: ""
 								color:0,0,0,.5
 								font_size:dp(14)
 								valign:"center"
@@ -726,7 +725,7 @@
 								text: "MASTER SKILLS" if _pie1_names.level >= 324 else ("MEDIOR SKILLS" if (_pie1_names.level >180 and _pie1_names.level <324) else "JUNIOR SKILLS")
 								bold:True
 								color:1,1,1,1
-								font_size:dp(16)
+								font_size:dp(15)
 								valign:"center"
 								halign:"center"
 
@@ -894,7 +893,7 @@
 
 							Label:
 								id:_lastvisit_names
-								text: "24-09-2022"
+								text: ""
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -929,7 +928,7 @@
 
 							Label:
 								id:_speed_names
-								text: "32"
+								text: ""
 								color:0,0,0,.5
 								font_size:dp(14)
 								valign:"center"
@@ -1014,7 +1013,7 @@
 								text:"MASTER SKILLS" if _pie1_meaning.level >=324 else ("MEDIOR SKILLS" if (_pie1_meaning.level >180 and _pie1_meaning.level <324) else "JUNIOR SKILLS")
 								bold:True
 								color:1,1,1,1
-								font_size:dp(16)
+								font_size:dp(15)
 								valign:"center"
 								halign:"center"
 
@@ -1181,7 +1180,7 @@
 
 							Label:
 								id:_lastvisit_meaning
-								text: "24-09-2022"
+								text: ""
 								font_size:dp(9)
 								color:0,0,0,.5
 								valign:"center"
@@ -1216,7 +1215,7 @@
 
 							Label:
 								id:_speed_meaning
-								text: "32"
+								text: ""
 								color:0,0,0,.5
 								font_size:dp(14)
 								valign:"center"
@@ -1230,29 +1229,58 @@
 								halign:"center"
 
 
+	ActionBar:
+		size:self.width, 60
+		pos_hint:{"top":1}
 
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
 
+		ActionView:
+			id: _toolbar
+			spacing:0
 
-	AnchorLayout:
-		anchor_x: "right"
-		anchor_y: "top"
-		BoxLayout:
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=18]Master of Runes[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:60
+				app_icon_width:60
 
-			orientation: 'horizontal'
-			padding:40
-			spacing: 50
-			size_hint: None,None
-			size: self.minimum_size
+			ActionButton:
+				icon:"Pics/info.png"
+				background_color:1,0,1,.85
+				text:"About"
+				font_size:dp(14)
+				on_release:
+					root.infodisplay()
 
-			AnchorButton:
-				text: "Menu"
+			ActionButton:
+				icon:"Pics/home.png"
+				background_color:1,0,1,.85
+				text:"Stats"
 				font_size:dp(14)
 				on_release:
 					root.manager.current="menuscreen"
 
-			AnchorButton:
-				text: "Quit"
+			ActionButton:
+				icon:"Pics/delete.png"
+				background_color:1,0,1,.85
+				text:"Delete"
+				font_size:dp(14)
+				on_release:
+					root.displaydelete()
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
 				font_size:dp(14)
 				on_release:
 					quit()
-
