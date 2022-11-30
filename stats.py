@@ -22,12 +22,50 @@ class StatsScreen(Screen):
 		self.ids._tests_names.text = str(counts[0][2])
 		self.ids._tests_meaning.text = str(counts[0][3])
 
+		# beperkt de omvang van de database tot 6 test per categorie
+
+		self.maximaal= 10
+
+		if counts[0][1] >= self.maximaal:
+			self.del_database("symbol")
+		elif counts[0][2] >=self.maximaal:
+			self.del_database("names")
+		elif counts[0][3] >=self.maximaal:
+			self.del_database("meaning")
+
 		self.timedisplay()
 		self.symbols()
 		self.names()
 		self.meanings()
 
 		# db sluiten >> conn = sqlite3.connect("MasterResults.db") na on_enter-display
+		conn.commit()
+		conn.close()
+
+	def del_database(self,testtype):
+
+		# verwijder laatste 4 tests als er meer dan 10( =self.maximaal) tests zijn in een categorie
+
+		conn = sqlite3.connect("masterresults.db")
+		c = conn.cursor()
+		if testtype == "symbol":
+			c.execute("DELETE FROM masterresults WHERE rowid in (SELECT rowid FROM masterresults WHERE Symbolscore>0 ORDER BY rowid DESC LIMIT 4)")
+
+		elif testtype =="names":
+			c.execute("DELETE FROM masterresults WHERE rowid in (SELECT rowid FROM masterresults WHERE Namescore>0 ORDER BY rowid DESC LIMIT 4)")
+
+		elif testtype == "meaning":
+			c.execute("DELETE FROM masterresults WHERE rowid in (SELECT rowid FROM masterresults WHERE Meaningscore>0 ORDER BY rowid DESC LIMIT 4)")
+
+		self.c.execute("SELECT COUNT(*),SUM(Symboltraining), SUM(Nametraining), SUM(Meaningtraining) FROM masterresults")
+		counts = self.c.fetchall()
+
+		self.ids._tests_symbol.text = str(counts [0][1])
+		self.ids._tests_names.text = str(counts[0][2])
+		self.ids._tests_meaning.text = str(counts[0][3])
+
+		# na verwijdering actie...
+		# opslaan en sluiten van database
 		conn.commit()
 		conn.close()
 
@@ -41,7 +79,6 @@ class StatsScreen(Screen):
 
 		if instructie == "lastsymbol":
 			c.execute("DELETE FROM masterresults WHERE rowid in (SELECT rowid FROM masterresults WHERE Symbolscore>0 ORDER BY rowid DESC LIMIT 1)")
-
 		elif instructie == "lastnames":
 			c.execute("DELETE FROM masterresults WHERE rowid in (SELECT rowid FROM masterresults WHERE Namescore>0 ORDER BY rowid DESC LIMIT 1)")
 
@@ -71,10 +108,9 @@ class StatsScreen(Screen):
 
 		# opschonen van de pagina
 		self.on_enter()
-		#self.manager.current = "menuscreen"
-
 
 	def on_press_button(self,event):
+
 		# bij selectie wordt tekstbutton "paars"
 		event.color=(1,0,1,1)
 
@@ -160,8 +196,8 @@ class StatsScreen(Screen):
 
 		self.currenttime = time.strftime("%X")
 		self.datum = time.strftime("%d-%m-%Y")
-		self.ids._currenttime.text = "time  "+self.currenttime[0:5]
-		Clock.schedule_interval(self.timeupdate,60)
+		self.ids._currenttime.text = "time  "+ self.currenttime[0:5]
+		Clock.schedule_interval(self.timeupdate,1)
 		self.ids._datetimes.text = self.datum
 
 	def	symbols(self):
@@ -180,6 +216,7 @@ class StatsScreen(Screen):
 		if len(symbooltest1) > 0:
 			self.ids._bar_symbol.level= str(symbooltest1[0][0])
 			self.ids._speed_symbol.text = str(symbooltest1[0][1]) + "s"
+
 		else:
 			self.ids._bar_symbol.level = 0
 
@@ -450,7 +487,6 @@ class StatsScreen(Screen):
 
 		self.currenttime = time.strftime("%X")
 		self.ids._currenttime.text = "Time "+ self.currenttime[0:5]
-
 
 	def on_leave(self):
 		pass

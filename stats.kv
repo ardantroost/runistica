@@ -8,6 +8,7 @@
 	text: str(format((self.level/360)*100,".1f")) + "%"
 	color:0,0,0,.8
 	font_size:dp(14)
+
 	# dummy voor scoreniveau
 	level: 0
 	pos_hint:{"center_x":.5,"center_y":.5}
@@ -136,7 +137,6 @@
 			size: self.level*10,self.height-2
 			pos:self.x+1, self.center_y-4
 
-
 <BarVer@Label>:
 	size_hint:None,None
 	width:10
@@ -160,27 +160,20 @@
 			pos:self.center_x-4, self.y+1
 
 <StatsScreen>:
+
 	canvas:
 		Color:
-			rgba: 1,0,1,.75
+			rgba: [0.1,1,0,.8]
 		Rectangle:
-			size:self.width, self.height
-			pos:self.pos
-	Image:
-		source:"Pics/sjamaan1.jpg"
-		size_hint:None,None
-		color:1,0,1,.25
-		width:900
-		height:1400
-		allow_stretch:True
-		keep_ratio:False
-		pos_hint:{"center_x":.5, "center_y":.5}
+			size:(self.width,self.height)
+			pos:self.x,self.y
+			source:"Pics/Olaus.jpg"
 
 	BoxLayout:
 		orientation:"vertical"
-		pos_hint:{"center_x":.5, "center_y":.8}
+		pos_hint:{"center_x":.5, "center_y":.75}
 		size_hint:1,.2
-		padding:20
+		padding:25
 		spacing:0
 		canvas:
 			Color:
@@ -195,60 +188,51 @@
 			halign:"center"
 
 		BoxLayout:
-			size_hint:0.5,1
+			size_hint:0.45,1
 			pos_hint:{"center_x":.5, "center_y":.5}
 			Label:
 				id: _datetimes
 				text:""
 				color:1,1,1,1
-				font_size:dp(10)
+				font_size:dp(12)
 				halign:"center"
 			Label:
 				id: _currenttime
 				text:""
 				color:1,1,1,1
-				font_size:dp(10)
+				font_size:dp(12)
 				halign:"center"
 
 	ScrollView:
-		size_hint:.85,1
-		pos_hint:{"center_x":.5, "center_y":0.15}
-		do_scroll_x:False
-		do_scroll_y:True
-		bar_color:0.2,1,0,.45
-		bar_width:15
-		bar_pos_y:"right"
+		size_hint:.85,.35
+		pos_hint:{"center_x":.5, "center_y":0.35}
+		do_scroll_x: True
+		do_scroll_y: False
+		bar_color:0,0,0,.75
+		bar_width:20
+		bar_pos_x:"bottom"
 		scroll_type:["bars","content"]
+		on_touch_move:
+			_swipe.text= "Your Skill-Level" if (self.hbar[0]< 0.2) else\
+			("Stats Symbol Test" if (self.hbar[0]>= 0.2 and self.hbar[0]< 0.4) else\
+			("Stats Names Test"  if (self.hbar[0] >= 0.4 and self.hbar[0]< 0.6) else"Stats Meaning Test"))
 
+			_2.color =[1,0,1,.6] if self.hbar[0]>= (0.25) else [1,1,1,.9]
+			_3.color =[1,0,1,1.6] if self.hbar[0]>= (0.50) else[1,1,1,.9]
+			_4.color =[1,0,1,.6] if self.hbar[0]>=(0.75) else [1,1,1,.9]
+
+		#inspring
 		BoxLayout:
-			orientation:"vertical"
-			size_hint_y:None
-			height:1500
-
-			# box1
-			BoxLayout:
-				id: _box1
-				orientation:"horizontal"
-				size_hint_y:None
-				padding:20
-				canvas:
-					Color:
-						rgba: 0,0,0,0
-					Rectangle:
-						size:self.width, self.height
-						pos:self.pos
-				Label:
-					text:"Overall statistics"
-					color:1,1,1,1
-					font_size:dp(16)
-					size_hint:.5,1
-					halign:"left"
+			orientation:"horizontal"
+			size_hint_x:None
+			width:2800
+			padding:25
 
 			# box1
 			BoxLayout:
 				orientation:"horizontal"
-				size_hint_y:None
-				height:300
+				size_hint_x:None
+				width:600
 				canvas:
 					Color:
 						rgba: 1,1,1,1
@@ -283,7 +267,7 @@
 							Label:
 								text: "CURRENT LEVEL"
 								font_size:dp(18)
-								color:1,1,1,.75
+								color:0,0,0,.75
 								valign:"center"
 								halign:"center"
 						BoxLayout:
@@ -291,7 +275,6 @@
 							size_hint:1,.6
 							Pie1:
 								id:_pie1
-								#level: _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
 								level: 0 if (_tests_symbol.text== "2" or _tests_symbol.text== "1" or _tests_names.text== "2" or _tests_names.text== "1" or _tests_meaning.text== "2" or _tests_meaning.text== "1") else _pie2.level*.25+_pie3.level*.25+_pie4.level*.5
 
 						BoxLayout:
@@ -299,9 +282,8 @@
 							size_hint:1,.2
 							Label:
 								id:_masterlabel
-								#text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else "APPRENTICE SKILLS")
 								text:"MASTER SKILLS" if _pie1.level > 324 else ("MEDIOR SKILLS" if (_pie1.level >180 and _pie1.level <324) else ("NO ENOUGH TESTS" if (_pie1.level==0) else "APPRENTICE SKILLS"))
-								color:1,1,1,1
+								color:0,0,0,1
 								font_size:dp(15)
 								valign:"center"
 								halign:"center"
@@ -327,8 +309,9 @@
 								level: _pie1_symbol.level
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Label:
-								text: "SKILLS\nRUNE SYMBOLS"
+								text: " SKILLS\nRUNE SYMBOLS"
 								font_size:dp(8)
+								color:0,0,0,.85
 								valign:"center"
 								halign:"left"
 
@@ -346,6 +329,7 @@
 							Label:
 								text:"SKILLS\nRUNE NAMES"
 								font_size:dp(8)
+								color:0,0,0,.85
 								valign:"center"
 								halign:"left"
 						BoxLayout:
@@ -360,8 +344,9 @@
 								level: _pie1_meaning.level
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Label:
-								text: "SKILLS\nRUNE MEANINGS"
+								text: " SKILLS\nRUNE MEANINGS"
 								font_size:dp(8)
+								color:0,0,0,.85
 								valign:"center"
 								halign:"left"
 
@@ -369,7 +354,8 @@
 			BoxLayout:
 				id: _box1
 				orientation:"vertical"
-				size_hint_y:None
+				#size_hint_y:None
+				size_hint_x:None
 				padding:20
 				canvas:
 					Color:
@@ -378,16 +364,19 @@
 						size:self.width, self.height
 						pos:self.pos
 				Label:
-					text:"Statistics I The Symbols of Runes"
+					text:">>"
 					color:1,1,1,1
-					font_size:dp(16)
+					font_size:dp(46)
 					size_hint:1,1
+					pos_hint_y:{"center_y":.5}
 					halign:"left"
 
 			BoxLayout:
 				orientation:"horizontal"
-				size_hint_y:None
-				height:300
+				#size_hint_y:None
+				#height:300
+				size_hint_x:None
+				width:600
 				canvas:
 					Color:
 						rgba: 1,1,1,1
@@ -422,6 +411,7 @@
 							Label:
 								text:"RUNE SYMBOLS"
 								font_size:dp(14)
+								color:0,0,0,.75
 								valign:"center"
 								halign:"center"
 						BoxLayout:
@@ -656,8 +646,10 @@
 			# box 3a *********************************************************
 			BoxLayout:
 				orientation:"vertical"
-				size_hint_y:None
+				#size_hint_y:None
+				size_hint_x:None
 				padding:20
+
 				canvas:
 					Color:
 						rgba: 0,0,0,0
@@ -665,17 +657,20 @@
 						size:self.width, self.height
 						pos:self.pos
 				Label:
-					text:"Statistics II The Names of Runes"
+					text:" "
 					color:1,1,1,1
-					font_size:dp(16)
+					font_size:dp(46)
 					size_hint:1,1
+					pos_hint_y:{"center_y":.5}
 					halign:"left"
 
 			# box3b *******************************************************
 			BoxLayout:
 				orientation:"horizontal"
-				size_hint_y:None
-				height:300
+				#size_hint_y:None
+				#height:300
+				size_hint_x:None
+				width:600
 				canvas:
 					Color:
 						rgba: 1,1,1,1
@@ -710,6 +705,7 @@
 							Label:
 								text:"RUNE NAMES"
 								font_size:dp(14)
+								color:0,0,0,.75
 								valign:"center"
 								halign:"center"
 						BoxLayout:
@@ -943,7 +939,8 @@
 			# box 4a ****************
 			BoxLayout:
 				orientation:"vertical"
-				size_hint_y:None
+				#size_hint_y:None
+				size_hint_x:None
 				padding:20
 				canvas:
 					Color:
@@ -952,17 +949,20 @@
 						size:self.width, self.height
 						pos:self.pos
 				Label:
-					text:"Statistics III Meaning of Runes"
+					text:""
 					color:1,1,1,1
-					font_size:dp(16)
+					font_size:dp(40)
 					size_hint:1,1
+					pos_hint_y:{"center_y":.5}
 					halign:"left"
 
 			# box 4b ****************************
 			BoxLayout:
 				orientation:"horizontal"
-				size_hint_y:None
-				height:300
+				#size_hint_y:None
+				#height:300
+				size_hint_x:None
+				width:600
 				canvas:
 					Color:
 						rgba: 1,1,1,1
@@ -997,6 +997,7 @@
 							Label:
 								text:"RUNE MEANINGS"
 								font_size:dp(14)
+								color:0,0,0,.75
 								valign:"center"
 								halign:"center"
 						BoxLayout:
@@ -1227,6 +1228,59 @@
 								color:0,0,0,.5
 								valign:"center"
 								halign:"center"
+			BoxLayout:
+				orientation:"vertical"
+				size_hint_x:None
+				padding:20
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						size:self.width, self.height
+						pos:self.pos
+				Label:
+					text:"<<"
+					color:1,1,1,1
+					font_size:dp(46)
+					size_hint:1,1
+					pos_hint_y:{"center_y":.5}
+					halign:"left"
+	BoxLayout:
+		orientation:"vertical"
+		size_hint:.35,.1
+		pos_hint:{"center_x":.5,"center_y":.1}
+
+		Label:
+			id:_swipe
+			text:"< SWIPE >"
+			color:1,1,1,1
+			font_size:dp(16)
+
+		BoxLayout:
+			orientation:"horizontal"
+			size_hint:.75,.1
+			pos_hint:{"center_x":.5,"center_y":.5}
+
+			Label:
+				id:_1
+				text: "\u2022"
+				font_size:135
+				color:1,0,1,.6
+			Label:
+				id:_2
+				text:"\u2022"
+				font_size:135
+				color:1,1,1,.9
+			Label:
+				id:_3
+				text:"\u2022"
+				font_size:135
+				color:1,1,1,.9
+			Label:
+				id:_4
+				text:"\u2022"
+				font_size:135
+				color:1,1,1,.9
 
 
 	ActionBar:

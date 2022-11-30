@@ -29,6 +29,7 @@ Builder.load_file("result.kv")
 Builder.load_file("collegesymbols.kv")
 Builder.load_file("collegenames.kv")
 Builder.load_file("stats.kv")
+Builder.load_file("advice.kv")
 
 
 class RunenMasterScreens(ScreenManager):
@@ -79,8 +80,8 @@ class RunenMasterScreens(ScreenManager):
     def Popup_Practicum(self):
 
         self.Box=BoxLayout(orientation="vertical")
-        self.Imagepop=Image(source="Pics\logorunistica.png")
-        self.Labelpop=Label(text="Well Done!", halign="center", font_size=16, color=[1,0,0,1])
+        self.Imagepop=Image(source="Pics/logorunistica.png")
+        self.Labelpop=Label(text="Well Done!", halign="center", font_size=28, color=[1,0,0,1])
         self.Box.add_widget(self.Imagepop)
         self.Box.add_widget(self.Labelpop)
 
@@ -88,61 +89,74 @@ class RunenMasterScreens(ScreenManager):
                                   separator_color=[1, 1, 1,1],
                                   content= self.Box,
                                   size_hint=(None, None),
-                                  size=(175, 150),
-                                  pos_hint={"center_x": .825, "center_y": .65},
+                                  size=(450, 450),
+                                  pos_hint={"center_x": .5, "center_y": .5},
                                   background="",
-                                  background_color=[1, 1, 1,1],
+                                  #background_color=[1, 1, 1,1],
                                   auto_dismiss=True)
         self.PopupPressed.open()
 
     def Popup_Choose(self,alarmtype):
+
+        self.Box1 = BoxLayout(orientation="vertical")
+        self.Imagepop = Image(source="Pics/logorunistica.png")
+        self.Labelpop = Label(text=f"Please choose {alarmtype}", halign="center", font_size=24, color=[1,0,0,9])
+        self.Box1.add_widget(self.Imagepop)
+        self.Box1.add_widget(self.Labelpop)
+
         self.PopupPressed = Popup(title="Warning",
-                                  separator_color=[1, 0, 1, .6],
-                                  content= Label(text=f"Please choose {alarmtype}", halign="center", font_size=22),
+                                  separator_color=[1, 1, 1, 1],
+                                  content=self.Box1,
                                   size_hint=(None, None),
-                                  size=(400, 250),
+                                  size=(450, 450),
                                   pos_hint={"center_x": .5, "center_y": .5},
-                                  background_color=[0, 0, 0, 1],
+                                  background="",
                                   auto_dismiss=True)
         self.PopupPressed.open()
 
     def Popup_info(self):
         Box=BoxLayout(orientation="vertical")
         label1=Label(text="",size_hint=(1,.1))
-        Imagepo=Image(source="Pics/logorunistica.png",size_hint=(.5,.25),pos_hint={"center_x":.5})
+        Imagepo=Image(source="Pics/logorunistica.png",size_hint=(.7,.35),pos_hint={"center_x":.5,"center_y":.2})
         message= Label(text="Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
                        ,color=(0,0,0,1),font_size=16, text_size=(380, None),halign ="center",valign="center", size_hint=(1,.65))
-        Box.add_widget(label1)
+        #Box.add_widget(label1)
         Box.add_widget(Imagepo)
         Box.add_widget(message)
         self.PopupPress = Popup(title="",
                                   separator_color=[0, 1, 0, 0],
                                   content= Box,
                                   size_hint=(None, None),
-                                  size=(450,550),
+                                  size=(self.width-150,550),
                                   pos_hint={"center_x": .5, "center_y": .50},
-                                  #background_color=[0, 0, 0, 1],
                                   background="",
                                   auto_dismiss=True)
 
         self.PopupPress.open()
 
     def Popup_infomaster(self):
+        Box = BoxLayout(orientation="vertical")
+        label1 = Label(text="", size_hint=(1, .1))
+        Imagepo = Image(source="Pics/logorunistica.png", size_hint=(.5, .25), pos_hint={"center_x": .5})
 
-        self.message= "You can achieve the title 'Master in Runes' by getting good test results. The requirements to become a 'Master' is the following:\n\n(1) The minimum number of tests per category must be at least three.\n(2) Performance on each test-category will be an average of multiple tests results\n(3) Your average overall test performance has to be 90%\n" \
-                      "(4) Test results per category will be weighted for the overall performance. The test regarding 'meaning of runes' will account for 50% of the overall score. The other tests, recognizing symbols en names of runes, will contribute each 25% respectively"
+        message= Label(text="You can achieve the title 'Master in Runes' by getting good test results. The requirements to become a 'Master' is the following:\n\n(1) The minimum number of tests per category must be at least three.\n\n(2) Performance on each test-category will be an average of multiple tests results.\n\n(3) Your average overall test performance has to be at least 90%.\n\n" \
+                      "(4) Test results per category will be weighted for the overall performance. The test regarding 'meaning of runes' will account for 50% of the overall score. The other tests, recognizing symbols en names of runes, will contribute each 25% respectively.\n\n Note: Learning Futhark runes for tests can easily be done via the 'Runes Academy' of Runistica. See option menu.",
+                        color = (0, 0, 0, .75), halign = "left", valign = "center", font_size = 18, text_size = (450, None))
+        Box.add_widget(Imagepo)
+        Box.add_widget(message)
+
         self.Popuppie = Popup(title="",
                                   separator_color=[0, 1, 0, 0],
-                                  content= Label(text=f"{self.message}",color=(1,0,1,1),halign="left", valign="center",font_size=16, text_size=(250, None)),
+                                  #content= Label(text=f"{self.message}",color=(0,0,0,.75),halign="left", valign="center",font_size=16, text_size=(450, None)),
+                                  content=Box,
                                   size_hint=(None, None),
-                                  size=(450,600),
+                                  size=(self.width-150,900),
                                   pos_hint={"center_x": .5, "center_y": .5},
                                   background="",
-                                  #background_color=[0, 0, 0, 1],
                                   auto_dismiss=True)
         self.Popuppie.open()
 
@@ -162,6 +176,7 @@ class RunenMasterScreens(ScreenManager):
 
 class MainApp(App):
     def build(self):
+
         # 256 x 256 pixels
         #self.icon = "icon.png"
         return RunenMasterScreens()

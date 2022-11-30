@@ -2,13 +2,13 @@
 
 <WelcomeScreen>:
 	FloatLayout:
-
 		canvas:
 			Color:
-				rgba: [0,1,1,.5]
+				rgba: [0,0,1,1]
 			Rectangle:
 				size:self.width, self.height
 				pos:self.x,self.y
+				source:"Pics/Olaus.jpg"
 			Color:
 				rgba: [1,1,1,1]
 
@@ -23,9 +23,9 @@
 				source: "Pics/logorunistica.png"
 
 		Label:
-			text: "Master of runes\n [color=#271405][size=28]Learn to read the secret Runes [/color][/size]"
+			text: "Master of runes\n [size=28]Learn to read the secret Runes[/size]"
 			font_size: dp(36)
-			color:0,0,0,1
+			color:1,1,1,1
 			halign: "center"
 			markup: True
 
@@ -35,10 +35,16 @@
 
 		AnchorButton:
 			id:_start
+			canvas:
+				Color:
+					rgba: 0,0,1,.1
+				Ellipse:
+					size:[90,90]
+					pos: self.center_x-45, self.center_y-45
 			text: "Start"
 			font_size:dp(18)
 			bold:True
-			color:[0,1,1,.5]
+			color:[0,0,0,.75]
 			background_color:[0,0,0,0]
 			size_hint:(1,.1)
 			on_press:

@@ -36,6 +36,7 @@ class CollegeNamesScreen(Screen):
 		self.ids._meaning_score.text = ""
 		self.ids._pie_perf.level = 0
 		self.ids._Buttoncheck.text = "Check"
+		self.ids._tests.text="0 tests"
 
 	def on_enter(self, *args):
 
@@ -56,21 +57,21 @@ class CollegeNamesScreen(Screen):
 			self.ids._Carou1.index = random.choice(range(1,28))
 
 			rune_association = rune[1]
-			Labelx= Label(text=rune_association, font_size=18)
+			Labelx= Label(text=rune_association, font_size=24)
 			self.ids._Carou2.add_widget(Labelx)
 			self.ids._Carou2.index = random.choice(range(1,28))
 			self.ids._Carou2.color = [0, 0, 0, 1]
 			self.ids._Carou2_result.text=""
 
 			rune_symbol = rune[0]
-			Labely = Label(text=rune_symbol, font_size=18)
+			Labely = Label(text=rune_symbol, font_size=24)
 			self.ids._Carou1a.add_widget(Labely)
 			self.ids._Carou1a.index = random.choice(range(1, 28))
 			self.ids._Carou1a.color = [0, 0, 0, 1]
 			self.ids._Carou1a_result.text = ""
 
 			rune_meaning = rune[2]
-			Labelz = Label(text=rune_meaning, text_size=(140,None))
+			Labelz = Label(text=rune_meaning,font_size=24, text_size=(145,None))
 			self.ids._Carou1b.add_widget(Labelz)
 			self.ids._Carou1b.index = random.choice(range(1, 28))
 			self.ids._Carou1b.color = [0, 0, 0, 1]
@@ -164,9 +165,9 @@ class CollegeNamesScreen(Screen):
 		self.ids._naam_score.text = str(format(self.b_perf*100,".1f")+"%")
 		self.ids._meaning_score.text = str(format(self.c_perf*100,".1f")+"%")
 
-		#self.ids._pie_perf.level = format(self.perf,"1f")
 		self.ids._pie_perf.level = (self.perf*360)
 		self.balance=(self.deltaMeaning + self.deltaNaam + self.deltaSymbol)
+		self.ids._tests.text = str(self.tries) + " tests"
 
 		if self.balance == 3:
 			self.full_strike()

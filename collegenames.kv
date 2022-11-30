@@ -3,30 +3,29 @@
 <Pie1@Label>:
 
 	size_hint:None,None
-	width:100
-	height:100
+	width:70
+	height:70
 	text: str(format((self.level),".1f")) + "%"
 	color:0,0,0,.8
 	font_size:dp(8)
-
 	# dummy voor scoreniveau
 	level: 0
-	pos_hint:{"center_x":.5,"center_y":0}
+	pos_hint:{"center_x":.5,"center_y":0.05}
 
 	canvas.before:
 		Color:
-			rgba:1,1,1,.5
+			rgba:1,0,0,.5
 		Ellipse:
 			size: self.size
 			pos:self.pos
 		Color:
-			rgba:0,0,0,.75
+			rgba:0,0,0,.95
 		Ellipse:
 			size: self.size
 			pos:self.pos
 			angle_end: self.level
 		Color:
-			rgba:1,0,0,1
+			rgba:1,1,1,1
 		Ellipse:
 			size: self.width-60,self.height-60
 			pos:self.center_x-(self.width-60)/2, self.center_y-(self.height-60)/2
@@ -44,7 +43,7 @@
 
 	BoxLayout:
 		size_hint:(.5, .1)
-		pos_hint:{"center_x":.5,"center_y":.82}
+		pos_hint:{"center_x":.5,"center_y":.80}
 		Label:
 			text:"Swipe\n the right combination"
 			font_size:dp(20)
@@ -105,33 +104,113 @@
 						Rectangle:
 							size: self.width, self.height
 							pos:self.pos
-
+	#######################
 	BoxLayout:
 		orientation: "horizontal"
-		size_hint:(1,.4)
-		pos_hint:{"center_x":.5,"center_y":.29}
+		size_hint:(1,.05)
+		pos_hint:{"center_x":.5,"center_y":.17}
 		spacing:20
 		padding:20
 
 		GridLayout:
 			cols:1
-
 			BoxLayout:
 				Label:
-					id:_Carou1a_text
-					text:"Symbol"
-					font_size:dp(14)
-					halign:"center"
-					valign:"center"
 					size_hint:(.15,1)
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(.85,.1)
+				Label:
+					id:_Carou1a_result
+					text:"- result -"
+					halign:"center"
+					valign:"top"
+					font_size:dp(13)
+					text_size:(140,None)
+					color:1,1,1,1
+		GridLayout:
+			cols:1
+			BoxLayout:
+				Label:
+					size_hint:(.15,1)
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(.85,.1)
+				Label:
+					id:_Carou2_result
+					text:"-result-"
+					valign:"top"
+					halign:"center"
+					font_size:dp(13)
+					text_size:(140,None)
+					color:1,1,1,1
+		GridLayout:
+			cols:1
+			BoxLayout:
+				Label:
+					size_hint:(.15,1)
+			BoxLayout:
+				orientation:"vertical"
+				size_hint:(.86,.1)
+				Label:
+					id:_Carou1b_result
+					text:"- result -"
+					valign:"bottom"
+					halign:"center"
+					font_size:dp(13)
+					text_size:(146,None)
+					color:1,1,1,1
 
-					canvas.before:
-						PushMatrix
-						Rotate:
-							angle: 90
-							origin: self.center
-					canvas.after:
-						PopMatrix
+#####################################
+	BoxLayout:
+		orientation: "horizontal"
+		size_hint:(1,.4)
+		pos_hint:{"center_x":.5,"center_y":.27}
+		spacing:20
+		padding:20
+
+		GridLayout:
+			cols:1
+			BoxLayout:
+				BoxLayout:
+					size_hint:.15,1
+					Label:
+						size_hint:(.1,1)
+					BoxLayout:
+						orientation:"vertical"
+						size_hint:.15,1
+
+						Label:
+							id:_Carou1a_text
+							text:"Symbol"
+							font_size:dp(14)
+							halign:"right"
+							valign:"center"
+							size_hint:(.15,1)
+
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
+
+						Label:
+							id:_symbol_score
+							text:"0.0%"
+							halign:"center"
+							valign:"center"
+							font_size:dp(12)
+							color:1,1,1,1
+							size_hint:(.15,.18)
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
 
 				Carousel:
 					id: _Carou1a
@@ -145,35 +224,50 @@
 			BoxLayout:
 				orientation:"vertical"
 				size_hint:(1,.85)
-				Label:
-					id:_Carou1a_result
-					text:"- result -"
-					halign:"center"
-					valign:"center"
-					font_size:dp(14)
-					text_size:(130,None)
-					color:1,1,1,1
+
 		GridLayout:
 			cols:1
-
 			BoxLayout:
-				orientation:"horizontal"
-				Label:
-					id:_Carou2_text
-					text:"Association"
-					size_hint:(.15,1)
-					halign:"center"
-					valign:"center"
-					font_size:dp(14)
+				BoxLayout:
+					size_hint:.15,1
+					Label:
+						size_hint:(.1,1)
+					BoxLayout:
+						orientation:"vertical"
+						size_hint:.15,1
 
-					canvas.before:
-						PushMatrix
-						Rotate:
-							angle: 90
-							origin: self.center
+						Label:
+							id:_Carou2_text
+							text:"Association"
+							size_hint:(.15,1)
+							halign:"center"
+							valign:"center"
+							font_size:dp(14)
 
-					canvas.after:
-						PopMatrix
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
+
+						Label:
+							id:_naam_score
+							text:"0.0%"
+							halign:"center"
+							valign:"center"
+							font_size:dp(12)
+							color:1,1,1,1
+							size_hint:(.15,.18)
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
+
 				Carousel:
 					id: _Carou2
 					loop:True
@@ -186,32 +280,48 @@
 			BoxLayout:
 				orientation:"vertical"
 				size_hint:(1,.85)
-				Label:
-					id:_Carou2_result
-					text:"- result -"
-					font_size:dp(14)
-					text_size:(130,None)
-					color:1,1,1,1
 
 		GridLayout:
 			cols:1
 			BoxLayout:
-				orientation:"horizontal"
-				Label:
-					id:_Carou1b_text
-					text:"Meaning"
-					halign:"center"
-					valign:"center"
-					font_size:dp(14)
-					size_hint:(.15,1)
-					canvas.before:
-						PushMatrix
-						Rotate:
-							angle: 90
-							origin: self.center
+				BoxLayout:
+					size_hint:.15,1
+					Label:
+						size_hint:(.1,1)
+					BoxLayout:
+						orientation:"vertical"
+						size_hint:.15,1
 
-					canvas.after:
-						PopMatrix
+						Label:
+							id:_Carou1b_text
+							text:"Meaning"
+							halign:"center"
+							valign:"center"
+							font_size:dp(14)
+							size_hint:(.15,1)
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
+						Label:
+							id:_meaning_score
+							text:"0.0%"
+							halign:"center"
+							valign:"top"
+							font_size:dp(12)
+							color:1,1,1,1
+							size_hint:(.15,.18)
+							canvas.before:
+								PushMatrix
+								Rotate:
+									angle: 90
+									origin: self.center
+							canvas.after:
+								PopMatrix
+
 				Carousel:
 					id: _Carou1b
 					loop:True
@@ -224,20 +334,12 @@
 			BoxLayout:
 				orientation:"vertical"
 				size_hint:(1,.85)
-				Label:
-					id:_Carou1b_result
-					text:"- result -"
-					font_size:dp(14)
-					text_size:(130,None)
-					color:1,1,1,1
-
 
 	BoxLayout:
 		orientation: "vertical"
 		size_hint:(.25,.05)
-		pos_hint:{"center_x":.5,"center_y":.05}
+		pos_hint:{"center_x":.5,"center_y":.06}
 		spacing:15
-
 		Button:
 			id:_Buttoncheck
 			text:"Check"
@@ -252,8 +354,8 @@
 				Color:
 					rgba: 1,1,1,.5
 				Ellipse:
-					size: 120, 120
-					pos:self.center_x-60,self.center_y-60
+					size: 130, 130
+					pos:self.center_x-65,self.center_y-65
 	BoxLayout:
 		orientation:"vertical"
 		size_hint:(.2,.14)
@@ -262,49 +364,14 @@
 		Pie1:
 			id: _pie_perf
 			level:0
-
-	BoxLayout:
-		orientation:"vertical"
-		size_hint:(.2,.14)
-		pos_hint:{"center_x":.85, "center_y":.6}
-
 		BoxLayout:
 			orientation:"horizontal"
-			size_hint:(1,.8)
-
-			BoxLayout:
-				orientation:"vertical"
-				size_hint:(.65,1)
-				Label:
-					text:"Performance\n\n"
-					font_size:dp(14)
-					#halign:"left"
-				Label:
-					text:"Symbol:"
-					font_size:dp(14)
-				Label:
-					id:_symbol_score
-					text:""
-					halign:"left"
-					font_size:dp(12)
-				Label:
-					text:"Association:"
-					font_size:dp(14)
-					#halign:"left"
-				Label:
-					id:_naam_score
-					text:""
-					font_size:dp(12)
-					halign:"left"
-				Label:
-					text:"Meaning:"
-					font_size:dp(14)
-					halign:"left"
-				Label:
-					id:_meaning_score
-					text:""
-					font_size:dp(12)
-					halign:"left"
+			size_hint:(.1,1)
+			pos_hint:{"center_x":.5,"center_y":.5}
+			Label:
+				id: _tests
+				text:"0 tests"
+				font_size:dp(12)
 
 	ActionBar:
 		size:self.width, 50

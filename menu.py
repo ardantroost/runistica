@@ -1,11 +1,7 @@
 import random
 import sqlite3
-from kivy.uix.actionbar import ActionBar
-from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen,WipeTransition
 from kivy.properties import StringProperty, ListProperty,NumericProperty
-from kivy.uix.textinput import TextInput
-
 
 class MenuScreen(Screen):
 
@@ -17,7 +13,8 @@ class MenuScreen(Screen):
 	quizz= ListProperty([])
 	a_waarde = NumericProperty()
 	teller = NumericProperty()
-	Missed_quistions=ListProperty([])
+	Missed_quistions = ListProperty([])
+	Missed_runes = ListProperty([])
 	Score_quizz = NumericProperty(0)
 
 	def textinfo(self):
@@ -155,11 +152,15 @@ class MenuScreen(Screen):
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
 			self.a_waarde = 0
+
 			self.manager.screens[3].Score_quizz = 0
 			self.manager.screens[3].teller = 0
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+			self.manager.screens[3].Missed_runes = []
+			self.manager.screens[4].Missed_runes = []
+			self.manager.screens[5].Missed_runes = []
 
 			self.manager.current = "vragenscreen"
 			self.manager.transition = WipeTransition(duration=1)
@@ -168,20 +169,24 @@ class MenuScreen(Screen):
 
 			self.quizzfunctie("SymbolNames")
 			self.ids._Names_but.active=False
+
 			# reset tellers
 			self.Trainingskeuze = ""
 			self.ids._ButtonStart.text = "Choose"
 			self.a_waarde = 0
+
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
 			self.manager.screens[4].Score_quizz = 0
 			self.manager.screens[4].teller = 0
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+			self.manager.screens[3].Missed_runes = []
+			self.manager.screens[4].Missed_runes = []
+			self.manager.screens[5].Missed_runes = []
 
 			self.manager.current = "vragenscreeneen"
 			self.manager.transition =  WipeTransition(duration=1)
-
 
 		elif self.Trainingskeuze == "Meaning of Runes":
 
@@ -199,6 +204,9 @@ class MenuScreen(Screen):
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+			self.manager.screens[3].Missed_runes = []
+			self.manager.screens[4].Missed_runes = []
+			self.manager.screens[5].Missed_runes = []
 
 			# ga naar antwoorden-scherm
 			self.manager.current = "vragenscreentwee"
@@ -218,6 +226,7 @@ class MenuScreen(Screen):
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+
 			# ga naar college symbols-scherm
 			self.manager.current = "collegesymbolsscreen"
 			self.manager.transition = WipeTransition(duration=1)
@@ -235,8 +244,27 @@ class MenuScreen(Screen):
 			self.manager.screens[3].Missed_quistions = []
 			self.manager.screens[4].Missed_quistions = []
 			self.manager.screens[5].Missed_quistions = []
+
 			# ga naar college symbols-scherm
 			self.manager.current = "collegenamesscreen"
+			self.manager.transition = WipeTransition(duration=1)
+
+		elif self.Trainingskeuze == "Personal Advice":
+
+			# zet gekozen knop "uit"
+			self.ids._advice_college.active = False
+			# reset tellers
+			self.Trainingskeuze = ""
+			self.ids._ButtonStart.text = "Choose"
+
+			# bij eerder gespeelde kwis alle resultaten wissen
+			self.manager.screens[5].teller = 0
+			self.manager.screens[5].Score_quizz = 0
+			self.manager.screens[3].Missed_quistions = []
+			self.manager.screens[4].Missed_quistions = []
+			self.manager.screens[5].Missed_quistions = []
+			# ga naar college symbols-scherm
+			self.manager.current = "advicescreen"
 			self.manager.transition = WipeTransition(duration=1)
 
 		elif self.Trainingskeuze == "":

@@ -1,0 +1,389 @@
+#: import advice advice
+#: import Factory kivy.factory.Factory
+
+<MySpinnerOption@SpinnerOption>:
+
+    background_color:0,1,0,.85
+    color: 1,1,1,1
+    font_size:dp(12)
+    size_hint_y:None
+    height:75
+    text_size:(self.width-10,None)
+    halign:"center"
+    valign:"center"
+
+<Spin@Spinner>:
+	text:"Info"
+	font_size:dp(14)
+	color:1,1,1,1
+	background_color:1,1,1,0
+	size_hint:.4,1
+	sync_height:False
+	option_cls: Factory.get("MySpinnerOption")
+
+<But@Button>:
+	font_size:dp(12)
+	halign:"center"
+	background_color:1,0,1,.25
+	color:1,1,1,1
+	pos_hint:{"center_x":.5}
+	size_hint:None,None
+	size:180,40
+
+<Box1@BoxLayout>:
+	orientation:"horizontal"
+	size_hint: (1,.1)
+	padding:5
+	canvas.before:
+		Color:
+			rgba: [0,0,0,.2]
+		Rectangle:
+			size:(self.width,self.height)
+			pos:self.x,self.y
+
+<Box2@BoxLayout>:
+	orientation:"horizontal"
+	size_hint: (1,.1)
+	padding:5
+	canvas.before:
+		Color:
+			rgba: [1,1,1,.8]
+		Rectangle:
+			size:(self.width,self.height)
+			pos:self.x,self.y
+
+<Labeltabel@Label>:
+	font_size:dp(14)
+	color:0,0,0,1
+	halign:"left"
+
+<Pie@Label>:
+	size_hint:None,None
+	width:120
+	height:120
+	text: str(format((self.level/360)*100,".1f")) + "%"
+	color:(0,0,0,.7)
+	font_size:dp(9)
+	# dummy voor scoreniveau
+	level: 0
+
+	canvas.before:
+		Color:
+			rgba:72/255,255/255,133/255,.75
+		Ellipse:
+			size: self.size
+			pos:self.pos
+		Color:
+			rgba:0,0,0,.5
+		Ellipse:
+			size: self.size
+			pos:self.pos
+			angle_end: self.level
+		Color:
+			rgba:1,1,1,.95
+		Ellipse:
+			size: self.width-30,self.height-30
+			pos:self.center_x-(self.width-30)/2, self.center_y-(self.height-30)/2
+
+<AdviceScreen>:
+
+	canvas:
+		Color:
+			rgba: [0,1,0,.6]
+		Rectangle:
+			size:(self.width,self.height)
+			pos:self.x,self.y
+			source:"Pics/Olaus.jpg"
+
+	BoxLayout:
+		orientation: "vertical"
+		padding:10
+		size_hint:(1,.2)
+		pos_hint:{"center_x":.5,"center_y":.75}
+
+		Label:
+			text: "Advice\n [size=24]Your list of test mistakes[/size]"
+			font_size:dp(32)
+			markup:True
+			halign:"center"
+			size_hint:(1,.4)
+
+	BoxLayout:
+		padding:13
+		spacing:5
+		pos_hint:{"center_x":0.5, "center_y":.35}
+		size_hint: (1,.7)
+		canvas:
+			Color:
+				rgba: [1,1,1,0]
+			Rectangle:
+				size:(self.width-5,self.height-5)
+				pos:self.x,self.y
+
+		# code box1
+		BoxLayout:
+			orientation: "vertical"
+			padding:5
+			size_hint:(.4,.75)
+			pos_hint:{"center_x":.5,"center_y":.5}
+
+			canvas:
+				Color:
+					rgba: [0,1,0,.5]
+				Rectangle:
+					size:(self.width,self.height)
+					pos:self.x,self.y
+
+			BoxLayout:
+				orientation:"vertical"
+				pos_hint:{"center_x":.5}
+				Pie:
+					id: pie_symbols
+					color:1,0,1,.95
+					level: 180
+					pos_hint:{"center_x":.5,"center_y":.5}
+				But:
+					text:"Rune Symbols"
+					on_release:
+						root.advicer("Symbols")
+					pos_hint:{"center_x":.5}
+
+			BoxLayout:
+				orientation:"vertical"
+				pos_hint:{"center_x":.5}
+				Pie:
+					id: pie_names
+					level: 270
+					pos_hint:{"center_x":.5,"center_y":.5}
+
+				But:
+					text:"Runes Names"
+					on_release:
+						root.advicer("Names")
+					pos_hint:{"center_x":.5}
+
+			BoxLayout:
+				orientation:"vertical"
+				pos_hint:{"center_x":.5}
+
+				Pie:
+					id: pie_meaning
+					level: 180
+					pos_hint:{"center_x":.5,"center_y":.5}
+
+				But:
+					text:"Rune Meaning"
+					on_release:
+						root.advicer("Meaning")
+					pos_hint:{"center_x":.5}
+
+		# code box2
+		BoxLayout:
+			orientation: "vertical"
+			padding:20
+			size_hint:(.6,.75)
+			pos_hint:{"center_x":.5,"center_y":.5}
+
+			canvas.before:
+				Color:
+					rgba: [0,1,0,.5]
+				Rectangle:
+					size:(self.width,self.height)
+					pos:self.x,self.y
+			Box1:
+				Labeltabel:
+					id:_advice_type
+					text:"Study Advice"
+					color:1,1,1,1
+					valign:"bottom"
+			Box2:
+				Labeltabel:
+					text:"nr."
+					size_hint:.1,1
+					valign:"bottom"
+				Labeltabel:
+					text:"Rune"
+					size_hint:.4,1
+					valign:"bottom"
+				Labeltabel:
+					text:"Mistake"
+					size_hint:.4,1
+					valign:"bottom"
+				Labeltabel:
+					text:"%"
+					size_hint:.1,1
+					valign:"bottom"
+			Box1:
+				size_hint:(1,.15)
+				Labeltabel:
+					text:"1."
+					size_hint:.1,1
+					valign:"bottom"
+				Labeltabel:
+					id:_mistake_rune1
+					text:""
+					color:1,1,1,1
+					size_hint:.4,1
+					valign:"bottom"
+				Spin:
+					id:_mistake_type1
+					text:"info"
+
+				Labeltabel:
+					id:_mistake_perc1
+					text:""
+					color:1,1,1,1
+					size_hint:.1,1
+					valign:"bottom"
+			Box2:
+				Labeltabel:
+					text:"2."
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune2
+					text:""
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type2
+					color:0,0,0,.85
+					text:"info"
+
+
+				Labeltabel:
+					id:_mistake_perc2
+					text:" "
+					size_hint:.1,1
+			Box1:
+				Labeltabel:
+					text:"3."
+					color:1,1,1,1
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune3
+					text:""
+					color:1,1,1,1
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type3
+					text:"info"
+
+				Labeltabel:
+					id:_mistake_perc3
+					text:""
+					color:1,1,1,1
+					size_hint:.1,1
+			Box2:
+				Labeltabel:
+					text:"4."
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune4
+					text:""
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type4
+					color:0,0,0,.85
+
+				Labeltabel:
+					id:_mistake_perc4
+					text:""
+					size_hint:.1,1
+			Box1:
+				Labeltabel:
+					text:"5."
+					color:1,1,1,1
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune5
+					text:""
+					color:1,1,1,1
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type5
+
+				Labeltabel:
+					id:_mistake_perc5
+					text:""
+					color:1,1,1,1
+					size_hint:.1,1
+			Box2:
+				Labeltabel:
+					text:"6."
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune6
+					text:" "
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type6
+					color:0,0,0,.85
+
+				Labeltabel:
+					id:_mistake_perc6
+					text:" "
+					size_hint:.1,1
+			Box1:
+				Labeltabel:
+					text:"7."
+					color:1,1,1,1
+					size_hint:.1,1
+				Labeltabel:
+					id:_mistake_rune7
+					text:" "
+					color:1,1,1,1
+					size_hint:.4,1
+				Spin:
+					id:_mistake_type7
+
+				Labeltabel:
+					id:_mistake_perc7
+					text:" "
+					color:1,1,1,1
+					size_hint:.1,1
+	ActionBar:
+		size:self.width, 50
+		pos_hint:{"top":1}
+
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				size:self.size
+				pos:self.pos
+
+		ActionView:
+			id: _toolbar
+			spacing:20
+
+			ActionPrevious:
+				color:0,0,0,1
+				title:"[size=16]Advice[/size]"
+				markup:True
+				with_previous:False
+				app_icon:"icon.png"
+				app_icon_height:50
+				app_icon_width:50
+
+			ActionButton:
+				icon:"Pics/home.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="menuscreen"
+
+			ActionButton:
+				icon:"Pics/graph.png"
+				background_color:1,0,1,.85
+				text:"Stats"
+				font_size:dp(14)
+				on_release:
+					root.manager.current="statsscreen"
+
+			ActionButton:
+				icon:"Pics/close.png"
+				background_color:1,0,1,.85
+				text:"Exit"
+				font_size:dp(14)
+				on_release:
+					quit()

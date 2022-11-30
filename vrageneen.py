@@ -13,23 +13,40 @@ class VragenScreeneen(Screen):
 	Score_quizz = NumericProperty(0)
 	Symbol_check = StringProperty("")
 	Missed_quistions = ListProperty([])
+	Missed_runes = ListProperty([])
 	teller=NumericProperty(0)
 
 	def on_enter(self, *args):
+
 		self.Symbol_start= self.manager.get_screen("menuscreen").Quizz_runen
 		self.ids._PictureChoice.source = "Tekens/" + self.Symbol_start[0].lower() + ".png"
 
 		# start Quizz-timer
 		self.starttime=time.time()
 
-	def CleanUp(self, *args):
 
-		self.teller= 0
-		self.Missed_quistions = []
-		self.Score_quizz = 0
+	def on_leave(self, *args):
+		self.saveresults("Names")
+
+	def saveresults(self, Testtype):
+
+		conn = sqlite3.connect("dataRunistica.db")
+		c = conn.cursor()
+		for elke in self.Missed_quistions:
+			c.execute("SELECT RuneNaam FROM Runistica WHERE RuneCredo=(?)",(elke,))
+			i = c.fetchone()
+			self.Missed_runes.append(i[0])
+		conn.commit()
+		conn.close()
+
+		conn = sqlite3.connect("masterresults.db")
+		c2 = conn.cursor()
+		for Rune in self.Missed_runes:
+			c2.execute("INSERT INTO Advice VALUES (?,?)", (Rune,Testtype))
+		conn.commit()
+		conn.close()
 
 	def updatedatabase(self,score_quizz, Symboltraining, Symbolscore, Nametraining, Meaningtraining,Meaningscore,Time):
-
 
 		Lastvisit = time.strftime("%d-%m-%Y")
 		Visittime = time.strftime("%X")
@@ -40,7 +57,6 @@ class VragenScreeneen(Screen):
 		c = conn.cursor()
 		c.execute("INSERT INTO masterresults VALUES (?,?,?,?,?,?,?,?,?)" ,
 				  (Lastvisit, Visittime, Symboltraining, Symbolscore, Nametraining, Namescore, Meaningtraining,Meaningscore,Time) )
-
 		conn.commit()
 		conn.close()
 
@@ -73,7 +89,6 @@ class VragenScreeneen(Screen):
 				self.multiplechoice_set.append(quizz[self.teller])
 				random.shuffle(self.multiplechoice_set)
 
-
 				# print symbool en antwoorden op "screen"
 				self.ids._PictureChoice.source = self.Symbol
 				# start animatie RuneTeken
@@ -105,16 +120,13 @@ class VragenScreeneen(Screen):
 								  f"Well done You!")
 
 					self.manager.screens[6].ids._ResultNaam.text = self.print
-					self.manager.screens[6].ids._ButtonAdvice.text = "<< Training advice >>"
+					self.manager.screens[6].ids._ButtonAdvice.text = "<< End >>"
 					self.manager.current = "resultscreen"
 
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens
 				self.endtime = time.time()
 				self.deltatime_name = self.endtime - self.starttime
 				self.updatedatabase(self.Score_quizz, Symboltraining=0, Symbolscore=0,Nametraining=1,Meaningtraining=0,Meaningscore=0,Time=format(self.deltatime_name,'.1f'))
-
-
-
 
 	# animatie van geprinte RuneTeken
 	def Anim1(self, widget,*args):

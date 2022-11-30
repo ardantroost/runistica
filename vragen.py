@@ -15,17 +15,25 @@ class VragenScreen(Screen):
 	teller=NumericProperty(0)
 
 	def on_enter(self, *args):
+
 		self.Symbol_start = self.manager.get_screen("menuscreen").Quizz_runen
 		self.ids._PictureChoice.source = "Tekens/" + self.Symbol_start[0].lower() + ".png"
 
 		#TIME CONTROLE
 		self.starttime = time.time()
 
-	def CleanUp(self, *args):
+	def on_leave(self, *args):
+		self.saveresults("Symbol")
 
-		self.teller= 0
-		self.Missed_quistions = []
-		self.Score_quizz = 0
+	def saveresults(self, Testtype):
+
+		conn = sqlite3.connect("masterresults.db")
+		c = conn.cursor()
+		for Rune in self.Missed_quistions:
+			c.execute("INSERT INTO Advice VALUES (?,?)", (Rune,Testtype))
+		conn.commit()
+		conn.close()
+
 
 	def updatedatabase(self,score_quizz, Symboltraining, Nametraining, Namescore, Meaningtraining,Meaningscore, Time):
 
@@ -70,7 +78,7 @@ class VragenScreen(Screen):
 				# print symbool en antwoorden op "screen"
 				self.ids._PictureChoice.source = self.Symbol
 
-				# start animatie RuneTeken
+				# start animatie van RuneTeken
 				self.Anim(self.ids._PictureChoice)
 
 				self.ids._antw1.text = self.multiplechoice_set[0]
@@ -90,19 +98,19 @@ class VragenScreen(Screen):
 			else:
 				if len(self.Missed_quistions)> 0:
 					self.print=(f"End of training the symbols!,\n {self.Score_quizz} out of 10 "
-						  f"is your testscore.\n For more insight which symbols\n are in need of practice\n press Training advice")
+						  f"is your testscore.\n For more insight which symbols\n are in need of practice\n press Training advice below")
 
 					self.manager.screens[6].ids._ResultNaam.text = self.print
 					self.manager.current = "resultscreen"
 
 				else:
 					self.print=(f"End of training symbols!,\n {self.Score_quizz} is your endscore\n "
-								f"This is 100%\n "
+								f"This is 100%.\n "
 								f"None of the runes are incorrectly answered.\n "
 								f"Well done You!")
 
 					self.manager.screens[6].ids._ResultNaam.text= self.print
-					self.manager.screens[6].ids._ButtonAdvice.text = "<< Training advice >>"
+					self.manager.screens[6].ids._ButtonAdvice.text = "<< End >>"
 					self.manager.current = "resultscreen"
 
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens

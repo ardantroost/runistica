@@ -5,27 +5,22 @@ from kivy.uix.screenmanager import Screen,RiseInTransition
 class ResultScreen(Screen):
 
 	Score_quizz = NumericProperty()
-	Missed_questions = ListProperty([])
+	Missed_quistions = ListProperty([])
+	Missed_runes = ListProperty([])
 	teller = NumericProperty()
 	tel=NumericProperty()
 	indicator = StringProperty("")
 
-	def CleanUp(self, *args):
+	def on_leave(self, *args):
 
 		self.teller= 0
 		self.Missed_quistions=[]
+		self.Missed_runes=[]
 		self.Score_quizz = 0
 		self.tel=0
 		self.indicator= ""
 
 	def Display_Results(self,next):
-
-		if len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0 or len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0 or len(self.manager.get_screen("vragenscreen").Missed_quistions) == 0:
-			self.CleanUp()
-			self.manager.current = "menuscreen"
-			self.manager.transition = RiseInTransition(duration=1)
-		else:
-			pass
 
 		if len(self.manager.get_screen("vragenscreen").Missed_quistions) > 0:
 			self.Missed_quistions = self.manager.get_screen("vragenscreen").Missed_quistions
@@ -39,6 +34,10 @@ class ResultScreen(Screen):
 			self.Missed_quistions = self.manager.get_screen("vragenscreentwee").Missed_quistions
 			self.indicator = "RuneText"
 
+		# als er geen missed.quistions zijn in alle trainingskeuzes (dus "0" zijn)
+		else:
+			self.manager.current = "menuscreen"
+			self.manager.transition = RiseInTransition(duration=1)
 
 		self.DisplaySelection = []
 
@@ -71,7 +70,7 @@ class ResultScreen(Screen):
 			self.ids._FavourMissedRune.text = ""
 			self.ids._MissedRuneNaam.source = "Pics/logorunistica.png"
 
-			self.CleanUp()
+			#self.CleanUp()
 			self.manager.current = "menuscreen"
 			self.manager.transition = RiseInTransition(duration=1)
 
