@@ -45,6 +45,7 @@
 		size_hint:(.5, .1)
 		pos_hint:{"center_x":.5,"center_y":.80}
 		Label:
+			id: _header
 			text:"Swipe\n the right combination"
 			font_size:dp(20)
 			halign:"center"
@@ -340,6 +341,7 @@
 		size_hint:(.25,.05)
 		pos_hint:{"center_x":.5,"center_y":.06}
 		spacing:15
+
 		Button:
 			id:_Buttoncheck
 			text:"Check"
@@ -348,7 +350,8 @@
 			color: 1,1,1,1
 			background_color: 1,1,1,0
 			on_press:
-				root.Checkcombination(_Carou1.index) if self.text == "Check" else root.newcombination()
+				root.Checkcombination(_Carou1.index) if self.text ==  str(root.texten[0][0]) else root.newcombination()
+				#root.Checkcombination(_Carou1.index) if self.text == "Check" else root.newcombination()
 
 			canvas.before:
 				Color:

@@ -1,24 +1,18 @@
 import sqlite3
-
-import kivy
-
-#from kivy.config import Config
-
-#Config.set('graphics', 'width',350)
-#Config.set('graphics', 'height',700)
-#Config.set('graphics', 'resizable',1)
+# eigen vertalingsmodule
+import taal as taal
+from kivmob import KivMob, TestIds
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.image import Image
-
+from kivy.properties import StringProperty,ListProperty
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 
-#foutmelding als je kv file (van runenmaster) laadt met alle screens
-
+#foutmelding als je kv-file (van runenmaster) laadt met alle screens
 Builder.load_file("welcome.kv")
 Builder.load_file("menu.kv")
 Builder.load_file("quizz.kv")
@@ -31,12 +25,40 @@ Builder.load_file("collegenames.kv")
 Builder.load_file("stats.kv")
 Builder.load_file("advice.kv")
 
-
 class RunenMasterScreens(ScreenManager):
+
+    def taalkeuze(self,speak):
+
+        taal.taalknop(self,speak)
+
+
+    def show_Banner(self):
+        print("tijd voorrr banner-reklame")
+        # admob:
+        # App ID: ca-app-pub-5700178800129779~8203136809
+        # ID advertblok: ca - app - pub - 5700178800129779 / 6594579659
+        # test van de id ads: ca - app - pub - 3940256099942544 / 6300978111
+
+        # self.ads = KivMob(TestIds.APP)
+        self.ads = KivMob('ca-app-pub-3940256099942544~3347511713')
+
+        # self.ads.new_banner(TestIds.BANNER,False)
+        self.ads.new_banner('ca-app-pub-3940256099942544/6300978111', top_pos=False)
+        self.ads.request_banner()
+        self.ads.show_banner()
+
+    def interstitial(self):
+        print("tijd voor andere reklaaaaaaaaaaaaame")
+        self.ads = KivMob(TestIds.APP)
+        self.ads.new_interstitial(TestIds.INTERSTITIAL)
+        self.ads.request_interstitial()
+        self.ads.show_interstitial()
+
+
 
     # op te roepen Popup in de hele APP
     # call met:   self.manager.Popup_choose(alarmtype)
-    # alarmtype om mee te geven: training, antwoord
+    # alarmtype om mee te geven: training of antwoord
 
     def referal(self):
 
@@ -78,10 +100,9 @@ class RunenMasterScreens(ScreenManager):
         self.Popup_warning.open()
 
     def Popup_Practicum(self):
-
         self.Box=BoxLayout(orientation="vertical")
         self.Imagepop=Image(source="Pics/logorunistica.png")
-        self.Labelpop=Label(text="Well Done!", halign="center", font_size=28, color=[1,0,0,1])
+        self.Labelpop=Label(text="Well Done you!", halign="center", font_size=28, color=[1,0,0,1])
         self.Box.add_widget(self.Imagepop)
         self.Box.add_widget(self.Labelpop)
 
@@ -123,7 +144,7 @@ class RunenMasterScreens(ScreenManager):
                             "Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
                             "Hier komt alle tekst over de app voor de gebruiker."
-                       ,color=(0,0,0,1),font_size=16, text_size=(380, None),halign ="center",valign="center", size_hint=(1,.65))
+                            ,color=(0,0,0,1),font_size=16, text_size=(380, None),halign ="center",valign="center", size_hint=(1,.65))
         #Box.add_widget(label1)
         Box.add_widget(Imagepo)
         Box.add_widget(message)
@@ -143,8 +164,8 @@ class RunenMasterScreens(ScreenManager):
         label1 = Label(text="", size_hint=(1, .1))
         Imagepo = Image(source="Pics/logorunistica.png", size_hint=(.5, .25), pos_hint={"center_x": .5})
 
-        message= Label(text="You can achieve the title 'Master in Runes' by getting good test results. The requirements to become a 'Master' is the following:\n\n(1) The minimum number of tests per category must be at least three.\n\n(2) Performance on each test-category will be an average of multiple tests results.\n\n(3) Your average overall test performance has to be at least 90%.\n\n" \
-                      "(4) Test results per category will be weighted for the overall performance. The test regarding 'meaning of runes' will account for 50% of the overall score. The other tests, recognizing symbols en names of runes, will contribute each 25% respectively.\n\n Note: Learning Futhark runes for tests can easily be done via the 'Runes Academy' of Runistica. See option menu.",
+        message= Label(text="You can achieve the title 'Master in Runes' by getting good test results. The requirements to become a 'Master' are the following:\n\n(1) The minimum number of tests per category must be at least three.\n\n(2) Performance on each test-category will be an average of multiple tests results.\n\n(3) Your average overall test performance has to be at least 90%.\n\n" \
+                      "(4) Test results per category will be weighted for the overall performance. The test regarding 'meaning of runes' will account for 50% of the overall score. The other tests, recognizing symbols en names of runes, will contribute each 25% respectively.\n\n Note: Learning Futhark runes for optimal tests results can easily be done via the 'Runes Academy' of Runistica. See option menu.",
                         color = (0, 0, 0, .75), halign = "left", valign = "center", font_size = 18, text_size = (450, None))
         Box.add_widget(Imagepo)
         Box.add_widget(message)
@@ -175,14 +196,13 @@ class RunenMasterScreens(ScreenManager):
         self.Popuppie_buttons.open()
 
 class MainApp(App):
-    def build(self):
 
+    def build(self):
         # 256 x 256 pixels
-        #self.icon = "icon.png"
+        #self.icon = "icon2.png"
         return RunenMasterScreens()
 
 if __name__ == '__main__':
-
     MainApp().run()
 
 

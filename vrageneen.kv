@@ -38,6 +38,7 @@
 		pos_hint:{"center_y":.75}
 
 		Label:
+			id:_header
 			text: "Test\nAssociation of Runes"
 			halign:"center"
 			font_size:dp(28)
@@ -74,12 +75,12 @@
 		pos_hint:{"center_y":.45}
 
 		Label:
-			id:_Vraag_label
+			id:_label_vraag
 			text:"This rune associated with...?"
 			font_size: dp(18)
 			halign:"center"
 			valign:"bottom"
-			color:0,0,0,1
+			color:1,1,1,1
 
 
 	BoxLayout:
@@ -124,7 +125,7 @@
 					root.PressedButton(self.text)
 
 	Button:
-		id:_ButtonStart
+		id:_button_start
 		text:"Submit"
 		font_size:dp(14)
 		halign:"center"

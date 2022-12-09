@@ -182,7 +182,8 @@
 				size:self.width, self.height
 				pos:self.pos
 		Label:
-			text:"RunenMaster\nProgress Statistics"
+			id: _header
+			text:"Master of Runes\nProgress Statistics"
 			color:1,1,1,1
 			font_size:dp(28)
 			halign:"center"
@@ -204,6 +205,7 @@
 				halign:"center"
 
 	ScrollView:
+		id:_scroll_bolletjes
 		size_hint:.85,.35
 		pos_hint:{"center_x":.5, "center_y":0.35}
 		do_scroll_x: True
@@ -213,15 +215,18 @@
 		bar_pos_x:"bottom"
 		scroll_type:["bars","content"]
 		on_touch_move:
-			_swipe.text= "Your Skill-Level" if (self.hbar[0]< 0.2) else\
-			("Stats Symbol Test" if (self.hbar[0]>= 0.2 and self.hbar[0]< 0.4) else\
-			("Stats Names Test"  if (self.hbar[0] >= 0.4 and self.hbar[0]< 0.6) else"Stats Meaning Test"))
+			#_swipe.text= "Your Skill-Level" if (self.hbar[0]< 0.2) else\
+			#("Stats Symbol Test" if (self.hbar[0]>= 0.2 and self.hbar[0]< 0.4) else\
+			#("Stats Names Test"  if (self.hbar[0] >= 0.4 and self.hbar[0]< 0.6) else "Stats Meaning Test"))
+			_swipe.text= str(root.stattexten[0][0]) if (self.hbar[0]< 0.2) else\
+			(str(root.stattexten[0][1]) if (self.hbar[0]>= 0.2 and self.hbar[0]< 0.4) else\
+			(str(root.stattexten[0][2]) if (self.hbar[0] >= 0.4 and self.hbar[0]< 0.6) else str(root.stattexten[0][3])))
 
 			_2.color =[1,0,1,.6] if self.hbar[0]>= (0.25) else [1,1,1,.9]
 			_3.color =[1,0,1,1.6] if self.hbar[0]>= (0.50) else[1,1,1,.9]
 			_4.color =[1,0,1,.6] if self.hbar[0]>=(0.75) else [1,1,1,.9]
 
-		#inspring
+		#inspringen
 		BoxLayout:
 			orientation:"horizontal"
 			size_hint_x:None
@@ -265,6 +270,7 @@
 							orientation:"vertical"
 							size_hint:1,.2
 							Label:
+								id:_current
 								text: "CURRENT LEVEL"
 								font_size:dp(18)
 								color:0,0,0,.75
@@ -309,6 +315,7 @@
 								level: _pie1_symbol.level
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Label:
+								id:_skill_runes
 								text: " SKILLS\nRUNE SYMBOLS"
 								font_size:dp(8)
 								color:0,0,0,.85
@@ -327,6 +334,7 @@
 								level: _pie1_names.level
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Label:
+								id:_skill_names
 								text:"SKILLS\nRUNE NAMES"
 								font_size:dp(8)
 								color:0,0,0,.85
@@ -344,6 +352,7 @@
 								level: _pie1_meaning.level
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Label:
+								id:_skill_meaning
 								text: " SKILLS\nRUNE MEANINGS"
 								font_size:dp(8)
 								color:0,0,0,.85
@@ -409,6 +418,7 @@
 							orientation:"vertical"
 							size_hint:1,.2
 							Label:
+								id:_stat_runes_header
 								text:"RUNE SYMBOLS"
 								font_size:dp(14)
 								color:0,0,0,.75
@@ -447,6 +457,7 @@
 							size_hint:1,None
 							height:50
 							Label:
+								id:_stat_runes_final
 								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -552,6 +563,7 @@
 									halign:"center"
 
 								Label:
+									id:_stat_runes_progress
 									text: "Progress"
 									font_size:dp(9)
 									color:0,0,0,.5
@@ -576,6 +588,7 @@
 							canvas:
 
 							Label:
+								id:_stat_runes_lasttest
 								text:"Last test"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -587,6 +600,7 @@
 							size_hint:1,.14
 							padding:5
 							Label:
+								id:_stat_runes_date
 								text: "Date:"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -703,6 +717,7 @@
 							orientation:"vertical"
 							size_hint:1,.2
 							Label:
+								id:_stat_names_header
 								text:"RUNE NAMES"
 								font_size:dp(14)
 								color:0,0,0,.75
@@ -741,6 +756,7 @@
 							size_hint:1,None
 							height:50
 							Label:
+								id:_stat_names_final
 								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -870,6 +886,7 @@
 							canvas:
 
 							Label:
+								id:_stat_names_lasttest
 								text: "Last test\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -881,6 +898,7 @@
 							size_hint:1,.14
 							padding:5
 							Label:
+								id:_stat_names_date
 								text: "Date:"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -995,6 +1013,7 @@
 							orientation:"vertical"
 							size_hint:1,.2
 							Label:
+								id:_stat_meaning_header
 								text:"RUNE MEANINGS"
 								font_size:dp(14)
 								color:0,0,0,.75
@@ -1033,6 +1052,7 @@
 							size_hint:1,None
 							height:50
 							Label:
+								id:_stat_meaning_final
 								text:"Final four tests\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -1162,6 +1182,7 @@
 							canvas:
 
 							Label:
+								id:_stat_meaning_lasttest
 								text: "Last test\n_______"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -1173,6 +1194,7 @@
 							size_hint:1,.14
 							padding:5
 							Label:
+								id:_stat_meaning_date
 								text: "Date:"
 								font_size:dp(9)
 								color:0,0,0,.5
@@ -1281,7 +1303,6 @@
 				text:"\u2022"
 				font_size:135
 				color:1,1,1,.9
-
 
 	ActionBar:
 		size:self.width, 60

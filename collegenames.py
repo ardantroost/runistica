@@ -6,7 +6,6 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
 import random
 
-
 class CollegeNamesScreen(Screen):
 
 	score_symbol = NumericProperty(0)
@@ -48,6 +47,9 @@ class CollegeNamesScreen(Screen):
 		conn.commit()
 		conn.close()
 
+		# vertaal button
+		self.vertaler()
+
 		for rune in self.datarune:
 
 			a = "".join([str(rune[0][:1]).lower(),str((rune[0][1:]).lower())])
@@ -78,6 +80,7 @@ class CollegeNamesScreen(Screen):
 			self.ids._Carou1b_result.text = ""
 
 		return self.datarune
+
 	def clear_carousels(self,*args, **kwargs):
 
 		# leeg al de carousels
@@ -86,6 +89,32 @@ class CollegeNamesScreen(Screen):
 		self.ids._Carou1a.clear_widgets(children=None, *args, **kwargs)
 		self.ids._Carou2.clear_widgets(children=None, *args, **kwargs)
 
+	def vertaler(self):
+
+		self.lanquage = self.manager.lanquage
+		conn = sqlite3.connect("taalkeuze.db")
+		c = conn.cursor()
+
+		if self.lanquage == 'Engels':
+			c.execute("SELECT button, button2 FROM collegenames WHERE taal=(?)", ("Engels",))
+			texten = c.fetchall()
+		elif self.lanquage == 'Frans':
+			c.execute("SELECT  button, button2 FROM collegenames WHERE taal=(?)", ("Frans",))
+			texten = c.fetchall()
+		elif self.lanquage == 'Duits':
+			c.execute("SELECT  button, button2 FROM collegenames WHERE taal=(?)", ("Duits",))
+			texten = c.fetchall()
+		elif self.lanquage == 'Nederlands':
+			c.execute("SELECT  button, button2 FROM collegenames WHERE taal=(?)", ("Nederlands",))
+			texten = c.fetchall()
+
+		conn.commit()
+		conn.close()
+		# voor transport....(elders gebruik)
+
+		self.texten = texten
+
+
 	def newcombination(self,*args,**kwargs):
 
 		#leeg caroucels
@@ -93,7 +122,10 @@ class CollegeNamesScreen(Screen):
 		# vul alle carousels met nieuwe vraag
 		self.on_enter()
 		# muteer button om de geswipte antwoorden te kunnen checken
-		self.ids._Buttoncheck.text = "Check"
+
+		#self.ids._Buttoncheck.text = "Check"
+		self.ids._Buttoncheck.text = str(self.texten[0][0])
+
 
 	def anim_answer_incorrect(self,widget):
 
@@ -180,7 +212,8 @@ class CollegeNamesScreen(Screen):
 		self.balance=0
 
 		# verander buttton voor selectie nieuwe combinatie
-		self.ids._Buttoncheck.text = "New\nRune"
+		#self.ids._Buttoncheck.text = "New\n rune"
+		self.ids._Buttoncheck.text = str(self.texten[0][1])
 
 	def full_strike(self):
 		self.manager.Popup_Practicum()

@@ -1,19 +1,6 @@
 import sqlite3
-from kivy.properties import StringProperty, NumericProperty,ListProperty
+from kivy.properties import NumericProperty,ListProperty
 from kivy.uix.screenmanager import Screen
-from kivy.core.window import Window
-from kivy.uix.spinner import Spinner
-
-class MyHooverSpin(Spinner):
-
-	def __int__(self,**kwargs):
-		super(MyHooverSpin).__init__(**kwargs)
-		Window.bind(mouse_pos=self.on_mouseover)
-
-	def on_mouseover(self,window,pos):
-		if self.collide_point(*pos):
-			print(*pos)
-			print("hoovered!!!!!!!!!!!")
 
 class AdviceScreen(Screen):
 

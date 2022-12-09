@@ -39,6 +39,7 @@
 		pos_hint:{"center_y":.75}
 
 		Label:
+			id:_Header_testsymbol
 			text: "Test\nSymbolization of Runes"
 			halign:"center"
 			font_size:dp(28)
@@ -75,7 +76,7 @@
 		pos_hint:{"center_y":.45}
 
 		Label:
-			id:_Vraag_label
+			id:_label_vraag
 			text:"What's the name of\n this rune...?"
 			font_size:dp(16)
 			halign:"center"
@@ -123,7 +124,7 @@
 					root.PressedButton(self.text)
 
 	Button:
-		id:_ButtonStart
+		id:_button_start
 		text:"Submit"
 		font_size:dp(14)
 		halign:"center"
@@ -135,6 +136,7 @@
 			self.color=[1,1,1,1]
 			root.ClearButtons()
 			root.SubmittAnswer()
+
 		canvas.before:
 			Color:
 				rgba: 1,1,1,.5

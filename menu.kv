@@ -40,6 +40,7 @@
 		pos_hint:{"center_x":.5,"center_y":.75}
 
 		Label:
+			id: _page1header
 			text: "Testcenter\n [size=24]Tests to become a Master in Runes[/size]"
 			font_size:dp(32)
 			markup:True
@@ -49,6 +50,7 @@
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
+				id:_label_testrunes
 				text:"Runesymbols"
 				font_size:dp(14)
 				size_hint:(.4,.5)
@@ -58,13 +60,15 @@
 				id:_Symbols_but
 				on_active:
 					root.Trainingskeuze="Runesymbols"
-					_ButtonStart.text = "Start\ntest"
+					_ButtonStart.text = "Start\ntest" if root.lanquage == "Engels" else ("Commence\nl'examen" if root.lanquage == "Frans"
+					else "Test\nstarten" if root.lanquage == "Nederlands" else "Prüfung\nstarten")
 			Label:
 				text:''
 				size_hint:(.2,.5)
 		BoxLayout:
 			size_hint: (1,.2)
 			Label:
+				id:_label_testnames
 				text:"Runenames"
 				font_size:dp(14)
 				size_hint:(.4,.5)
@@ -74,8 +78,8 @@
 				id:_Names_but
 				on_active:
 					root.Trainingskeuze = "SymbolNames"
-					_ButtonStart.text = "Start\ntest"
-
+					_ButtonStart.text = "Start\ntest" if root.lanquage == "Engels" else ("Commence\nl'examen" if root.lanquage == "Frans"
+					else "Test\nstarten" if root.lanquage == "Nederlands" else "Prüfung\nstarten")
 			Label:
 				text:''
 				size_hint:(.2,1)
@@ -83,6 +87,7 @@
 			size_hint: (1,.2)
 
 			Label:
+				id:_label_testmeaning
 				text:"Meaning of Runes"
 				font_size:dp(14)
 				size_hint:(.4,.5)
@@ -92,7 +97,9 @@
 				id:_Meaning_but
 				on_active:
 					root.Trainingskeuze="Meaning of Runes"
-					_ButtonStart.text = "Start\ntest"
+					_ButtonStart.text = "Start\ntest" if root.lanquage == "Engels" else ("Commence\nl'examen" if root.lanquage == "Frans"
+					else "Test\nstarten" if root.lanquage == "Nederlands" else "Prüfung\nstarten")
+
 			Label:
 				text:''
 				size_hint:(.2,.5)
@@ -104,6 +111,7 @@
 		pos_hint:{"center_x":0.5, "center_y":.33}
 
 		Label:
+			id:_Header_college
 			text: "Academy for Runes\n [size=24]Select a college to learn Runes[/size]"
 			font_size:dp(32)
 			markup:True
@@ -112,17 +120,18 @@
 		BoxLayout:
 			size_hint: (1,.17)
 			Label:
+				id:_label_library
 				text:"Library for Runes "
 				font_size:dp(14)
 				size_hint:(.4,.5)
 				halign:"right"
 
-
 			CBox:
 				id:_Symbols_college
 				on_active:
 					root.Trainingskeuze="College Symbols"
-					_ButtonStart.text = "See\nlibrary"
+					_ButtonStart.text = "See\nlibrary" if root.lanquage == "Engels" else ("Voir\nbibliothèque" if root.lanquage == "Frans"
+					else "Naar\nBiblio" if root.lanquage == "Nederlands" else "Zur\nBibliothek")
 			Label:
 				text:''
 				size_hint:(.2,.5)
@@ -130,17 +139,18 @@
 		BoxLayout:
 			size_hint: (1,.17)
 			Label:
+				id:_label_practicum
 				text:"Practicum"
 				font_size:dp(14)
 				size_hint:(.4,.5)
 				halign:"right"
 
-
 			CBox:
 				id:_Names_college
 				on_active:
 					root.Trainingskeuze="College Names"
-					_ButtonStart.text = "Start\npracticum"
+					_ButtonStart.text = "To\nthe Practice" if root.lanquage == "Engels" else ("Vers\nla pratique" if root.lanquage == "Frans"
+					else "Naar\nPracticum" if root.lanquage == "Nederlands" else "Zur\nPraxis")
 			Label:
 				text:''
 				size_hint:(.2,.5)
@@ -148,6 +158,7 @@
 		BoxLayout:
 			size_hint: (1,.17)
 			Label:
+				id:_label_personaladvice
 				text:"Personal advice"
 				font_size:dp(14)
 				size_hint:(.4,.5)
@@ -158,7 +169,8 @@
 				id:_advice_college
 				on_active:
 					root.Trainingskeuze="Personal Advice"
-					_ButtonStart.text = "See\nadvice"
+					_ButtonStart.text = "See\nAdvice" if root.lanquage == "Engels" else ("Vers\nconseils" if root.lanquage == "Frans"
+					else "Zie\nAdvies" if root.lanquage == "Nederlands" else "Siehe\nBeratung")
 			Label:
 				text:''
 				size_hint:(.2,.5)

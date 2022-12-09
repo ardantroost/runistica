@@ -32,6 +32,7 @@
 		pos_hint:{"center_x":.5,"center_y":.8}
 
 		Label:
+			id: _header
 			text: "Library\n Futhark runes"
 			font_size: dp(28)
 			halign:"center"
@@ -103,6 +104,7 @@
 						size: self.width-5, self.height-5
 						pos:self.pos
 				Label:
+					id:_label_association
 					text:"Symbolization"
 					font_size:dp(16)
 					bold:False
@@ -128,6 +130,7 @@
 						size: self.width-5, self.height-5
 						pos:self.pos
 				Label:
+					id:_label_interpretation
 					text:"Interpretation"
 					font_size:dp(16)
 					bold:False

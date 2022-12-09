@@ -42,6 +42,32 @@ class StatsScreen(Screen):
 		conn.commit()
 		conn.close()
 
+		self.vertaler()
+
+	def vertaler(self):
+
+		self.lanquage = self.manager.lanquage
+		conn = sqlite3.connect("taalkeuze.db")
+		c = conn.cursor()
+
+		if self.lanquage == 'Engels':
+			c.execute("SELECT current,skillrunes, skillnames, skillmeaning FROM stats WHERE taal=(?)", ("Engels",))
+			stattexten = c.fetchall()
+		elif self.lanquage == 'Frans':
+			c.execute("SELECT current,skillrunes, skillnames, skillmeaning FROM stats WHERE taal=(?)", ("Frans",))
+			stattexten = c.fetchall()
+		elif self.lanquage == 'Duits':
+			c.execute("SELECT current,skillrunes, skillnames, skillmeaning FROM stats WHERE taal=(?)", ("Duits",))
+			stattexten = c.fetchall()
+		elif self.lanquage == 'Nederlands':
+			c.execute("SELECT current,skillrunes, skillnames, skillmeaning FROM stats WHERE taal=(?)", ("Nederlands",))
+			stattexten = c.fetchall()
+
+		conn.commit()
+		conn.close()
+		# voor transport....naar kv-file
+		self.stattexten = stattexten
+
 	def del_database(self,testtype):
 
 		# verwijder laatste 4 tests als er meer dan 10( =self.maximaal) tests zijn in een categorie

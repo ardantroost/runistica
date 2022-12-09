@@ -33,23 +33,59 @@
 		anchor_x: "center"
 		anchor_y: "bottom"
 
-		AnchorButton:
-			id:_start
-			canvas:
-				Color:
-					rgba: 0,0,1,.1
-				Ellipse:
-					size:[90,90]
-					pos: self.center_x-45, self.center_y-45
-			text: "Start"
-			font_size:dp(18)
-			bold:True
-			color:[0,0,0,.75]
-			background_color:[0,0,0,0]
-			size_hint:(1,.1)
-			on_press:
-				color = [1,0,0,1] if _start.state == "active" else [0,1,1,.75]
-				root.manager.current = "menuscreen"
-				root.manager.transition.direction = "down"
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: .5,1
 
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
 
+				on_press:
+					root.manager.taalkeuze("Engels")
+					root.manager.current = "menuscreen"
+					root.manager.transition.direction = "down"
+				Image:
+					source:"Pics/FlagofGreatBritain.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.taalkeuze("Frans")
+					root.manager.current = "menuscreen"
+					root.manager.transition.direction = "down"
+				Image:
+					source:"Pics/FlagofFrance.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+
+				on_press:
+					root.manager.taalkeuze("Duits")
+					root.manager.current = "menuscreen"
+					root.manager.transition.direction = "down"
+
+				Image:
+					source:"Pics/FlagofGermany.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y
+			Button:
+				size_hint:(.25,.1)
+				pos_hint:{"center_x":.5}
+				background_color:0,0,0,0
+				on_press:
+					root.manager.taalkeuze("Nederlands")
+					root.manager.current = "menuscreen"
+					root.manager.transition.direction = "down"
+
+				Image:
+					source:"Pics/FlagofHolland.png"
+					center_x:self.parent.center_x
+					center_y:self.parent.center_y

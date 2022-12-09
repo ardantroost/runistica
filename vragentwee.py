@@ -24,6 +24,30 @@ class VragenScreentwee(Screen):
 		#start timer
 		self.starttime= time.time()
 
+	def scorevertaler(self):
+
+		self.lanquage = self.manager.lanquage
+		conn = sqlite3.connect("taalkeuze.db")
+		c = conn.cursor()
+
+		if self.lanquage == 'Engels':
+			c.execute("SELECT meaningtext,text2,text3,text4,text5,text6 FROM score WHERE taal=(?)", ("Engels",))
+			scoretexten = c.fetchall()
+		elif self.lanquage == 'Frans':
+			c.execute("SELECT meaningtext,text2,text3,text4,text5,text6 FROM score WHERE taal=(?)", ("Frans",))
+			scoretexten = c.fetchall()
+		elif self.lanquage == 'Duits':
+			c.execute("SELECT meaningtext,text2,text3,text4,text5,text6 FROM score WHERE taal=(?)", ("Duits",))
+			scoretexten = c.fetchall()
+		elif self.lanquage == 'Nederlands':
+			c.execute("SELECT meaningtext,text2,text3,text4,text5,text6 FROM score WHERE taal=(?)", ("Nederlands",))
+			scoretexten = c.fetchall()
+
+		conn.commit()
+		conn.close()
+
+		self.scoretexten = scoretexten
+
 	def on_leave(self, *args):
 		self.saveresults("Meaning")
 
@@ -92,7 +116,7 @@ class VragenScreentwee(Screen):
 				# start animatie RuneTeken
 				self.Anim(self.ids._PictureChoice)
 				# start animatie vraagstelling
-				self.Anim1(self.ids._Vraag_label)
+				self.Anim1(self.ids._label_vraag)
 
 				self.ids._antw1.text = self.multiplechoice_set[0]
 				self.ids._antw2.text = self.multiplechoice_set[1]
@@ -105,22 +129,31 @@ class VragenScreentwee(Screen):
 			# als alle vragen gesteld zijn score en leersymbolen laten zien in ander scherm RESULT
 
 			else:
-				if len(self.Missed_quistions)> 0:
-					self.print = (f"End of training the interpretation of runes!,\n {self.Score_quizz} out of 10 "
-						  f" is your endscore.\n"
-						  f"Some symbols need to be studied a bit more:\n"
-						f"Press button below for more information")
+				# bereidt vertaling van testuitslag voor
+				self.scorevertaler()
 
+				if len(self.Missed_quistions)> 0:
+					#self.print = (f"End of training the interpretation of runes!,\n {self.Score_quizz} out of 10 "
+					#	  f" is your endscore.\n"
+					#	  f"Some symbols need to be studied a bit more:\n"
+					#	f"Press button below for more information")
+
+					self.print = str(self.scoretexten[0][0]) + str(self.Score_quizz) + " " + str(self.scoretexten[0][1]) + " " + str(self.scoretexten[0][2])
 					self.manager.screens[6].ids._ResultNaam.text = self.print
+					self.manager.screens[6].ids._ButtonAdvice.text = str(self.scoretexten[0][4])
+
 					self.manager.current = "resultscreen"
 
 				else:
-					self.print= (f"End of training the interpretation of runes!, {self.Score_quizz} "
-						  f"is your endscore.\n This a 100% score"
-						  f"None of these runes are unclear to you. Well done")
+					#self.print= (f"End of training the interpretation of runes!, {self.Score_quizz} "
+					#	  f"is your endscore.\n This a 100% score"
+					#	  f"None of these runes are unclear to you. Well done")
 
+					self.print = str(self.scoretexten[0][0]) + str(self.Score_quizz) + " " + str(self.scoretexten[0][3])
 					self.manager.screens[6].ids._ResultNaam.text = self.print
-					self.manager.screens[6].ids._ButtonAdvice.text = "<< End >>"
+
+					#self.manager.screens[6].ids._ButtonAdvice.text = "<< End >>"
+					self.manager.screens[6].ids._ButtonAdvice.text = str(self.scoretexten[0][5])
 					self.manager.current = "resultscreen"
 
 				# stop Quizz-timer, bereken tijdsduur en transporteer deze met andere gegevens naar DataBase

@@ -5,6 +5,10 @@ from kivy.properties import StringProperty, ListProperty,NumericProperty
 
 class MenuScreen(Screen):
 
+	def on_enter(self, *args):
+		self.lanquage = self.manager.lanquage
+
+
 	Trainingskeuze = StringProperty("")
 	Antwoord_runen = ListProperty([])
 	Quizz_runen= ListProperty([])
@@ -52,7 +56,7 @@ class MenuScreen(Screen):
 		# selecteer x runen-quizzvragen uit de database
 		##############################################
 		#################################################
-		quizzduur = 10
+		quizzduur = 2
 		###################################################
 		################################################
 
@@ -118,8 +122,6 @@ class MenuScreen(Screen):
 			conn.close()
 
 		#stuur naar volgende gekozen pagina alvast de eerste vraag (symbool & antwoorden)
-		#ab= self.manager.screens[(int(3 + a_waarde))].ids._PictureChoice.source = "Tekens/" + runequizz[0].lower() + ".png"
-		#print (str(ab))
 
 		if a_waarde == 0:
 			self.manager.screens[(int(3 + a_waarde))].ids._antw1.text = self.Quizz_runen[0]
@@ -137,7 +139,34 @@ class MenuScreen(Screen):
 			self.manager.screens[(int(3 + a_waarde))].ids._antw3.text = self.antwoordcat_meaning[2]
 			self.manager.screens[(int(3 + a_waarde))].ids._antw4.text = self.antwoordcat_meaning[3]
 
+	def knopvertaler(self):
+
+		self.lanquage = self.manager.lanquage
+
+		conn = sqlite3.connect("taalkeuze.db")
+		c = conn.cursor()
+		if self.lanquage == 'Engels':
+			c.execute("SELECT choose_eng FROM menu")
+			texten = c.fetchall()
+		elif self.lanquage == 'Frans':
+			c.execute("SELECT choose_fr FROM menu")
+			texten = c.fetchall()
+		elif self.lanquage == 'Duits':
+			c.execute("SELECT choose_dts FROM menu")
+			texten = c.fetchall()
+		elif self.lanquage == 'Nederlands':
+			c.execute("SELECT choose_ned FROM menu")
+			texten = c.fetchall()
+
+		conn.commit()
+		conn.close()
+		# voor transport....(elders gebruik)
+
+		self.knoptext = texten
+
 	def transport(self):
+
+		self.knopvertaler()
 
 		if self.Trainingskeuze == "Runesymbols":
 
@@ -148,7 +177,8 @@ class MenuScreen(Screen):
 
 			# reset de tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			##self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
 			self.a_waarde = 0
@@ -172,7 +202,8 @@ class MenuScreen(Screen):
 
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			##self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 			self.a_waarde = 0
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
@@ -195,7 +226,8 @@ class MenuScreen(Screen):
 
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			#self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 			self.a_waarde = 0
 
 			# extreem belangrijk self.teller= 0 werkt nml niet!!!!!!
@@ -218,7 +250,8 @@ class MenuScreen(Screen):
 			self.ids._Symbols_college.active = False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			#self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 
 			# bij eerder gespeelde kwis alle resultaten wissen
 			self.manager.screens[5].teller = 0
@@ -236,7 +269,8 @@ class MenuScreen(Screen):
 			self.ids._Names_college.active = False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			#self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 
 			# bij eerder gespeelde kwis alle resultaten wissen
 			self.manager.screens[5].teller = 0
@@ -255,7 +289,8 @@ class MenuScreen(Screen):
 			self.ids._advice_college.active = False
 			# reset tellers
 			self.Trainingskeuze = ""
-			self.ids._ButtonStart.text = "Choose"
+			#self.ids._ButtonStart.text = "Choose"
+			self.ids._ButtonStart.text = str(self.knoptext[0][0])
 
 			# bij eerder gespeelde kwis alle resultaten wissen
 			self.manager.screens[5].teller = 0
